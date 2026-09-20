@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dhoomsingh.github.io/Paul-et-paulette/sitemap.xml
