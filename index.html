@@ -113,8 +113,11 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;bac
 .dish,.order-item,.btn{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
 @media(max-width:800px){body:after{display:none}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{transform:none!important}.hero-in,.wrap,.nav{transform:none!important}}
 
-/* ULTRA-SMOOTH 4D */
-*{scroll-behavior:auto!important}body:before{display:none!important}body:after{background:radial-gradient(circle 220px at var(--glow-x) var(--glow-y),rgba(255,255,255,.10),transparent 72%)!important;mix-blend-mode:normal!important} .hero-in,.nav{will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{will-change:auto!important;transform:none!important;transition:box-shadow .2s ease,filter .2s ease!important}.dish:hover,.order-item:hover{transform:translate3d(0,-3px,0)!important}.btn{will-change:transform;transform:translateZ(0)}
+/* PHOTOREALISTIC 4D LIGHTING */
+body{background-image:radial-gradient(circle at var(--glow-x) var(--glow-y),rgba(255,245,220,.08),transparent 32%),radial-gradient(circle at 20% 10%,rgba(255,255,255,.045),transparent 28%);}
+.hero-photo{filter:saturate(1.06) contrast(1.035);box-shadow:0 35px 90px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.25)}
+.hero-photo:before,.hero-info:before,.dish:before,.order-box:before,.order-item:before,.hours-card:before,.aboutgrid .box:before,form:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.13),transparent 25%,transparent 72%,rgba(0,0,0,.08));opacity:.7;z-index:1}
+.hero-photo img,.dish img{filter:contrast(1.04) saturate(1.05);transform:scale(1.012);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s ease}.hero-photo:hover img,.dish:hover img{transform:scale(1.035);filter:contrast(1.06) saturate(1.08)}
 </style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
