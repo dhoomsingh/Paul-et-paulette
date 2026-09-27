@@ -79,6 +79,29 @@ body{background:linear-gradient(135deg,#eee5d8 0%,#faf7f1 45%,#e3d7c7 100%);text
 .box{background:linear-gradient(145deg,#68765e,#414c3b)!important;box-shadow:0 25px 55px rgba(25,30,20,.3),inset 0 1px 0 rgba(255,255,255,.18)!important}
 .vegan-banner,.order-note{box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 12px 25px rgba(45,65,35,.09)}
 nav{background:rgba(255,253,249,.78);box-shadow:0 8px 30px rgba(30,20,10,.12),inset 0 -1px 0 rgba(255,255,255,.8)}
+
+/* MAX REALISM — cinematic restaurant UI */
+html{background:#ddd3c4}body{background:radial-gradient(ellipse at 50% -15%,#fff 0,#f8f3eb 35%,#e3d8c8 100%);font-smoothing:antialiased;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:-20%;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 20%,rgba(255,255,255,.95),transparent 38%),radial-gradient(ellipse at 15% 70%,rgba(88,102,78,.12),transparent 32%),radial-gradient(ellipse at 85% 45%,rgba(169,81,56,.10),transparent 30%);filter:blur(30px);animation:ambient 12s ease-in-out infinite alternate}
+@keyframes ambient{from{transform:scale(1) translate3d(-1%,0,0)}to{transform:scale(1.08) translate3d(1%,1%,0)}}
+nav{box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 15px 40px rgba(35,24,15,.13);backdrop-filter:blur(24px) saturate(1.25)}
+.hero{background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(238,228,213,.72));box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+.hero-photo{border-radius:26px;box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 2px 8px rgba(0,0,0,.12),0 25px 55px rgba(35,25,15,.25),0 55px 110px rgba(35,25,15,.12);will-change:transform;overflow:hidden}
+.hero-photo:before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(105deg,rgba(255,255,255,.28) 0%,transparent 18%,transparent 67%,rgba(0,0,0,.12) 100%);mix-blend-mode:soft-light;pointer-events:none}
+.hero-photo:after{content:"";position:absolute;z-index:2;inset:0;background:radial-gradient(ellipse at 50% 35%,transparent 35%,rgba(0,0,0,.13) 100%);pointer-events:none}
+.hero-photo img{filter:saturate(1.1) contrast(1.08) brightness(1.01);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s ease}.hero-photo:hover img{transform:scale(1.075);filter:saturate(1.16) contrast(1.1) brightness(1.03)}
+.photo-caption{z-index:3;box-shadow:0 12px 35px rgba(20,12,7,.22),inset 0 1px 0 rgba(255,255,255,.95);background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(247,239,228,.78));backdrop-filter:blur(18px) saturate(1.3)}
+.dish,.order-item,.hours-card,.order-box,form{box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 2px 4px rgba(40,25,15,.08),0 18px 40px rgba(40,25,15,.10),0 35px 75px rgba(40,25,15,.06);background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(243,235,224,.94));}
+.dish{transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s ease;will-change:transform}.dish:hover{transform:translate3d(0,-11px,35px) rotateX(4deg) rotateY(-2deg) scale(1.015);box-shadow:0 2px 0 rgba(255,255,255,1) inset,0 28px 55px rgba(35,23,13,.18),0 55px 100px rgba(35,23,13,.10)}
+.dish:before{background:linear-gradient(115deg,rgba(255,255,255,.7),transparent 18%,transparent 68%,rgba(90,55,30,.06));opacity:.8}
+.order-item{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease}.order-item:hover{transform:translateZ(22px) translateY(-5px) scale(1.01);box-shadow:0 20px 40px rgba(35,23,13,.16)}
+.hours-card div:hover{background:linear-gradient(90deg,rgba(255,255,255,.7),rgba(245,237,225,.3));box-shadow:0 10px 22px rgba(35,23,13,.08)}
+.btn{border-radius:11px;background:linear-gradient(145deg,#bf654b,#8d3f2d);box-shadow:0 2px 0 #6c2d21,0 10px 22px rgba(110,45,30,.28),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease,filter .25s ease}.btn:hover{filter:saturate(1.08);transform:translate3d(0,-5px,24px) scale(1.025);box-shadow:0 3px 0 #6c2d21,0 20px 38px rgba(110,45,30,.34),inset 0 1px 0 rgba(255,255,255,.4)}.btn:active{transform:translateY(1px) translateZ(8px)}
+input,select,textarea{background:linear-gradient(145deg,#fff,#f4ece1);box-shadow:inset 0 2px 8px rgba(40,25,15,.05),0 1px 0 rgba(255,255,255,.9);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}input:focus,select:focus,textarea:focus{transform:translateZ(12px);border-color:#a95138;box-shadow:0 8px 20px rgba(90,45,30,.12),inset 0 1px 0 rgba(255,255,255,.9);outline:none}
+.aboutgrid .box{box-shadow:0 2px 0 rgba(255,255,255,.18) inset,0 30px 60px rgba(20,30,15,.3),0 60px 100px rgba(20,30,15,.12)!important;background:linear-gradient(145deg,#718067,#3e4b39)!important}
+.vegan-banner,.order-note{box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 12px 30px rgba(50,70,40,.10)}
+section{isolation:isolate}
+@media(prefers-reduced-motion:no-preference){.hero-in,.hours-card,.order-box,.aboutgrid,.bookinggrid{animation:riseIn .9s cubic-bezier(.16,1,.3,1) both}}@keyframes riseIn{from{opacity:0;transform:translateY(24px) translateZ(-30px)}to{opacity:1;transform:translateY(0) translateZ(0)}}
 </style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
