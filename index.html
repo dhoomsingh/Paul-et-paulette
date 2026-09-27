@@ -37,7 +37,29 @@ section{transform-style:preserve-3d}
 .aboutgrid .box{transform:perspective(900px) rotateY(-5deg) rotateX(2deg);box-shadow:25px 28px 55px rgba(36,33,29,.20);transition:transform .4s ease}
 .aboutgrid .box:hover{transform:perspective(900px) rotateY(-1deg) rotateX(0) translateZ(20px)}
 .bookinggrid>div:first-child{transform:translateZ(35px)}
-@media(max-width:800px){.hero-photo{transform:none}.hero-photo:hover{transform:none}.hero-info{transform:none}.aboutgrid .box{transform:none}.dish:hover{transform:translateY(-4px)}}</style></head>
+@media(max-width:800px){.hero-photo{transform:none}.hero-photo:hover{transform:none}.hero-info{transform:none}.aboutgrid .box{transform:none}.dish:hover{transform:translateY(-4px)}}
+/* FULL-PAGE 3D DEPTH */
+*{transform-style:preserve-3d}
+body{perspective:1800px;background:radial-gradient(circle at 50% -10%,#fffdf9 0%,var(--cream) 45%,#e8dccb 100%);overflow-x:hidden}
+nav{transform:translateZ(35px);box-shadow:0 12px 40px rgba(0,0,0,.14)}
+nav .nav{transform:translateZ(25px)}
+.hero,.hours,#menu,.order-section,.about,.booking{position:relative;transform-style:preserve-3d}
+.hero:after,.hours:after,#menu:after,.order-section:after,.about:after,.booking:after{content:"";position:absolute;inset:12px;border-radius:30px;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 30px 70px rgba(30,20,10,.08);transform:translateZ(-20px)}
+.hero-in,.wrap{position:relative;transform-style:preserve-3d}
+.hero-in>*,.head,.hours-card,.order-box,.aboutgrid>*,.bookinggrid>*{transform:translateZ(28px);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease}
+.hero-in>div:hover,.hours-card:hover,.order-box:hover,.aboutgrid>div:hover,.bookinggrid>div:hover{transform:translateZ(48px)}
+.hero-photo,.dish,.order-item,.box,form,.btn{transform-style:preserve-3d;backface-visibility:hidden}
+.dish,.order-item{box-shadow:10px 14px 0 rgba(80,55,35,.035),0 20px 45px rgba(30,20,10,.11)}
+.dish:hover,.order-item:hover{transform:translateZ(25px) rotateX(3deg) rotateY(-2deg) translateY(-5px);box-shadow:18px 24px 55px rgba(30,20,10,.18)}
+.btn{position:relative;transform:translateZ(18px);box-shadow:0 8px 0 #783b2c,0 18px 30px rgba(120,59,44,.25);transition:all .2s ease}
+.btn:hover{transform:translateZ(30px) translateY(-5px) rotateX(4deg);box-shadow:0 5px 0 #783b2c,0 25px 40px rgba(120,59,44,.32)}
+.btn:active{transform:translateZ(12px) translateY(2px);box-shadow:0 3px 0 #783b2c,0 8px 15px rgba(120,59,44,.2)}
+.hero h1,.head h2,.about h2,.booking h2{transform:translateZ(38px);text-shadow:0 3px 0 rgba(255,255,255,.7),0 18px 35px rgba(30,20,10,.16)}
+.price,.tag,.eyebrow{transform:translateZ(22px)}
+input,select,textarea{transform:translateZ(8px);box-shadow:inset 0 2px 8px rgba(0,0,0,.05),0 5px 12px rgba(0,0,0,.05)}
+footer{transform:translateZ(15px);box-shadow:0 -15px 40px rgba(0,0,0,.18)}
+@media(max-width:800px){*{transform-style:flat}.hero-in>*,.head,.hours-card,.order-box,.aboutgrid>*,.bookinggrid>*{transform:none}.hero-in>div:hover,.hours-card:hover,.order-box:hover,.aboutgrid>div:hover,.bookinggrid>div:hover{transform:none}.dish:hover,.order-item:hover{transform:translateY(-4px)}}
+</style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
 <section class="hero" id="home"><div class="hero-in"><div><div class="eyebrow">Café · Restaurant · Fontainebleau</div><h1>Bienvenue chez<br><span style="color:var(--red)">Paul & Paulette</span></h1><p>Une cuisine fraîche, généreuse et conviviale, préparée avec passion.</p><a class="btn" href="#reservation">Réserver une table</a></div><div><div class="hero-photo"><img src="cafe-coffee.webp" alt="Trois cafés servis chez Paul & Paulette à Fontainebleau" loading="eager"><div class="photo-caption">☕ Une vraie pause café<small>Cafés préparés avec soin, à déguster sur place ou à emporter.</small></div></div><div class="hero-info" style="margin-top:18px"><div class="eyebrow">Horaires</div><h3>Bienvenue à table</h3><div class="info-line"><span>Service</span><strong>8h30 – 18h00</strong></div><div class="info-line"><span>Réservations</span><strong>10h00 – 17h59</strong></div><div class="info-line"><span>Options</span><strong>Vegan · végétarien</strong></div></div></div></div></section>
