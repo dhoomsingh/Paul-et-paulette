@@ -115,6 +115,18 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;bac
 
 /* ULTRA-SMOOTH 4D */
 *{scroll-behavior:auto!important}body:before{display:none!important}body:after{background:radial-gradient(circle 220px at var(--glow-x) var(--glow-y),rgba(255,255,255,.10),transparent 72%)!important;mix-blend-mode:normal!important} .hero-in,.nav{will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{will-change:auto!important;transform:none!important;transition:box-shadow .2s ease,filter .2s ease!important}.dish:hover,.order-item:hover{transform:translate3d(0,-3px,0)!important}.btn{will-change:transform;transform:translateZ(0)}
+
+/* RESTORE ORIGINAL PAUL & PAULETTE COLOR PALETTE */
+:root{--cream:#f7f1e7;--ink:#24211d;--red:#a95138;--sage:#58664e;--white:#fffdf9;--line:#e5dacb}
+html{background:var(--cream)!important}body{background:var(--cream)!important;color:var(--ink)!important}
+body:before{background:radial-gradient(circle at 15% 10%,rgba(255,255,255,.9),transparent 32%),radial-gradient(circle at 85% 35%,rgba(169,81,56,.08),transparent 30%)!important;filter:none!important}
+nav{background:#fffdf9f2!important;border-bottom:1px solid var(--line)!important}
+.hero{background:linear-gradient(180deg,#f7f1e7,#efe5d6)!important}
+.hero-info,.dish,.hours-card,.order-box,form,.order-item{background:var(--white)!important;border-color:var(--line)!important}
+.hours{background:#fffdf9!important}#menu{background:var(--cream)!important}.order-section{background:#f8f3ea!important}.about{background:#e3dacb!important}.booking{background:var(--ink)!important;color:#fff!important}footer{background:#181714!important;color:#aaa!important}
+.btn{background:var(--red)!important;border-color:transparent!important}.price,.info-line strong,.hours-card span,.eyebrow{color:var(--red)!important}.box{background:var(--sage)!important}
+.vegan-banner,.order-note{background:#e4eadf!important;border-color:#bdcbb7!important}.vegan-banner .title{color:#3f5738!important}.vegan-banner p,.order-note{color:#53604e!important}.tag{background:#e3efdd!important;color:#3f6537!important}
+.about p{color:#5f5a53!important}.hero p,.head p,.dish p{color:#716b63!important}.photo-caption{background:#fffdf9eb!important;border-color:var(--line)!important}input,select,textarea{background:#fffdf9!important;border-color:#ddd3c6!important}
 </style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
