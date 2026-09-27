@@ -112,6 +112,14 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;bac
 .hero-photo{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .4s ease}
 .dish,.order-item,.btn{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
 @media(max-width:800px){body:after{display:none}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{transform:none!important}.hero-in,.wrap,.nav{transform:none!important}}
+
+/* 4D MAX: cinematic depth, glass refraction and living surfaces */
+html{scroll-behavior:smooth}body{background-attachment:fixed;overflow-x:hidden}body:before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:998;background:conic-gradient(from 180deg at var(--glow-x) var(--glow-y),transparent 0deg,rgba(255,255,255,.035) 55deg,transparent 120deg,rgba(255,255,255,.025) 220deg,transparent 300deg);filter:blur(28px);animation:ambientSpin 18s linear infinite;transform-origin:center}@keyframes ambientSpin{to{transform:rotate(360deg)}}
+.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{position:relative;overflow:hidden}.hero-photo:after,.hero-info:after,.dish:after,.order-box:after,.order-item:after,.hours-card:after,.aboutgrid .box:after,form:after{content:"";position:absolute;inset:-40%;pointer-events:none;background:radial-gradient(circle at var(--shine-x,50%) var(--shine-y,50%),rgba(255,255,255,.2),transparent 22%);opacity:.45;mix-blend-mode:soft-light;transition:opacity .3s}
+.hero-photo:hover,.hero-info:hover,.dish:hover,.order-box:hover,.order-item:hover,.hours-card:hover,.aboutgrid .box:hover,form:hover{box-shadow:0 25px 70px rgba(0,0,0,.22),0 0 35px rgba(255,255,255,.07)}
+.dish:hover,.order-item:hover{transform:perspective(1400px) translateZ(28px) rotateX(2deg) rotateY(-2deg) scale(1.025)!important}.btn:hover{transform:translateY(-4px) translateZ(20px) scale(1.035);filter:brightness(1.08)}
+@keyframes levitate{0%,100%{transform:translateY(0) rotateZ(0)}50%{transform:translateY(-5px) rotateZ(.2deg)}}.hero-photo{animation:levitate 6s ease-in-out infinite}
+@media(max-width:800px){body:before{display:none}.hero-photo{animation:none}.dish:hover,.order-item:hover{transform:none!important}}
 </style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
@@ -195,4 +203,11 @@ updateTotal();
  function raf(){cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;requestAnimationFrame(raf)} raf();
 })();
 </script>
-</body></html>
+<script>
+/* 4D MAX interaction layer */
+(()=>{const els=[...document.querySelectorAll('.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form')];let px=50,py=50;
+function shine(x,y){px=x;py=y;document.documentElement.style.setProperty('--glow-x',x+'px');document.documentElement.style.setProperty('--glow-y',y+'px');els.forEach((e,i)=>{e.style.setProperty('--shine-x',(50+(x/innerWidth-.5)*80)+'%');e.style.setProperty('--shine-y',(50+(y/innerHeight-.5)*80)+'%');});}
+addEventListener('pointermove',e=>shine(e.clientX,e.clientY),{passive:true});
+addEventListener('scroll',()=>{const s=scrollY;document.querySelector('.hero-in')?.style.setProperty('filter','drop-shadow(0 '+Math.min(18,s/18)+'px '+Math.min(35,s/8)+'px rgba(0,0,0,.12))')},{passive:true});
+})();
+</script></body></html>
