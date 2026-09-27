@@ -113,8 +113,8 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;bac
 .dish,.order-item,.btn{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
 @media(max-width:800px){body:after{display:none}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{transform:none!important}.hero-in,.wrap,.nav{transform:none!important}}
 
-/* 4D PERFORMANCE OPTIMIZATION */
-body:before{animation:none!important;filter:blur(18px);opacity:.55}body:after{transition:none!important}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form,.hero-in,.nav{will-change:transform;backface-visibility:hidden;transform-style:preserve-3d}.hero-photo{animation:none!important}.dish:hover,.order-item:hover{transform:perspective(1400px) translateZ(18px) scale(1.015)!important}.btn:hover{transform:translateY(-2px) scale(1.02)}
+/* ULTRA-SMOOTH 4D */
+*{scroll-behavior:auto!important}body:before{display:none!important}body:after{background:radial-gradient(circle 220px at var(--glow-x) var(--glow-y),rgba(255,255,255,.10),transparent 72%)!important;mix-blend-mode:normal!important} .hero-in,.nav{will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{will-change:auto!important;transform:none!important;transition:box-shadow .2s ease,filter .2s ease!important}.dish:hover,.order-item:hover{transform:translate3d(0,-3px,0)!important}.btn{will-change:transform;transform:translateZ(0)}
 </style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
@@ -199,6 +199,6 @@ updateTotal();
 })();
 </script>
 <script>
-/* 4D performance layer: one RAF loop, no per-move layout work */
-(()=>{const root=document.documentElement, hero=document.querySelector('.hero-in'), nav=document.querySelector('.nav');let tx=.5,ty=.5,x=.5,y=.5,raf=0;function render(){x+=(tx-x)*.12;y+=(ty-y)*.12;const dx=x-.5,dy=y-.5;root.style.setProperty('--glow-x',(x*100)+'vw');root.style.setProperty('--glow-y',(y*100)+'vh');if(hero)hero.style.transform='translate3d('+(dx*5)+'px,'+(dy*4)+'px,0)';if(nav)nav.style.transform='translate3d('+(-dx*5)+'px,'+(-dy*2)+'px,0)';raf=requestAnimationFrame(render)}addEventListener('pointermove',e=>{tx=e.clientX/innerWidth;ty=e.clientY/innerHeight},{passive:true});addEventListener('pointerleave',()=>{tx=.5;ty=.5},{passive:true});render();})();
+/* ULTRA-SMOOTH pointer depth: only two compositor transforms */
+(()=>{const root=document.documentElement,hero=document.querySelector('.hero-in'),nav=document.querySelector('.nav');let tx=.5,ty=.5,x=.5,y=.5,raf;const tick=()=>{x+=(tx-x)*.08;y+=(ty-y)*.08;const dx=(x-.5)*4,dy=(y-.5)*3;root.style.setProperty('--glow-x',(x*100)+'vw');root.style.setProperty('--glow-y',(y*100)+'vh');if(hero)hero.style.transform=`translate3d(${dx}px,${dy}px,0)`;if(nav)nav.style.transform=`translate3d(${-dx*.7}px,${-dy*.5}px,0)`;raf=requestAnimationFrame(tick)};addEventListener('pointermove',e=>{tx=e.clientX/innerWidth;ty=e.clientY/innerHeight},{passive:true});addEventListener('pointerleave',()=>{tx=.5;ty=.5},{passive:true});tick()})();
 </script></body></html>
