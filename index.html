@@ -150,6 +150,15 @@ nav{background:#f8f3eaf2!important;border-bottom:1px solid #0001!important}
 .booking .eyebrow{color:#d7ae55!important}
 footer{background:#181714!important}
 input,select,textarea{background:#fffdf8!important;border-color:#ddd3c6!important}
+
+/* 4D ORDER SECTION — cursor-following depth */
+#commande{transform-style:preserve-3d;perspective:1400px;position:relative;overflow:hidden}
+#commande .wrap{transform-style:preserve-3d;will-change:transform}
+#commande .head,#commande .order-box,#commande .order-note,#commande .order-item,#commande form,#commande .pickup-info{transform-style:preserve-3d;will-change:transform}
+#commande .order-box{transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease!important}
+#commande .order-item{transition:transform .14s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease!important}
+#commande .order-item:hover{transform:translate3d(0,-4px,18px)!important}
+#commande .btn{transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease!important}
 </style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
@@ -236,4 +245,8 @@ updateTotal();
 <script>
 /* ULTRA-SMOOTH pointer depth: only two compositor transforms */
 (()=>{const root=document.documentElement,hero=document.querySelector('.hero-in'),nav=document.querySelector('.nav');let tx=.5,ty=.5,x=.5,y=.5,raf;const tick=()=>{x+=(tx-x)*.08;y+=(ty-y)*.08;const dx=(x-.5)*4,dy=(y-.5)*3;root.style.setProperty('--glow-x',(x*100)+'vw');root.style.setProperty('--glow-y',(y*100)+'vh');if(hero)hero.style.transform=`translate3d(${dx}px,${dy}px,0)`;if(nav)nav.style.transform=`translate3d(${-dx*.7}px,${-dy*.5}px,0)`;raf=requestAnimationFrame(tick)};addEventListener('pointermove',e=>{tx=e.clientX/innerWidth;ty=e.clientY/innerHeight},{passive:true});addEventListener('pointerleave',()=>{tx=.5;ty=.5},{passive:true});tick()})();
-</script></body></html>
+</script><script>
+/* 4D movement for the online ordering section */
+(()=>{const s=document.querySelector('#commande'),box=s?.querySelector('.order-box'),head=s?.querySelector('.head');if(!s||!box)return;let tx=0,ty=0,x=0,y=0;const move=e=>{const r=s.getBoundingClientRect();tx=(e.clientX-(r.left+r.width/2))/(r.width/2);ty=(e.clientY-(r.top+r.height/2))/(r.height/2)};s.addEventListener('pointermove',move,{passive:true});s.addEventListener('pointerleave',()=>{tx=0;ty=0},{passive:true});const raf=()=>{x+=(tx-x)*.09;y+=(ty-y)*.09;box.style.transform='perspective(1400px) rotateX('+(-y*2.2)+'deg) rotateY('+(x*2.8)+'deg) translateZ(18px)';if(head)head.style.transform='translate3d('+(-x*4)+'px,'+(-y*3)+'px,28px)';s.querySelectorAll('.order-item').forEach((el,i)=>{const d=1+(i%3)*.35;el.style.transform='perspective(1200px) rotateX('+(-y*d)+'deg) rotateY('+(x*d)+'deg) translateZ('+(8+i%3*4)+'px)'}) ;requestAnimationFrame(raf)};raf()})();
+</script>
+</body></html>
