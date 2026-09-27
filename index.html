@@ -113,11 +113,8 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;bac
 .dish,.order-item,.btn{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
 @media(max-width:800px){body:after{display:none}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{transform:none!important}.hero-in,.wrap,.nav{transform:none!important}}
 
-/* PHOTOREALISTIC 4D LIGHTING */
-body{background-image:radial-gradient(circle at var(--glow-x) var(--glow-y),rgba(255,245,220,.08),transparent 32%),radial-gradient(circle at 20% 10%,rgba(255,255,255,.045),transparent 28%);}
-.hero-photo{filter:saturate(1.06) contrast(1.035);box-shadow:0 35px 90px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.25)}
-.hero-photo:before,.hero-info:before,.dish:before,.order-box:before,.order-item:before,.hours-card:before,.aboutgrid .box:before,form:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.13),transparent 25%,transparent 72%,rgba(0,0,0,.08));opacity:.7;z-index:1}
-.hero-photo img,.dish img{filter:contrast(1.04) saturate(1.05);transform:scale(1.012);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s ease}.hero-photo:hover img,.dish:hover img{transform:scale(1.035);filter:contrast(1.06) saturate(1.08)}
+/* DARK ROOM TEST MODE */
+body{background:#0b0b0b!important;color:#f5f2eb;position:relative}body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:997;background:radial-gradient(circle 260px at var(--glow-x,50vw) var(--glow-y,50vh),rgba(255,248,225,.30),rgba(255,248,225,.09) 30%,rgba(0,0,0,.48) 72%,rgba(0,0,0,.78) 100%);mix-blend-mode:screen;transition:background .08s linear}.wrap,.nav,.hero-in{position:relative;z-index:2}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{background-color:rgba(20,20,20,.78)!important;color:#f5f2eb;box-shadow:0 20px 60px rgba(0,0,0,.45)}
 </style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
