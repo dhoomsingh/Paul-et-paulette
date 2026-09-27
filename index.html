@@ -182,71 +182,34 @@ input,select,textarea{background:#fffdf8!important;border-color:#ddd3c6!importan
 <form action="https://formsubmit.co/Pauletpaulettedhoom@gmail.com" method="POST"><input type="hidden" name="_subject" value="Nouvelle réservation — Paul & Paulette"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="true"><div class="row"><div><label>Nom</label><input name="Nom" required></div><div><label>Téléphone</label><input name="Téléphone" required></div></div><div class="row"><div><label>Date</label><input name="Date" type="date" required></div><div><label>Heure</label><input name="Heure" type="time" min="10:00" max="17:59" required></div></div><label>Nombre de personnes<select name="Nombre de personnes"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label>Message<textarea name="Message" rows="3"></textarea></label><button class="btn" type="submit" style="width:100%;font-size:18px">✉️ Envoyer la réservation</button><small style="text-align:center">Réservations de 10h00 à 17h59.</small></form></div></section>
 <footer><strong>Paul & Paulette</strong><br>04 rue des Bouchers · Fontainebleau<br>Réservations : Pauletpaulettedhoom@gmail.com<br><small>© 2026 Paul & Paulette · Tous droits réservés</small></footer>
 <script>
-(function(){
-const payButton=document.querySelector('#commande button[type="submit"]');
-if(payButton){payButton.addEventListener('click',function(e){e.preventDefault();alert('Le paiement en ligne Stripe doit encore être connecté au site. Votre commande n\'est pas envoyée tant que Stripe n\'est pas configuré.');});}
-
-const form=document.querySelector('#commande form');
-const total=document.getElementById('order-total-value');
-if(!form||!total)return;
-function updateTotal(){
- let sum=0;
- form.querySelectorAll('input[type="number"]').forEach(function(input){
-   sum+=(Number(input.value)||0)*(Number(input.dataset.price)||0);
- });
- total.textContent=sum.toFixed(2).replace('.',',')+' €';
-}
-const prices={"Dhal de mungo":14,"Burger végétarien":13,"Poulet curry":17,"Poulet shawarma":17,"Limonade Maison":3.9,"Red Fizz":4.5,"Jus du Jour":4,"Jus de Pomme / Orange":3.9,"Bières Pachamama":4.9,"Thé Glacé":3.9,"Cheesecake":5.5,"Carotte Cake":5,"Tarte vegan citron vert":6,"Tarte vegan chocolat":6,"Vegan Banana Bread":4.5};
-form.querySelectorAll('input[type="number"]').forEach(function(input){
- const name=input.name;
- if(prices[name]!==undefined)input.dataset.price=prices[name];
- input.addEventListener('input',updateTotal);
-});
-updateTotal();
-})();
-<script>
-/* Subtle cursor-based depth on desktop */
-(function(){
- if(window.matchMedia("(max-width:800px)").matches) return;
- const hero=document.querySelector(".hero");
- const card=document.querySelector(".hero-photo");
- if(!hero||!card) return;
- hero.addEventListener("mousemove",function(e){
-   const r=hero.getBoundingClientRect();
-   const x=(e.clientX-r.left)/r.width-.5;
-   const y=(e.clientY-r.top)/r.height-.5;
-   card.style.transform="perspective(1200px) rotateY("+(-7-x*5)+"deg) rotateX("+(3-y*4)+"deg) translateZ(45px)";
- });
- hero.addEventListener("mouseleave",function(){card.style.transform="perspective(1200px) rotateY(-7deg) rotateX(3deg) translateZ(35px)"});
-})();
-</script></script>
-<script>
-/* 4D-style living depth: cursor + device motion */
-(function(){
- const root=document.documentElement, body=document.body;
- const cards=[...document.querySelectorAll('.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form')];
- let tx=0,ty=0,cx=0,cy=0;
- function move(x,y){
-  const nx=(x/window.innerWidth-.5), ny=(y/window.innerHeight-.5);
-  tx=nx;ty=ny;
-  root.style.setProperty('--glow-x',x+'px');root.style.setProperty('--glow-y',y+'px');
-  document.querySelector('.nav')?.style.setProperty('transform','translate3d('+(-nx*8)+'px,'+(-ny*3)+'px,35px)');
-  document.querySelector('.hero-in')?.style.setProperty('transform','translate3d('+(nx*5)+'px,'+(ny*4)+'px,0)');
-  cards.forEach((el,i)=>{
-   if(el.matches('.hero-photo')){el.style.setProperty('--ry',(-nx*7)+'deg');el.style.setProperty('--rx',(ny*5)+'deg');el.style.setProperty('--tz','45px');}
-   else {const d=(i%4)+1;el.style.setProperty('--ry',(-nx*d*1.3)+'deg');el.style.setProperty('--rx',(ny*d)+'deg');el.style.setProperty('--tz',(10+d*3)+'px');}
-  });
+/* ORDER TOTAL + 4D MOUSE ENGINE */
+(()=>{
+ const order=document.querySelector('#commande');
+ const form=document.querySelector('#commande form');
+ const total=document.getElementById('order-total-value');
+ if(form&&total){
+  const prices={"Dhal de mungo":14,"Burger végétarien":13,"Poulet curry":17,"Poulet shawarma":17,"Limonade Maison":3.9,"Red Fizz":4.5,"Jus du Jour":4,"Jus de Pomme / Orange":3.9,"Bières Pachamama":4.9,"Thé Glacé":3.9,"Cheesecake":5.5,"Carotte Cake":5,"Tarte vegan citron vert":6,"Tarte vegan chocolat":6,"Vegan Banana Bread":4.5};
+  form.querySelectorAll('input[type="number"]').forEach(i=>{if(prices[i.name]!==undefined)i.dataset.price=prices[i.name];i.addEventListener('input',()=>{let s=0;form.querySelectorAll('input[type="number"]').forEach(x=>s+=(Number(x.value)||0)*(Number(x.dataset.price)||0));total.textContent=s.toFixed(2).replace('.',',')+' €'});});
+  let s=0;form.querySelectorAll('input[type="number"]').forEach(x=>s+=(Number(x.value)||0)*(Number(x.dataset.price)||0));total.textContent=s.toFixed(2).replace('.',',')+' €';
  }
- window.addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});
- if(window.DeviceOrientationEvent){window.addEventListener('deviceorientation',e=>{if(Math.abs(e.gamma||0)+Math.abs(e.beta||0)<2)return;move(window.innerWidth/2+(e.gamma||0)*8,window.innerHeight/2+(e.beta||0)*3)},{passive:true});}
- function raf(){cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;requestAnimationFrame(raf)} raf();
+ if(!order||window.matchMedia('(max-width:800px)').matches)return;
+ const wrap=order.querySelector('.wrap'), box=order.querySelector('.order-box'), head=order.querySelector('.head');
+ const items=[...order.querySelectorAll('.order-item')];
+ let tx=0,ty=0,x=0,y=0;
+ order.addEventListener('pointermove',e=>{const r=order.getBoundingClientRect();tx=(e.clientX-(r.left+r.width/2))/(r.width/2);ty=(e.clientY-(r.top+r.height/2))/(r.height/2)},{passive:true});
+ order.addEventListener('pointerleave',()=>{tx=0;ty=0},{passive:true});
+ function frame(){
+  x+=(tx-x)*.065;y+=(ty-y)*.065;
+  if(wrap)wrap.style.transform=`translate3d(${x*7}px,${y*4}px,0)`;
+  if(head)head.style.transform=`translate3d(${-x*8}px,${-y*5}px,45px) rotateY(${x*1.8}deg) rotateX(${-y*1.2}deg)`;
+  if(box)box.style.transform=`perspective(1600px) rotateY(${x*3.8}deg) rotateX(${-y*2.8}deg) translate3d(${x*3}px,${y*2}px,35px)`;
+  items.forEach((el,i)=>{
+   const d=1+(i%4)*.28;
+   el.style.transform=`perspective(1200px) rotateY(${x*3*d}deg) rotateX(${-y*2*d}deg) translate3d(${x*5*d}px,${y*3*d}px,${12+i%3*7}px)`;
+  });
+  requestAnimationFrame(frame);
+ }
+ frame();
 })();
 </script>
-<script>
-/* ULTRA-SMOOTH pointer depth: only two compositor transforms */
-(()=>{const root=document.documentElement,hero=document.querySelector('.hero-in'),nav=document.querySelector('.nav');let tx=.5,ty=.5,x=.5,y=.5,raf;const tick=()=>{x+=(tx-x)*.08;y+=(ty-y)*.08;const dx=(x-.5)*4,dy=(y-.5)*3;root.style.setProperty('--glow-x',(x*100)+'vw');root.style.setProperty('--glow-y',(y*100)+'vh');if(hero)hero.style.transform=`translate3d(${dx}px,${dy}px,0)`;if(nav)nav.style.transform=`translate3d(${-dx*.7}px,${-dy*.5}px,0)`;raf=requestAnimationFrame(tick)};addEventListener('pointermove',e=>{tx=e.clientX/innerWidth;ty=e.clientY/innerHeight},{passive:true});addEventListener('pointerleave',()=>{tx=.5;ty=.5},{passive:true});tick()})();
-</script><script>
-/* 4D movement for the online ordering section */
-(()=>{const s=document.querySelector('#commande'),box=s?.querySelector('.order-box'),head=s?.querySelector('.head');if(!s||!box)return;let tx=0,ty=0,x=0,y=0;const move=e=>{const r=s.getBoundingClientRect();tx=(e.clientX-(r.left+r.width/2))/(r.width/2);ty=(e.clientY-(r.top+r.height/2))/(r.height/2)};s.addEventListener('pointermove',move,{passive:true});s.addEventListener('pointerleave',()=>{tx=0;ty=0},{passive:true});const raf=()=>{x+=(tx-x)*.09;y+=(ty-y)*.09;box.style.transform='perspective(1400px) rotateX('+(-y*2.2)+'deg) rotateY('+(x*2.8)+'deg) translateZ(18px)';if(head)head.style.transform='translate3d('+(-x*4)+'px,'+(-y*3)+'px,28px)';s.querySelectorAll('.order-item').forEach((el,i)=>{const d=1+(i%3)*.35;el.style.transform='perspective(1200px) rotateX('+(-y*d)+'deg) rotateY('+(x*d)+'deg) translateZ('+(8+i%3*4)+'px)'}) ;requestAnimationFrame(raf)};raf()})();
-</script>
-</body></html>
+</body>
