@@ -6,11 +6,118 @@
 <title>Paul & Paulette — Restaurant à Fontainebleau</title>
 <meta name="description" content="Paul & Paulette, café-restaurant à Fontainebleau. Découvrez notre menu, nos boissons et nos gâteaux faits maison.">
 <link rel="canonical" href="https://dhoomsingh.github.io/Paul-et-paulette/">
-/* FULL 4D ORDER — continuous mouse depth */
-#commande{position:relative;perspective:1800px;transform-style:preserve-3d;overflow:visible}
-#commande .wrap,#commande .head,#commande .order-box,#commande .order-note,#commande .order-item,#commande form,#commande .pickup-info{transform-style:preserve-3d;backface-visibility:hidden}
-#commande .wrap,#commande .head,#commande .order-box,#commande .order-item{will-change:transform}
-#commande .order-box,#commande .order-item{transition:transform .12s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease!important}
+<style>
+:root{--cream:#f7f1e7;--ink:#24211d;--red:#a95138;--sage:#58664e;--white:#fffdf9;--line:#e5dacb}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif;line-height:1.6}h1,h2,h3{font-family:Georgia,serif;line-height:1.1}a{text-decoration:none;color:inherit}nav{position:fixed;top:0;width:100%;z-index:5;background:#fffdf9f2;border-bottom:1px solid var(--line)}.nav{max-width:1120px;margin:auto;padding:15px 24px;display:flex;align-items:center;justify-content:space-between}.logo{font:bold 25px Georgia}.links{display:flex;gap:24px;font-weight:bold;font-size:14px}.btn{display:inline-block;background:var(--red);color:#fff;padding:13px 22px;border-radius:8px;font-weight:bold;border:0;cursor:pointer}.hero{min-height:650px;padding:150px 22px 85px;display:grid;place-items:center;background:linear-gradient(180deg,#f7f1e7,#efe5d6)}.hero-in{max-width:1120px;width:100%;display:grid;grid-template-columns:1.25fr .75fr;gap:65px;align-items:center}.eyebrow{text-transform:uppercase;letter-spacing:3px;color:var(--red);font-size:11px;font-weight:800}.hero h1{font-size:clamp(52px,7vw,82px);margin:16px 0 20px;letter-spacing:-2px}.hero p{font-size:19px;color:#5d574f;max-width:610px}.hero-photo{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px #2b21151f;border:1px solid var(--line);background:#fffdf9}.hero-photo img{display:block;width:100%;height:500px;object-fit:cover;object-position:center}.photo-caption{position:absolute;left:18px;right:18px;bottom:18px;background:#fffdf9eb;border:1px solid var(--line);border-radius:14px;padding:15px 18px;font-weight:800}.photo-caption small{display:block;color:#716b63;font-weight:normal;margin-top:3px}.hero-info{background:#fffdf9;border:1px solid var(--line);padding:32px;border-radius:18px}.hero-info h3{font-size:26px;margin:0 0 18px}.info-line{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:11px 0;font-size:14px}.info-line:last-child{border:0}.info-line strong{color:var(--red)}section{padding:95px 22px}.wrap{max-width:1050px;margin:auto}.head{text-align:center;max-width:700px;margin:0 auto 45px}.head h2{font-size:46px;margin:12px 0}.head p{color:#706960}.grid,.order-items{display:grid;grid-template-columns:1fr 1fr;gap:18px}.dish{background:var(--white);padding:28px;border:1px solid var(--line);border-radius:14px;display:flex;justify-content:space-between;gap:20px}.dish h3{margin:0 0 8px;font-size:22px}.dish p{margin:0;color:#716b63;font-size:15px}.price{color:var(--red);font-size:20px;font-weight:bold;white-space:nowrap}.vegan-banner{background:#e4eadf;border:1px solid #bdcbb7;border-radius:14px;padding:20px;margin:0 auto 28px;max-width:900px;text-align:center}.vegan-banner .title{font-size:18px;font-weight:800;color:#3f5738}.vegan-banner p{margin:7px 0 0;color:#53604e;font-size:14px}.tag{display:inline-block;background:#e3efdd;color:#3f6537;border-radius:20px;padding:3px 9px;font:bold 11px Arial;margin-left:7px}.hours{padding:75px 22px;background:#fffdf9}.hours-card{max-width:760px;margin:auto;background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:10px 25px}.hours-card div{display:flex;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--line)}.hours-card div:last-child{border:0}.hours-card span{font-weight:bold;color:var(--red)}.order-section{background:#f8f3ea}.order-box{max-width:900px;margin:auto;background:#fffdf9;border:1px solid var(--line);border-radius:18px;padding:30px}.order-note{background:#e4eadf;border:1px solid #bdcbb7;border-radius:12px;padding:14px 16px;margin-bottom:22px;text-align:center;color:#3f5738;font-weight:bold}.order-item{display:flex;align-items:center;justify-content:space-between;gap:15px;border:1px solid var(--line);border-radius:12px;padding:15px;background:#fff}.order-item input{width:75px}.pickup-info{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:18px}.about{background:#e3dacb}.aboutgrid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}.about h2,.booking h2{font-size:48px}.about p{color:#5f5a53}.box{background:var(--sage);color:white;border-radius:18px;padding:42px;min-height:280px;display:flex;align-items:end;font:700 34px Georgia}.booking{background:var(--ink);color:white}.bookinggrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}.booking p{color:#ccc}form{background:var(--white);color:var(--ink);padding:30px;border-radius:16px;display:grid;gap:15px}.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{font-size:13px;font-weight:bold}input,select,textarea{width:100%;padding:13px;border:1px solid #ddd3c6;border-radius:8px;font:inherit;background:#fffdf9}footer{text-align:center;padding:40px 20px;background:#181714;color:#aaa}footer strong{color:#fff}@media(max-width:800px){.links{display:none}.hero-in,.aboutgrid,.bookinggrid,.grid,.order-items,.pickup-info{grid-template-columns:1fr}.hero{min-height:auto;padding-top:125px}.hero h1{font-size:55px}.head h2,.about h2,.booking h2{font-size:38px}.row{grid-template-columns:1fr}}
+.facade-photo{position:relative;margin-top:18px;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px rgba(43,33,21,.12)}.facade-photo img{display:block;width:100%;height:520px;object-fit:cover;object-position:center}.facade-photo .photo-caption{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(255,253,249,.92);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-weight:800}.facade-photo .photo-caption small{display:block;color:#716b63;font-weight:400;margin-top:3px}
+/* 3D / ultra-realistic visual layer */
+body{perspective:1400px;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 15% 10%,rgba(255,255,255,.9),transparent 32%),radial-gradient(circle at 85% 35%,rgba(169,81,56,.08),transparent 30%);transform:translateZ(-300px) scale(1.3)}
+nav{backdrop-filter:blur(18px);box-shadow:0 10px 35px rgba(36,33,29,.08)}
+.hero{position:relative;overflow:hidden;transform-style:preserve-3d}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;pointer-events:none;filter:blur(2px)}
+.hero:before{width:360px;height:360px;right:-100px;top:80px;background:radial-gradient(circle,rgba(169,81,56,.16),transparent 68%);transform:translateZ(80px)}
+.hero:after{width:280px;height:280px;left:-120px;bottom:-80px;background:radial-gradient(circle,rgba(88,102,78,.16),transparent 70%);transform:translateZ(60px)}
+.hero-in{position:relative;transform-style:preserve-3d}
+.hero-in>div:first-child{transform:translateZ(45px)}
+.hero-photo{transform:perspective(1200px) rotateY(-7deg) rotateX(3deg) translateZ(35px);transform-style:preserve-3d;transition:transform .5s ease,box-shadow .5s ease;box-shadow:32px 35px 70px rgba(43,33,21,.22),0 5px 0 rgba(255,255,255,.7) inset}
+.hero-photo:hover{transform:perspective(1200px) rotateY(-2deg) rotateX(1deg) translateZ(55px);box-shadow:42px 45px 85px rgba(43,33,21,.28)}
+.hero-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.35),transparent 28%,transparent 72%,rgba(0,0,0,.12));pointer-events:none}
+.hero-photo img{filter:saturate(1.08) contrast(1.04);transform:scale(1.02)}
+.photo-caption{box-shadow:0 15px 35px rgba(36,33,29,.16);backdrop-filter:blur(12px)}
+.hero-info{transform:translateZ(55px);box-shadow:18px 22px 45px rgba(36,33,29,.14);transition:transform .4s ease}
+.hero-info:hover{transform:translateZ(70px) rotateX(1deg)}
+section{transform-style:preserve-3d}
+.head h2{letter-spacing:-1px;text-shadow:0 2px 0 rgba(255,255,255,.8),0 12px 28px rgba(36,33,29,.10)}
+.dish{position:relative;overflow:hidden;transform:translateZ(0);box-shadow:0 12px 28px rgba(36,33,29,.07),0 2px 0 rgba(255,255,255,.8) inset;transition:transform .3s ease,box-shadow .3s ease}
+.dish:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.45),transparent 35%);pointer-events:none}
+.dish:hover{transform:translateY(-7px) rotateX(2deg) rotateY(-1deg) translateZ(12px);box-shadow:0 24px 42px rgba(36,33,29,.15)}
+.order-box,form,.hours-card{box-shadow:0 20px 50px rgba(36,33,29,.10),0 2px 0 rgba(255,255,255,.8) inset}
+.btn{box-shadow:0 9px 18px rgba(169,81,56,.25);transition:transform .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-3px) translateZ(8px);box-shadow:0 14px 25px rgba(169,81,56,.32)}
+.aboutgrid .box{transform:perspective(900px) rotateY(-5deg) rotateX(2deg);box-shadow:25px 28px 55px rgba(36,33,29,.20);transition:transform .4s ease}
+.aboutgrid .box:hover{transform:perspective(900px) rotateY(-1deg) rotateX(0) translateZ(20px)}
+.bookinggrid>div:first-child{transform:translateZ(35px)}
+@media(max-width:800px){.hero-photo{transform:none}.hero-photo:hover{transform:none}.hero-info{transform:none}.aboutgrid .box{transform:none}.dish:hover{transform:translateY(-4px)}}
+/* FULL-PAGE 3D DEPTH */
+*{transform-style:preserve-3d}
+body{perspective:1800px;background:radial-gradient(circle at 50% -10%,#fffdf9 0%,var(--cream) 45%,#e8dccb 100%);overflow-x:hidden}
+nav{transform:translateZ(35px);box-shadow:0 12px 40px rgba(0,0,0,.14)}
+nav .nav{transform:translateZ(25px)}
+.hero,.hours,#menu,.order-section,.about,.booking{position:relative;transform-style:preserve-3d}
+.hero:after,.hours:after,#menu:after,.order-section:after,.about:after,.booking:after{content:"";position:absolute;inset:12px;border-radius:30px;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 30px 70px rgba(30,20,10,.08);transform:translateZ(-20px)}
+.hero-in,.wrap{position:relative;transform-style:preserve-3d}
+.hero-in>*,.head,.hours-card,.order-box,.aboutgrid>*,.bookinggrid>*{transform:translateZ(28px);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease}
+.hero-in>div:hover,.hours-card:hover,.order-box:hover,.aboutgrid>div:hover,.bookinggrid>div:hover{transform:translateZ(48px)}
+.hero-photo,.dish,.order-item,.box,form,.btn{transform-style:preserve-3d;backface-visibility:hidden}
+.dish,.order-item{box-shadow:10px 14px 0 rgba(80,55,35,.035),0 20px 45px rgba(30,20,10,.11)}
+.dish:hover,.order-item:hover{transform:translateZ(25px) rotateX(3deg) rotateY(-2deg) translateY(-5px);box-shadow:18px 24px 55px rgba(30,20,10,.18)}
+.btn{position:relative;transform:translateZ(18px);box-shadow:0 8px 0 #783b2c,0 18px 30px rgba(120,59,44,.25);transition:all .2s ease}
+.btn:hover{transform:translateZ(30px) translateY(-5px) rotateX(4deg);box-shadow:0 5px 0 #783b2c,0 25px 40px rgba(120,59,44,.32)}
+.btn:active{transform:translateZ(12px) translateY(2px);box-shadow:0 3px 0 #783b2c,0 8px 15px rgba(120,59,44,.2)}
+.hero h1,.head h2,.about h2,.booking h2{transform:translateZ(38px);text-shadow:0 3px 0 rgba(255,255,255,.7),0 18px 35px rgba(30,20,10,.16)}
+.price,.tag,.eyebrow{transform:translateZ(22px)}
+input,select,textarea{transform:translateZ(8px);box-shadow:inset 0 2px 8px rgba(0,0,0,.05),0 5px 12px rgba(0,0,0,.05)}
+footer{transform:translateZ(15px);box-shadow:0 -15px 40px rgba(0,0,0,.18)}
+@media(max-width:800px){*{transform-style:flat}.hero-in>*,.head,.hours-card,.order-box,.aboutgrid>*,.bookinggrid>*{transform:none}.hero-in>div:hover,.hours-card:hover,.order-box:hover,.aboutgrid>div:hover,.bookinggrid>div:hover{transform:none}.dish:hover,.order-item:hover{transform:translateY(-4px)}}
+
+/* PHOTOREALISTIC 3D MATERIALS */
+body{background:linear-gradient(135deg,#eee5d8 0%,#faf7f1 45%,#e3d7c7 100%);text-rendering:optimizeLegibility}
+.hero,.hours,#menu,.order-section,.about,.booking{background-image:radial-gradient(circle at 20% 15%,rgba(255,255,255,.8),transparent 28%),radial-gradient(circle at 80% 80%,rgba(80,55,35,.08),transparent 30%);}
+.hero-photo,.dish,.hours-card,.order-box,.order-item,form,.aboutgrid .box{border:1px solid rgba(90,65,40,.16);background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(245,238,227,.92));box-shadow:0 2px 2px rgba(255,255,255,.9) inset,0 -1px 0 rgba(50,30,15,.08) inset,0 18px 35px rgba(45,30,18,.12),0 35px 70px rgba(45,30,18,.08)}
+.hero-photo{box-shadow:0 3px 4px rgba(255,255,255,.7) inset,0 28px 50px rgba(30,20,10,.25),0 50px 90px rgba(30,20,10,.14)}
+.hero-photo img{filter:saturate(1.12) contrast(1.06) brightness(1.02);box-shadow:inset 0 0 30px rgba(0,0,0,.12)}
+.photo-caption{background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(245,238,227,.76));box-shadow:0 10px 25px rgba(30,20,10,.18),inset 0 1px 0 rgba(255,255,255,.9)}
+.dish{position:relative;isolation:isolate;background:linear-gradient(145deg,#fffdf9,#f3eadc);}
+.dish:after,.order-item:after{content:"";position:absolute;inset:1px;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.6),transparent 22%,transparent 75%,rgba(80,50,25,.07));pointer-events:none;z-index:-1}
+.dish h3,.dish p,.price{position:relative;z-index:1}
+.order-box{background:linear-gradient(145deg,#fffdf9,#f0e7da)}
+.order-item{background:linear-gradient(145deg,#fff,#f5eee4);transition:transform .3s ease,box-shadow .3s ease}
+.hours-card div{position:relative;transition:transform .25s ease,background .25s ease}
+.hours-card div:hover{transform:translateZ(12px) scale(1.015);background:rgba(255,255,255,.55);border-radius:8px}
+.btn{background:linear-gradient(145deg,#b85f45,#91422f);border:1px solid rgba(255,255,255,.25);box-shadow:0 2px 0 #6f3023,0 12px 24px rgba(120,59,44,.3),inset 0 1px 0 rgba(255,255,255,.3);text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.btn:hover{background:linear-gradient(145deg,#c56b50,#9b4934);box-shadow:0 4px 0 #6f3023,0 22px 38px rgba(100,45,30,.35),inset 0 1px 0 rgba(255,255,255,.35)}
+.box{background:linear-gradient(145deg,#68765e,#414c3b)!important;box-shadow:0 25px 55px rgba(25,30,20,.3),inset 0 1px 0 rgba(255,255,255,.18)!important}
+.vegan-banner,.order-note{box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 12px 25px rgba(45,65,35,.09)}
+nav{background:rgba(255,253,249,.78);box-shadow:0 8px 30px rgba(30,20,10,.12),inset 0 -1px 0 rgba(255,255,255,.8)}
+
+/* MAX REALISM — cinematic restaurant UI */
+html{background:#ddd3c4}body{background:radial-gradient(ellipse at 50% -15%,#fff 0,#f8f3eb 35%,#e3d8c8 100%);font-smoothing:antialiased;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:-20%;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 20%,rgba(255,255,255,.95),transparent 38%),radial-gradient(ellipse at 15% 70%,rgba(88,102,78,.12),transparent 32%),radial-gradient(ellipse at 85% 45%,rgba(169,81,56,.10),transparent 30%);filter:blur(30px);animation:ambient 12s ease-in-out infinite alternate}
+@keyframes ambient{from{transform:scale(1) translate3d(-1%,0,0)}to{transform:scale(1.08) translate3d(1%,1%,0)}}
+nav{box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 15px 40px rgba(35,24,15,.13);backdrop-filter:blur(24px) saturate(1.25)}
+.hero{background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(238,228,213,.72));box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+.hero-photo{border-radius:26px;box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 2px 8px rgba(0,0,0,.12),0 25px 55px rgba(35,25,15,.25),0 55px 110px rgba(35,25,15,.12);will-change:transform;overflow:hidden}
+.hero-photo:before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(105deg,rgba(255,255,255,.28) 0%,transparent 18%,transparent 67%,rgba(0,0,0,.12) 100%);mix-blend-mode:soft-light;pointer-events:none}
+.hero-photo:after{content:"";position:absolute;z-index:2;inset:0;background:radial-gradient(ellipse at 50% 35%,transparent 35%,rgba(0,0,0,.13) 100%);pointer-events:none}
+.hero-photo img{filter:saturate(1.1) contrast(1.08) brightness(1.01);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s ease}.hero-photo:hover img{transform:scale(1.075);filter:saturate(1.16) contrast(1.1) brightness(1.03)}
+.photo-caption{z-index:3;box-shadow:0 12px 35px rgba(20,12,7,.22),inset 0 1px 0 rgba(255,255,255,.95);background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(247,239,228,.78));backdrop-filter:blur(18px) saturate(1.3)}
+.dish,.order-item,.hours-card,.order-box,form{box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 2px 4px rgba(40,25,15,.08),0 18px 40px rgba(40,25,15,.10),0 35px 75px rgba(40,25,15,.06);background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(243,235,224,.94));}
+.dish{transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s ease;will-change:transform}.dish:hover{transform:translate3d(0,-11px,35px) rotateX(4deg) rotateY(-2deg) scale(1.015);box-shadow:0 2px 0 rgba(255,255,255,1) inset,0 28px 55px rgba(35,23,13,.18),0 55px 100px rgba(35,23,13,.10)}
+.dish:before{background:linear-gradient(115deg,rgba(255,255,255,.7),transparent 18%,transparent 68%,rgba(90,55,30,.06));opacity:.8}
+.order-item{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease}.order-item:hover{transform:translateZ(22px) translateY(-5px) scale(1.01);box-shadow:0 20px 40px rgba(35,23,13,.16)}
+.hours-card div:hover{background:linear-gradient(90deg,rgba(255,255,255,.7),rgba(245,237,225,.3));box-shadow:0 10px 22px rgba(35,23,13,.08)}
+.btn{border-radius:11px;background:linear-gradient(145deg,#bf654b,#8d3f2d);box-shadow:0 2px 0 #6c2d21,0 10px 22px rgba(110,45,30,.28),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease,filter .25s ease}.btn:hover{filter:saturate(1.08);transform:translate3d(0,-5px,24px) scale(1.025);box-shadow:0 3px 0 #6c2d21,0 20px 38px rgba(110,45,30,.34),inset 0 1px 0 rgba(255,255,255,.4)}.btn:active{transform:translateY(1px) translateZ(8px)}
+input,select,textarea{background:linear-gradient(145deg,#fff,#f4ece1);box-shadow:inset 0 2px 8px rgba(40,25,15,.05),0 1px 0 rgba(255,255,255,.9);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}input:focus,select:focus,textarea:focus{transform:translateZ(12px);border-color:#a95138;box-shadow:0 8px 20px rgba(90,45,30,.12),inset 0 1px 0 rgba(255,255,255,.9);outline:none}
+.aboutgrid .box{box-shadow:0 2px 0 rgba(255,255,255,.18) inset,0 30px 60px rgba(20,30,15,.3),0 60px 100px rgba(20,30,15,.12)!important;background:linear-gradient(145deg,#718067,#3e4b39)!important}
+.vegan-banner,.order-note{box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 12px 30px rgba(50,70,40,.10)}
+section{isolation:isolate}
+@media(prefers-reduced-motion:no-preference){.hero-in,.hours-card,.order-box,.aboutgrid,.bookinggrid{animation:riseIn .9s cubic-bezier(.16,1,.3,1) both}}@keyframes riseIn{from{opacity:0;transform:translateY(24px) translateZ(-30px)}to{opacity:1;transform:translateY(0) translateZ(0)}}
+
+/* IMMERSIVE 4D-STYLE INTERACTION */
+:root{--mx:50%;--my:50%;--depth:0px}
+body{--glow-x:50vw;--glow-y:50vh}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;background:radial-gradient(circle 280px at var(--glow-x) var(--glow-y),rgba(255,255,255,.16),transparent 70%);mix-blend-mode:screen}
+.hero-in,.wrap,.nav{transition:transform .18s cubic-bezier(.2,.8,.2,1)}
+.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{--rx:0deg;--ry:0deg;--tz:0px;transform:perspective(1400px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--tz));will-change:transform}
+.hero-photo{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .4s ease}
+.dish,.order-item,.btn{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+@media(max-width:800px){body:after{display:none}.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form{transform:none!important}.hero-in,.wrap,.nav{transform:none!important}}
+
+/* PHOTOREALISTIC 4D LIGHTING */
+body{background-image:radial-gradient(circle at var(--glow-x) var(--glow-y),rgba(255,245,220,.08),transparent 32%),radial-gradient(circle at 20% 10%,rgba(255,255,255,.045),transparent 28%);}
+.hero-photo{filter:saturate(1.06) contrast(1.035);box-shadow:0 35px 90px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.25)}
+.hero-photo:before,.hero-info:before,.dish:before,.order-box:before,.order-item:before,.hours-card:before,.aboutgrid .box:before,form:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.13),transparent 25%,transparent 72%,rgba(0,0,0,.08));opacity:.7;z-index:1}
+.hero-photo img,.dish img{filter:contrast(1.04) saturate(1.05);transform:scale(1.012);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s ease}.hero-photo:hover img,.dish:hover img{transform:scale(1.035);filter:contrast(1.06) saturate(1.08)}
 </style></head>
 <body>
 <nav><div class="nav"><a class="logo" href="#home">Paul & Paulette</a><div class="links"><a href="#menu">Menu</a><a href="#commande">Commande à emporter</a><a href="#restaurant">Le restaurant</a><a href="#reservation">Réservation</a></div><a class="btn" href="#reservation">Réserver</a></div></nav>
@@ -34,33 +141,67 @@
 <form action="https://formsubmit.co/Pauletpaulettedhoom@gmail.com" method="POST"><input type="hidden" name="_subject" value="Nouvelle réservation — Paul & Paulette"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="true"><div class="row"><div><label>Nom</label><input name="Nom" required></div><div><label>Téléphone</label><input name="Téléphone" required></div></div><div class="row"><div><label>Date</label><input name="Date" type="date" required></div><div><label>Heure</label><input name="Heure" type="time" min="10:00" max="17:59" required></div></div><label>Nombre de personnes<select name="Nombre de personnes"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label>Message<textarea name="Message" rows="3"></textarea></label><button class="btn" type="submit" style="width:100%;font-size:18px">✉️ Envoyer la réservation</button><small style="text-align:center">Réservations de 10h00 à 17h59.</small></form></div></section>
 <footer><strong>Paul & Paulette</strong><br>04 rue des Bouchers · Fontainebleau<br>Réservations : Pauletpaulettedhoom@gmail.com<br><small>© 2026 Paul & Paulette · Tous droits réservés</small></footer>
 <script>
-/* ORDER TOTAL + CONTINUOUS FULL-SECTION 4D */
-(()=>{
- const order=document.querySelector('#commande');
- const form=order?.querySelector('form');
- const total=document.getElementById('order-total-value');
- if(form&&total){
-  const prices={"Dhal de mungo":14,"Burger végétarien":13,"Poulet curry":17,"Poulet shawarma":17,"Limonade Maison":3.9,"Red Fizz":4.5,"Jus du Jour":4,"Jus de Pomme / Orange":3.9,"Bières Pachamama":4.9,"Thé Glacé":3.9,"Cheesecake":5.5,"Carotte Cake":5,"Tarte vegan citron vert":6,"Tarte vegan chocolat":6,"Vegan Banana Bread":4.5};
-  const calc=()=>{let n=0;form.querySelectorAll('input[type="number"]').forEach(x=>n+=(Number(x.value)||0)*(prices[x.name]||0));total.textContent=n.toFixed(2).replace('.',',')+' €'};
-  form.querySelectorAll('input[type="number"]').forEach(x=>x.addEventListener('input',calc));calc();
- }
- if(!order||window.matchMedia('(max-width:800px)').matches)return;
- const wrap=order.querySelector('.wrap'),head=order.querySelector('.head'),box=order.querySelector('.order-box');
- const cards=[...order.querySelectorAll('.order-item')],note=order.querySelector('.order-note'),pickup=order.querySelector('.pickup-info');
- let tx=0,ty=0,x=0,y=0;
- order.addEventListener('pointermove',e=>{const r=order.getBoundingClientRect();tx=(e.clientX-r.left)/r.width*2-1;ty=(e.clientY-r.top)/r.height*2-1},{passive:true});
- order.addEventListener('pointerleave',()=>{tx=0;ty=0},{passive:true});
- const loop=()=>{
-  x+=(tx-x)*.085;y+=(ty-y)*.085;
-  if(wrap)wrap.style.transform=`translate3d(${x*9}px,${y*6}px,0) rotateY(${x*1.2}deg) rotateX(${-y*.8}deg)`;
-  if(head)head.style.transform=`translate3d(${-x*18}px,${-y*12}px,55px) rotateY(${x*4}deg) rotateX(${-y*3}deg)`;
-  if(box)box.style.transform=`translate3d(${x*10}px,${y*7}px,45px) rotateY(${x*5.5}deg) rotateX(${-y*4}deg)`;
-  cards.forEach((el,i)=>{const d=1+(i%5)*.22;el.style.transform=`translate3d(${x*14*d}px,${y*9*d}px,${18+i%4*9}px) rotateY(${x*4*d}deg) rotateX(${-y*3*d}deg)`});
-  if(note)note.style.transform=`translate3d(${x*7}px,${y*5}px,28px)`;
-  if(pickup)pickup.style.transform=`translate3d(${x*6}px,${y*4}px,22px)`;
-  requestAnimationFrame(loop);
- };
- loop();
-})();
+(function(){
+const payButton=document.querySelector('#commande button[type="submit"]');
+if(payButton){payButton.addEventListener('click',function(e){e.preventDefault();alert('Le paiement en ligne Stripe doit encore être connecté au site. Votre commande n\'est pas envoyée tant que Stripe n\'est pas configuré.');});}
 
-</body>
+const form=document.querySelector('#commande form');
+const total=document.getElementById('order-total-value');
+if(!form||!total)return;
+function updateTotal(){
+ let sum=0;
+ form.querySelectorAll('input[type="number"]').forEach(function(input){
+   sum+=(Number(input.value)||0)*(Number(input.dataset.price)||0);
+ });
+ total.textContent=sum.toFixed(2).replace('.',',')+' €';
+}
+const prices={"Dhal de mungo":14,"Burger végétarien":13,"Poulet curry":17,"Poulet shawarma":17,"Limonade Maison":3.9,"Red Fizz":4.5,"Jus du Jour":4,"Jus de Pomme / Orange":3.9,"Bières Pachamama":4.9,"Thé Glacé":3.9,"Cheesecake":5.5,"Carotte Cake":5,"Tarte vegan citron vert":6,"Tarte vegan chocolat":6,"Vegan Banana Bread":4.5};
+form.querySelectorAll('input[type="number"]').forEach(function(input){
+ const name=input.name;
+ if(prices[name]!==undefined)input.dataset.price=prices[name];
+ input.addEventListener('input',updateTotal);
+});
+updateTotal();
+})();
+<script>
+/* Subtle cursor-based depth on desktop */
+(function(){
+ if(window.matchMedia("(max-width:800px)").matches) return;
+ const hero=document.querySelector(".hero");
+ const card=document.querySelector(".hero-photo");
+ if(!hero||!card) return;
+ hero.addEventListener("mousemove",function(e){
+   const r=hero.getBoundingClientRect();
+   const x=(e.clientX-r.left)/r.width-.5;
+   const y=(e.clientY-r.top)/r.height-.5;
+   card.style.transform="perspective(1200px) rotateY("+(-7-x*5)+"deg) rotateX("+(3-y*4)+"deg) translateZ(45px)";
+ });
+ hero.addEventListener("mouseleave",function(){card.style.transform="perspective(1200px) rotateY(-7deg) rotateX(3deg) translateZ(35px)"});
+})();
+</script></script>
+<script>
+/* 4D-style living depth: cursor + device motion */
+(function(){
+ const root=document.documentElement, body=document.body;
+ const cards=[...document.querySelectorAll('.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form')];
+ let tx=0,ty=0,cx=0,cy=0;
+ function move(x,y){
+  const nx=(x/window.innerWidth-.5), ny=(y/window.innerHeight-.5);
+  tx=nx;ty=ny;
+  root.style.setProperty('--glow-x',x+'px');root.style.setProperty('--glow-y',y+'px');
+  document.querySelector('.nav')?.style.setProperty('transform','translate3d('+(-nx*8)+'px,'+(-ny*3)+'px,35px)');
+  document.querySelector('.hero-in')?.style.setProperty('transform','translate3d('+(nx*5)+'px,'+(ny*4)+'px,0)');
+  cards.forEach((el,i)=>{
+   if(el.matches('.hero-photo')){el.style.setProperty('--ry',(-nx*7)+'deg');el.style.setProperty('--rx',(ny*5)+'deg');el.style.setProperty('--tz','45px');}
+   else {const d=(i%4)+1;el.style.setProperty('--ry',(-nx*d*1.3)+'deg');el.style.setProperty('--rx',(ny*d)+'deg');el.style.setProperty('--tz',(10+d*3)+'px');}
+  });
+ }
+ window.addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});
+ if(window.DeviceOrientationEvent){window.addEventListener('deviceorientation',e=>{if(Math.abs(e.gamma||0)+Math.abs(e.beta||0)<2)return;move(window.innerWidth/2+(e.gamma||0)*8,window.innerHeight/2+(e.beta||0)*3)},{passive:true});}
+ function raf(){cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;requestAnimationFrame(raf)} raf();
+})();
+</script>
+<script>
+/* ULTRA-SMOOTH pointer depth: only two compositor transforms */
+(()=>{const root=document.documentElement,hero=document.querySelector('.hero-in'),nav=document.querySelector('.nav');let tx=.5,ty=.5,x=.5,y=.5,raf;const tick=()=>{x+=(tx-x)*.08;y+=(ty-y)*.08;const dx=(x-.5)*4,dy=(y-.5)*3;root.style.setProperty('--glow-x',(x*100)+'vw');root.style.setProperty('--glow-y',(y*100)+'vh');if(hero)hero.style.transform=`translate3d(${dx}px,${dy}px,0)`;if(nav)nav.style.transform=`translate3d(${-dx*.7}px,${-dy*.5}px,0)`;raf=requestAnimationFrame(tick)};addEventListener('pointermove',e=>{tx=e.clientX/innerWidth;ty=e.clientY/innerHeight},{passive:true});addEventListener('pointerleave',()=>{tx=.5;ty=.5},{passive:true});tick()})();
+</script></body></html>
