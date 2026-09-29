@@ -138,7 +138,28 @@ body{background-image:radial-gradient(circle at var(--glow-x) var(--glow-y),rgba
 <div class="pickup-info"><div><label>Nom</label><input name="Nom" required></div><div><label>Téléphone</label><input name="Téléphone" required></div><div><label>Date de retrait</label><input name="Date de retrait" type="date" required></div><div><label>Heure de retrait</label><input name="Heure de retrait" type="time" min="09:00" max="17:59" required></div></div><label>Message (facultatif)<textarea name="Message" rows="2"></textarea></label><div class="order-total" style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5dacb;margin-top:20px;padding:18px 0;font-size:20px;font-weight:bold"><span>Total de la commande</span><span id="order-total-value">0,00 €</span></div><button class="btn" type="submit" style="width:100%;font-size:18px">💳 Payer en ligne</button><small style="text-align:center">Retrait sur place uniquement · Aucun service de livraison · Paiement en ligne sécurisé</small></form></div></div></section>
 <section class="about" id="restaurant"><div class="wrap aboutgrid"><div><div class="eyebrow">Paul & Paulette</div><h2>Une table où l'on se sent bien.</h2><p>Une cuisine généreuse, fraîche et inspirée du monde entier.</p></div><div class="box">Bon appétit,<br>et à très bientôt !</div></div></section>
 <section class="booking" id="reservation"><div class="wrap bookinggrid"><div><div class="eyebrow" style="color:#d6ae70">Votre table</div><h2>Réservez votre moment.</h2><p>Remplissez le formulaire puis cliquez sur « Envoyer la réservation ». La demande est envoyée directement au restaurant.</p></div>
-<form action="https://formsubmit.co/Pauletpaulettedhoom@gmail.com" method="POST"><input type="hidden" name="_subject" value="Nouvelle réservation — Paul & Paulette"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="true"><div class="row"><div><label>Nom</label><input name="Nom" required></div><div><label>Téléphone</label><input name="Téléphone" required></div></div><div class="row"><div><label>Date</label><input name="Date" type="date" required></div><div><label>Heure</label><input name="Heure" type="time" min="10:00" max="17:59" required></div></div><label>Nombre de personnes<select name="Nombre de personnes"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label>Message<textarea name="Message" rows="3"></textarea></label><button class="btn" type="submit" style="width:100%;font-size:18px">✉️ Envoyer la réservation</button><small style="text-align:center">Réservations de 10h00 à 17h59.</small></form></div></section>
+<form id="reservation-form" action="/api/reservations" method="POST"><input type="hidden" name="restaurant" value="Paul & Paulette"><input type="hidden" name="notificationEmail" value="Pauletpaulettedhoom@gmail.com"><div class="row"><div><label>Nom</label><input name="Nom" required></div><div><label>Téléphone</label><input name="Téléphone" required></div></div><div class="row"><div><label>Date</label><input name="Date" type="date" required></div><div><label>Heure</label><input name="Heure" type="time" min="10:00" max="17:59" required></div></div><label>Nombre de personnes<select name="Nombre de personnes"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label>Message<textarea name="Message" rows="3"></textarea></label><button class="btn" type="submit" style="width:100%;font-size:18px">✉️ Envoyer la réservation</button><small style="text-align:center">Réservations de 10h00 à 17h59.</small></form></div></section>
+<script>
+(function(){
+ const f=document.getElementById('reservation-form');
+ if(!f)return;
+ f.addEventListener('submit',async function(e){
+   e.preventDefault();
+   const b=f.querySelector('button[type="submit"]');
+   const original=b.textContent;
+   b.disabled=true;b.textContent='Enregistrement…';
+   try{
+     const res=await fetch('/api/reservations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))});
+     const data=await res.json().catch(()=>({}));
+     if(!res.ok) throw new Error(data.error||'Erreur');
+     f.reset();
+     alert('Réservation enregistrée. Merci !');
+   }catch(err){
+     alert('La réservation n’a pas pu être enregistrée. Merci de réessayer.');
+   }finally{b.disabled=false;b.textContent=original;}
+ });
+})();
+</script>
 <footer><strong>Paul & Paulette</strong><br>04 rue des Bouchers · Fontainebleau<br>Réservations : Pauletpaulettedhoom@gmail.com<br><small>© 2026 Paul & Paulette · Tous droits réservés</small></footer>
 <script>
 (function(){
