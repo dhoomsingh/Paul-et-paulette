@@ -235,4 +235,79 @@ updateTotal();
 <script>
 /* ULTRA-SMOOTH pointer depth: only two compositor transforms */
 (()=>{const root=document.documentElement,hero=document.querySelector('.hero-in'),nav=document.querySelector('.nav');let tx=.5,ty=.5,x=.5,y=.5,raf;const tick=()=>{x+=(tx-x)*.08;y+=(ty-y)*.08;const dx=(x-.5)*4,dy=(y-.5)*3;root.style.setProperty('--glow-x',(x*100)+'vw');root.style.setProperty('--glow-y',(y*100)+'vh');if(hero)hero.style.transform=`translate3d(${dx}px,${dy}px,0)`;if(nav)nav.style.transform=`translate3d(${-dx*.7}px,${-dy*.5}px,0)`;raf=requestAnimationFrame(tick)};addEventListener('pointermove',e=>{tx=e.clientX/innerWidth;ty=e.clientY/innerHeight},{passive:true});addEventListener('pointerleave',()=>{tx=.5;ty=.5},{passive:true});tick()})();
-</script></body></html>
+</script>
+<script>
+/* MOBILE 3D/4D — gyroscope / device orientation */
+(function(){
+  if(!window.DeviceOrientationEvent) return;
+
+  let active=false, baseBeta=null, baseGamma=null;
+  const root=document.documentElement;
+  const targets=[...document.querySelectorAll(
+    '.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid .box,form'
+  )];
+
+  function apply(beta,gamma){
+    if(beta==null || gamma==null) return;
+    if(baseBeta===null){ baseBeta=beta; baseGamma=gamma; }
+
+    let dx=(gamma-baseGamma);
+    let dy=(beta-baseBeta);
+
+    // Limites pour garder un mouvement élégant et éviter les rotations excessives.
+    dx=Math.max(-18,Math.min(18,dx));
+    dy=Math.max(-14,Math.min(14,dy));
+
+    root.style.setProperty('--glow-x',(50+dx*1.8)+'vw');
+    root.style.setProperty('--glow-y',(50+dy*1.2)+'vh');
+
+    targets.forEach(function(el,i){
+      const depth=(i%4)+1;
+      if(el.classList.contains('hero-photo')){
+        el.style.transform=
+          'perspective(1400px) rotateX('+(-dy*.22)+'deg) rotateY('+(-dx*.28)+'deg) translateZ(45px)';
+      }else{
+        el.style.transform=
+          'perspective(1400px) rotateX('+(-dy*.10*depth)+'deg) rotateY('+(-dx*.12*depth)+'deg) translateZ('+(10+depth*3)+'px)';
+      }
+    });
+  }
+
+  function start(){
+    if(active) return;
+    active=true;
+    window.addEventListener('deviceorientation',function(e){
+      apply(e.beta,e.gamma);
+    },{passive:true});
+  }
+
+  async function enable(){
+    try{
+      if(typeof DeviceOrientationEvent.requestPermission==='function'){
+        const permission=await DeviceOrientationEvent.requestPermission();
+        if(permission!=='granted') return;
+      }
+      start();
+      const b=document.getElementById('motion3d-button');
+      if(b) b.remove();
+    }catch(e){}
+  }
+
+  // iOS/Safari requires a user gesture for sensor permission.
+  if(typeof DeviceOrientationEvent.requestPermission==='function'){
+    const b=document.createElement('button');
+    b.id='motion3d-button';
+    b.type='button';
+    b.textContent='✨ Activer les effets 3D/4D';
+    b.style.cssText=
+      'position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:10000;'+
+      'background:#a95138;color:#fff;border:0;border-radius:999px;padding:13px 20px;'+
+      'font:bold 14px Arial;box-shadow:0 10px 30px rgba(0,0,0,.22);cursor:pointer;';
+    document.body.appendChild(b);
+    b.addEventListener('click',enable,{once:true});
+  }else{
+    start();
+  }
+})();
+</script>
+</body></html>
