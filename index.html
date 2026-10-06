@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="cache-version" content="2026-10-03-live-v2">
+<meta name="cache-version" content="2026-10-06-realism-v3">
 <title>Paul & Paulette — Restaurant à Fontainebleau</title>
 <meta name="description" content="Paul & Paulette, café-restaurant à Fontainebleau. Découvrez notre menu, nos boissons et nos gâteaux faits maison.">
 <link rel="canonical" href="https://dhoomsingh.github.io/Paul-et-paulette/">
@@ -370,6 +370,204 @@ updateTotal();
   // Highlight takeaway total whenever it changes.
   const total=document.getElementById('order-total-value');
   if(total){new MutationObserver(()=>{if(total.textContent!=='0,00 €')toast('Total mis à jour · '+total.textContent)}).observe(total,{childList:true,characterData:true,subtree:true})}
+})();
+</script>
+
+<style id="pp-realism-v3">
+/* Paul & Paulette — premium photoreal 3D layer v3 */
+:root{
+  --pp-red:#a95138;--pp-sage:#58664e;--pp-cream:#f7f1e7;
+  --pp-gold:#d6ae70;--pp-shadow:rgba(44,28,17,.16);
+  --pp-x:0;--pp-y:0;--pp-tiltX:0deg;--pp-tiltY:0deg;
+}
+html{scroll-padding-top:88px}
+body{
+  background:
+    radial-gradient(900px 500px at var(--pp-x) var(--pp-y),rgba(255,255,255,.42),transparent 55%),
+    radial-gradient(700px 420px at 12% 65%,rgba(88,102,78,.09),transparent 62%),
+    radial-gradient(700px 420px at 88% 35%,rgba(169,81,56,.08),transparent 62%),
+    linear-gradient(135deg,#eee5d8,#fbf8f2 48%,#e5d9ca);
+}
+body:before{opacity:.72;filter:blur(42px);animation:ppAtmosphere 16s ease-in-out infinite alternate}
+@keyframes ppAtmosphere{0%{transform:scale(1) translate3d(-1%,0,0)}100%{transform:scale(1.08) translate3d(1%,1%,0)}}
+body:after{z-index:999;mix-blend-mode:soft-light;background:radial-gradient(220px at var(--pp-x) var(--pp-y),rgba(255,255,255,.20),transparent 72%)}
+nav{
+  background:rgba(255,253,249,.72)!important;
+  border-bottom:1px solid rgba(255,255,255,.72)!important;
+  box-shadow:0 12px 38px rgba(36,25,16,.13),inset 0 1px 0 rgba(255,255,255,.92)!important;
+  backdrop-filter:blur(24px) saturate(1.35)!important;
+}
+.logo{letter-spacing:-.5px;text-shadow:0 2px 16px rgba(169,81,56,.12)}
+.links a{position:relative;transition:color .25s ease,transform .25s ease}
+.links a:after{content:"";position:absolute;left:0;right:100%;bottom:-7px;height:2px;border-radius:99px;background:linear-gradient(90deg,var(--pp-red),var(--pp-gold));transition:right .3s ease}
+.links a:hover{color:var(--pp-red);transform:translateY(-1px)}
+.links a:hover:after{right:0}
+.hero{
+  min-height:720px;
+  background:
+    radial-gradient(700px 500px at 72% 45%,rgba(255,255,255,.65),transparent 65%),
+    linear-gradient(135deg,rgba(255,255,255,.55),rgba(238,228,213,.74))!important;
+}
+.hero-in{will-change:transform}
+.hero h1{font-size:clamp(56px,7.5vw,96px);text-wrap:balance}
+.hero h1 em{color:var(--pp-red);font-style:normal}
+.hero p{font-size:20px;line-height:1.7}
+.hero-photo{
+  border-radius:30px!important;
+  transform:perspective(1500px) rotateX(var(--pp-tiltY)) rotateY(var(--pp-tiltX)) translateZ(48px)!important;
+  box-shadow:0 2px 0 rgba(255,255,255,.96) inset,0 20px 42px rgba(35,25,15,.18),0 55px 110px rgba(35,25,15,.14)!important;
+}
+.hero-photo:before{background:linear-gradient(110deg,rgba(255,255,255,.38),transparent 24%,transparent 65%,rgba(0,0,0,.16))!important}
+.hero-photo img{transform:scale(1.025);filter:saturate(1.08) contrast(1.07)!important}
+.photo-caption{border:1px solid rgba(255,255,255,.75)!important}
+.hero-info,.dish,.order-item,.order-box,.hours-card,form,.aboutgrid .box{
+  border-color:rgba(100,70,45,.13)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.98) inset,0 12px 28px rgba(44,28,17,.08),0 35px 80px rgba(44,28,17,.08)!important;
+}
+.hero-info{
+  transform:perspective(1200px) rotateX(calc(var(--pp-tiltY)*.45)) rotateY(calc(var(--pp-tiltX)*.55)) translateZ(42px)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(247,239,228,.88))!important;
+  backdrop-filter:blur(16px);
+}
+section{position:relative}
+section:not(.booking):not(.about):before{
+  content:"";position:absolute;left:8%;right:8%;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(169,81,56,.16),rgba(214,174,112,.2),transparent);
+}
+.head h2,.about h2,.booking h2{letter-spacing:-1.8px}
+.head p{font-size:16px}
+.dish{
+  min-height:118px;
+  position:relative;
+  overflow:hidden;
+  transform:perspective(1100px) rotateX(var(--pp-tiltY)) rotateY(var(--pp-tiltX)) translateZ(12px)!important;
+  transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease!important;
+}
+.dish:before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.7) 0%,transparent 23%,transparent 68%,rgba(120,75,40,.055) 100%);
+}
+.dish:after{
+  content:"";position:absolute;top:-60%;left:-35%;width:28%;height:220%;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  transform:rotate(18deg) translateX(-220%);
+  transition:transform .8s ease;
+}
+.dish:hover:after{transform:rotate(18deg) translateX(650%)}
+.dish:hover{border-color:rgba(169,81,56,.25)!important;box-shadow:0 1px 0 #fff inset,0 25px 50px rgba(44,28,17,.15),0 45px 90px rgba(44,28,17,.08)!important}
+.dish>*{position:relative;z-index:3}
+.price{font-size:22px;text-shadow:0 2px 10px rgba(169,81,56,.16)}
+.tag{box-shadow:0 3px 10px rgba(63,101,55,.12)}
+.vegan-banner,.order-note{
+  background:linear-gradient(135deg,rgba(228,234,223,.95),rgba(244,247,239,.82))!important;
+  backdrop-filter:blur(12px);
+}
+.order-box{border-radius:24px!important;padding:34px!important}
+.order-item{
+  transform:perspective(1000px) rotateX(var(--pp-tiltY)) rotateY(var(--pp-tiltX)) translateZ(8px)!important;
+  min-height:70px;
+}
+.order-item label{font-size:14px}
+.order-item input{
+  width:78px!important;height:44px;padding:8px 10px!important;
+  border-radius:12px!important;text-align:center;font-weight:800;
+}
+.order-total{
+  position:sticky;bottom:12px;z-index:20;
+  background:rgba(255,253,249,.88)!important;
+  border:1px solid rgba(169,81,56,.16)!important;
+  border-radius:16px;padding:16px 18px!important;
+  box-shadow:0 14px 30px rgba(44,28,17,.14),inset 0 1px 0 #fff;
+  backdrop-filter:blur(18px);
+}
+.order-total #order-total-value{color:var(--pp-red);font-size:26px}
+.btn{
+  border-radius:13px!important;
+  background:linear-gradient(145deg,#bf654b,#8d3f2d)!important;
+  position:relative;overflow:hidden;
+  box-shadow:0 3px 0 #6c2d21,0 14px 30px rgba(110,45,30,.25),inset 0 1px 0 rgba(255,255,255,.38)!important;
+}
+.btn:before{
+  content:"";position:absolute;top:0;left:-130%;width:70%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+  transform:skewX(-18deg);transition:left .7s ease;pointer-events:none;
+}
+.btn:hover:before{left:145%}
+.btn:hover{filter:saturate(1.1) brightness(1.03);transform:translateY(-4px) translateZ(18px)!important}
+input,select,textarea{
+  border-color:rgba(90,65,40,.18)!important;border-radius:11px!important;
+  transition:border-color .25s ease,box-shadow .25s ease,transform .2s ease!important;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--pp-red)!important;box-shadow:0 10px 25px rgba(169,81,56,.13),inset 0 1px 0 #fff!important}
+.about{background:linear-gradient(135deg,#e8dfd1,#ddd1c0)!important}
+.aboutgrid .box{
+  background:linear-gradient(145deg,#6e7d64,#3d4a38)!important;
+  position:relative;overflow:hidden;
+}
+.aboutgrid .box:before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.18),transparent 28%);animation:ppBoxGlow 7s ease-in-out infinite alternate}
+@keyframes ppBoxGlow{to{transform:translate3d(12%,10%,0) scale(1.12)}}
+.booking{background:linear-gradient(145deg,#26231f,#191815)!important}
+.booking form{background:linear-gradient(145deg,#fffdf9,#f2e9dc)!important}
+footer{box-shadow:0 -25px 60px rgba(0,0,0,.16)!important}
+#pp-status{box-shadow:0 12px 30px rgba(44,28,17,.15)!important;border-color:rgba(255,255,255,.72)!important}
+#pp-progress{height:4px!important;background:linear-gradient(90deg,var(--pp-red),var(--pp-gold),var(--pp-sage))!important}
+#pp-dock{filter:drop-shadow(0 12px 20px rgba(44,28,17,.10))}
+.pp-fab{background:rgba(255,253,249,.78)!important;backdrop-filter:blur(18px);border-color:rgba(255,255,255,.9)!important}
+.pp-reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)!important}
+.pp-reveal.pp-visible{transform:none!important}
+.pp-orb{
+  position:absolute;width:170px;height:170px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.75),rgba(214,174,112,.08) 45%,transparent 70%);
+  filter:blur(2px);opacity:.7;z-index:0;animation:ppFloat 9s ease-in-out infinite alternate;
+}
+@keyframes ppFloat{to{transform:translate3d(25px,-18px,60px) scale(1.12)}}
+@media(max-width:800px){
+  .hero{min-height:auto}
+  .hero-photo{transform:none!important}
+  .hero-info{transform:none!important}
+  .dish,.order-item{transform:none!important}
+  .order-box{padding:22px!important}
+  .pp-orb{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  body:before,.aboutgrid .box:before,.pp-orb{animation:none!important}
+  *,*:before,*:after{scroll-behavior:auto!important}
+}
+</style>
+<script id="pp-realism-v3-js">
+(function(){
+  if(window.__PP_REALISM_V3__) return;
+  window.__PP_REALISM_V3__=true;
+  const root=document.documentElement;
+  const fine=matchMedia('(pointer:fine)').matches;
+  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(fine&&!reduced){
+    let tx=.5,ty=.5,x=.5,y=.5,raf=0;
+    const targets=[...document.querySelectorAll('.hero-photo,.hero-info,.dish,.order-item')];
+    addEventListener('pointermove',e=>{tx=e.clientX/innerWidth;ty=e.clientY/innerHeight},{passive:true});
+    const tick=()=>{
+      x+=(tx-x)*.075;y+=(ty-y)*.075;
+      root.style.setProperty('--pp-x',(x*100)+'vw');
+      root.style.setProperty('--pp-y',(y*100)+'vh');
+      const tiltX=((x-.5)*-5).toFixed(2)+'deg';
+      const tiltY=((y-.5)*4).toFixed(2)+'deg';
+      root.style.setProperty('--pp-tiltX',tiltX);
+      root.style.setProperty('--pp-tiltY',tiltY);
+      raf=requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  // Add subtle depth lights without changing layout.
+  document.querySelectorAll('section').forEach((s,i)=>{
+    if(i>0 && !s.querySelector('.pp-orb')){
+      const o=document.createElement('i');o.className='pp-orb';o.style.right=(8+(i%3)*12)+'%';o.style.top=(12+(i%2)*38)+'%';o.style.animationDelay=(-i*1.2)+'s';s.appendChild(o);
+    }
+  });
+  // Make number controls feel like a premium ordering interface.
+  document.querySelectorAll('#commande input[type=number]').forEach(input=>{
+    input.addEventListener('focus',()=>input.closest('.order-item')?.classList.add('pp-active'));
+    input.addEventListener('blur',()=>input.closest('.order-item')?.classList.remove('pp-active'));
+  });
 })();
 </script>
 </body></html>
