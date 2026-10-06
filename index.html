@@ -570,4 +570,50 @@ footer{box-shadow:0 -25px 60px rgba(0,0,0,.16)!important}
   });
 })();
 </script>
-</body></html>
+<script id="pp-gyro-v1">
+(function(){
+ if(window.__PP_GYRO_V1__)return;window.__PP_GYRO_V1__=true;
+ const root=document.documentElement;
+ let gx=0,gy=0,tx=0,ty=0,enabled=false;
+ function apply(){
+   gx+=(tx-gx)*.08; gy+=(ty-gy)*.08;
+   root.style.setProperty('--pp-gyro-x',gx.toFixed(2)+'deg');
+   root.style.setProperty('--pp-gyro-y',gy.toFixed(2)+'deg');
+   root.style.setProperty('--pp-gyro-mx',(gx*1.8).toFixed(2)+'px');
+   root.style.setProperty('--pp-gyro-my',(gy*1.8).toFixed(2)+'px');
+   requestAnimationFrame(apply);
+ }
+ function start(){
+   if(enabled)return;enabled=true;
+   window.addEventListener('deviceorientation',e=>{
+     if(e.beta==null||e.gamma==null)return;
+     tx=Math.max(-7,Math.min(7,e.gamma*.22));
+     ty=Math.max(-6,Math.min(6,(e.beta-45)*.12));
+   },{passive:true});
+   apply();
+ }
+ function request(){
+   if(typeof DeviceOrientationEvent!=='undefined' &&
+      typeof DeviceOrientationEvent.requestPermission==='function'){
+     DeviceOrientationEvent.requestPermission().then(r=>{if(r==='granted')start()}).catch(()=>{});
+   }else start();
+ }
+ window.addEventListener('touchstart',request,{once:true,passive:true});
+ window.addEventListener('click',request,{once:true,passive:true});
+ if(typeof DeviceOrientationEvent==='undefined')return;
+})();
+</script>
+<style id="pp-gyro-style">
+@media (max-width:800px){
+  body{perspective:1200px;overflow-x:hidden}
+  .hero-in,.hero-photo,.hero-info,.dish,.order-item,.order-box,.hours-card,.aboutgrid .box{
+    will-change:transform;
+    transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease!important;
+  }
+  .hero-in{transform:translate3d(calc(var(--pp-gyro-mx,0px)*.45),calc(var(--pp-gyro-my,0px)*.45),0) rotateX(calc(var(--pp-gyro-y,0deg)*.28)) rotateY(calc(var(--pp-gyro-x,0deg)*.32))}
+  .hero-photo{transform:perspective(1100px) translate3d(var(--pp-gyro-mx),var(--pp-gyro-my),42px) rotateX(var(--pp-gyro-y)) rotateY(var(--pp-gyro-x))!important}
+  .hero-info{transform:perspective(1000px) translate3d(calc(var(--pp-gyro-mx)*.75),calc(var(--pp-gyro-my)*.75),18px) rotateX(calc(var(--pp-gyro-y)*.65)) rotateY(calc(var(--pp-gyro-x)*.7))!important}
+  .dish,.order-item{transform:perspective(900px) translate3d(calc(var(--pp-gyro-mx)*.38),calc(var(--pp-gyro-my)*.38),8px) rotateX(calc(var(--pp-gyro-y)*.35)) rotateY(calc(var(--pp-gyro-x)*.42))!important}
+  .aboutgrid .box{transform:translate3d(calc(var(--pp-gyro-mx)*.5),calc(var(--pp-gyro-my)*.5),0) rotateX(calc(var(--pp-gyro-y)*.25)) rotateY(calc(var(--pp-gyro-x)*.3))}
+}
+</style></body></html>
