@@ -642,4 +642,50 @@ addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;root.style.setPrope
 const tick=()=>{px+=(tx-px)*.09;py+=(ty-py)*.09;cards.forEach(el=>{const r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;el.style.setProperty('--shine-x',Math.max(0,Math.min(100,((px-r.left)/r.width)*100)).toFixed(1)+'%');el.style.setProperty('--shine-y',Math.max(0,Math.min(100,((py-r.top)/r.height)*100)).toFixed(1)+'%')});requestAnimationFrame(tick)};tick();
 })();
 </script>
+
+<!-- PP-ULTRA-REALISM-V5 -->
+<style id="pp-ultra-v5">
+:root{--ultraX:0px;--ultraY:0px;--ultraRX:0deg;--ultraRY:0deg;--ultraScale:1}
+body{--ultraGlow:rgba(255,255,255,.32)}
+.pp-ultra-layer{pointer-events:none;position:fixed;inset:0;z-index:9990;opacity:.55;mix-blend-mode:soft-light;background:radial-gradient(500px circle at var(--ultraX) var(--ultraY),rgba(255,255,255,.55),transparent 70%);transition:opacity .25s ease}
+.hero-in,.wrap,.bookinggrid,.aboutgrid{transform-style:preserve-3d}
+.hero-in{will-change:transform}
+.dish,.order-item,.hero-info,.hero-photo,.hours-card,.order-box,.aboutgrid .box,form{will-change:transform,box-shadow}
+@media(pointer:fine) and (prefers-reduced-motion:no-preference){
+.hero-in{transform:perspective(1500px) rotateX(calc(var(--ultraRY)*.22)) rotateY(calc(var(--ultraRX)*.28)) translate3d(calc(var(--ultraX)*.012),calc(var(--ultraY)*.012),0)}
+.dish,.order-item{transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease!important}
+.dish:hover,.order-item:hover{box-shadow:0 1px 0 #fff inset,0 24px 55px rgba(35,24,15,.18),0 55px 100px rgba(35,24,15,.08)!important}
+}
+@media(max-width:800px){
+.pp-ultra-layer{display:none}
+.hero-in{transform:translate3d(calc(var(--ultraX)*.018),calc(var(--ultraY)*.018),0)}
+}
+@media(prefers-reduced-motion:reduce){.pp-ultra-layer{display:none}}
+</style>
+<script id="pp-ultra-v5-js">
+(function(){
+if(window.__PP_ULTRA_V5__)return;window.__PP_ULTRA_V5__=true;
+const r=document.documentElement;
+const layer=document.createElement('div');layer.className='pp-ultra-layer';document.body.appendChild(layer);
+let tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,raf=0;
+function move(e){tx=e.clientX;ty=e.clientY}
+addEventListener('pointermove',move,{passive:true});
+addEventListener('touchmove',e=>{if(e.touches[0]){tx=e.touches[0].clientX;ty=e.touches[0].clientY}},{passive:true});
+function loop(){
+x+=(tx-x)*.075;y+=(ty-y)*.075;
+const rx=((x/innerWidth)-.5)*8,ry=((y/innerHeight)-.5)*-7;
+r.style.setProperty('--ultraX',(x-innerWidth/2).toFixed(1)+'px');
+r.style.setProperty('--ultraY',(y-innerHeight/2).toFixed(1)+'px');
+r.style.setProperty('--ultraRX',rx.toFixed(2)+'deg');
+r.style.setProperty('--ultraRY',ry.toFixed(2)+'deg');
+requestAnimationFrame(loop)
+}
+loop();
+const sections=[...document.querySelectorAll('section')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+if(e.isIntersecting)e.target.style.setProperty('--ultra-visible','1');
+}),{threshold:.08});
+sections.forEach(s=>{s.style.setProperty('--ultra-visible','0');io.observe(s)});
+})();
+</script>
 </body></html>
