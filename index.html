@@ -730,4 +730,26 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 items.forEach(i=>io.observe(i));
 })();
 </script>
+
+<!-- PP-IMMERSIVE-V7 -->
+<style id="pp-immersive-v7">
+:root{--pp7x:50vw;--pp7y:35vh;--pp7rx:0deg;--pp7ry:0deg}
+.pp7-light{position:fixed;inset:0;z-index:9987;pointer-events:none;opacity:.48;background:radial-gradient(260px circle at var(--pp7x) var(--pp7y),rgba(255,255,255,.38),transparent 72%);mix-blend-mode:screen}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info,.hero-photo{transform-style:preserve-3d;backface-visibility:hidden}
+.dish:hover,.order-item:hover,.hours-card:hover,.aboutgrid .box:hover,.order-box:hover,.hero-info:hover{transform:translateY(-5px) rotateX(var(--pp7ry)) rotateY(var(--pp7rx)) translateZ(12px)!important;box-shadow:0 28px 55px rgba(35,24,15,.18),0 3px 0 rgba(255,255,255,.7) inset!important}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info{transition:transform .32s cubic-bezier(.16,.8,.18,1),box-shadow .32s ease!important}
+.hero-photo{transform:perspective(1400px) rotateX(calc(var(--pp7ry)*.65)) rotateY(calc(var(--pp7rx)*.8)) scale(1.008);transition:transform .3s ease-out}
+@media(max-width:800px){.pp7-light{opacity:.2}.dish:hover,.order-item:hover,.hours-card:hover,.aboutgrid .box:hover,.order-box:hover,.hero-info:hover{transform:translateZ(5px)!important}}
+@media(prefers-reduced-motion:reduce){.pp7-light{display:none}.hero-photo{transform:none}}
+</style>
+<script id="pp-immersive-v7-js">
+(()=>{if(window.__PP7)return;window.__PP7=1;
+const r=document.documentElement,l=document.createElement('div');l.className='pp7-light';document.body.appendChild(l);
+let tx=innerWidth/2,ty=innerHeight*.35,x=tx,y=ty,ox=0,oy=0;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+addEventListener('deviceorientation',e=>{if(e.gamma==null)return;ox=Math.max(-1,Math.min(1,e.gamma/35));oy=Math.max(-1,Math.min(1,(e.beta-45)/35))},{passive:true});
+function loop(){x+=(tx-x)*.09;y+=(ty-y)*.09;const px=(x/innerWidth-.5)*6+ox*4,py=(y/innerHeight-.5)*-6+oy*4;
+r.style.setProperty('--pp7x',x+'px');r.style.setProperty('--pp7y',y+'px');r.style.setProperty('--pp7rx',px.toFixed(2)+'deg');r.style.setProperty('--pp7ry',py.toFixed(2)+'deg');requestAnimationFrame(loop)}loop();
+})();
+</script>
 </body></html>
