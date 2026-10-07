@@ -616,4 +616,30 @@ footer{box-shadow:0 -25px 60px rgba(0,0,0,.16)!important}
   .dish,.order-item{transform:perspective(900px) translate3d(calc(var(--pp-gyro-mx)*.38),calc(var(--pp-gyro-my)*.38),8px) rotateX(calc(var(--pp-gyro-y)*.35)) rotateY(calc(var(--pp-gyro-x)*.42))!important}
   .aboutgrid .box{transform:translate3d(calc(var(--pp-gyro-mx)*.5),calc(var(--pp-gyro-my)*.5),0) rotateX(calc(var(--pp-gyro-y)*.25)) rotateY(calc(var(--pp-gyro-x)*.3))}
 }
-</style></body></html>
+</style>
+<!-- PP-PREMIUM-REALISM-V4 -->
+<style id="pp-realism-v4">
+:root{--pp-light-x:50%;--pp-light-y:30%}
+.hero,.hours,#menu,.order-section,.about,.booking{overflow:hidden}
+.hero:after,.hours:after,#menu:after,.order-section:after,.about:after,.booking:after{background:radial-gradient(420px circle at var(--pp-light-x) var(--pp-light-y),rgba(255,255,255,.24),transparent 68%);box-shadow:none!important;opacity:.9;z-index:0}
+.hero-in,.wrap{z-index:1}
+.hero-photo,.hero-info,.dish,.order-item,.order-box,.hours-card,.aboutgrid .box,form{position:relative}
+@media(pointer:fine) and (prefers-reduced-motion:no-preference){
+.hero-photo,.hero-info,.dish,.order-item,.order-box,.hours-card,.aboutgrid .box,form{--shine-x:50%;--shine-y:50%;background-image:radial-gradient(220px circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.30),transparent 62%),linear-gradient(145deg,rgba(255,255,255,.98),rgba(243,235,224,.94))}
+.hero-photo{background-image:radial-gradient(280px circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.22),transparent 65%)}
+.dish:hover,.order-item:hover{box-shadow:0 1px 0 rgba(255,255,255,.98) inset,0 30px 60px rgba(44,28,17,.17),0 55px 110px rgba(44,28,17,.08)!important}
+}
+@media(max-width:800px){.hero:after,.hours:after,#menu:after,.order-section:after,.about:after,.booking:after{display:none}}
+</style>
+<script id="pp-realism-v4-js">
+(function(){
+if(window.__PP_REALISM_V4__)return;window.__PP_REALISM_V4__=true;
+const root=document.documentElement,fine=matchMedia('(pointer:fine)').matches,reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(!fine||reduced)return;
+const cards=[...document.querySelectorAll('.hero-photo,.hero-info,.dish,.order-item,.order-box,.hours-card,.aboutgrid .box,form')];
+let px=innerWidth*.5,py=innerHeight*.3,tx=px,ty=py;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;root.style.setProperty('--pp-light-x',e.clientX+'px');root.style.setProperty('--pp-light-y',e.clientY+'px')},{passive:true});
+const tick=()=>{px+=(tx-px)*.09;py+=(ty-py)*.09;cards.forEach(el=>{const r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;el.style.setProperty('--shine-x',Math.max(0,Math.min(100,((px-r.left)/r.width)*100)).toFixed(1)+'%');el.style.setProperty('--shine-y',Math.max(0,Math.min(100,((py-r.top)/r.height)*100)).toFixed(1)+'%')});requestAnimationFrame(tick)};tick();
+})();
+</script>
+</body></html>
