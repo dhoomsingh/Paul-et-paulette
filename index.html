@@ -851,4 +851,26 @@ el.addEventListener('pointerleave',()=>{el.style.transform='';});
 });
 })();
 </script>
+
+<!-- PP-PRO-ULTIMATE-V11 -->
+<style id="pp-pro-ultimate-v11">
+:root{--v11x:50vw;--v11y:35vh;--v11sx:0;--v11sy:0}
+.pp-v11-light{position:fixed;inset:0;pointer-events:none;z-index:9983;opacity:.34;background:radial-gradient(420px circle at var(--v11x) var(--v11y),rgba(255,255,255,.34),transparent 70%);mix-blend-mode:soft-light}
+.pp-v11-grain{position:fixed;inset:0;pointer-events:none;z-index:9982;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info{transform-style:preserve-3d}
+.dish:hover,.order-item:hover,.hours-card:hover,.aboutgrid .box:hover,.order-box:hover,.hero-info:hover{filter:brightness(1.015) saturate(1.02)}
+.hero-photo img{will-change:transform}
+@media(max-width:800px){.pp-v11-light{opacity:.14}.pp-v11-grain{opacity:.015}}
+@media(prefers-reduced-motion:reduce){.pp-v11-light,.pp-v11-grain{display:none}}
+</style>
+<script id="pp-pro-ultimate-v11-js">
+(()=>{if(window.__PPV11)return;window.__PPV11=1;
+const r=document.documentElement,a=document.createElement('div'),g=document.createElement('div');a.className='pp-v11-light';g.className='pp-v11-grain';document.body.append(a,g);
+let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+const cards=[...document.querySelectorAll('.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info')];
+function frame(){x+=(tx-x)*.07;y+=(ty-y)*.07;r.style.setProperty('--v11x',x+'px');r.style.setProperty('--v11y',y+'px');requestAnimationFrame(frame)}frame();
+cards.forEach(el=>{el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.clientX-q.left)/q.width-.5,py=(e.clientY-q.top)/q.height-.5;el.style.setProperty('--rx',(-py*1.7).toFixed(2)+'deg');el.style.setProperty('--ry',(px*2.1).toFixed(2)+'deg');el.style.transform='perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(6px) translateY(-2px)'},{passive:true});el.addEventListener('pointerleave',()=>el.style.transform='')});
+})();
+</script>
 </body></html>
