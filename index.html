@@ -752,4 +752,36 @@ function loop(){x+=(tx-x)*.09;y+=(ty-y)*.09;const px=(x/innerWidth-.5)*6+ox*4,py
 r.style.setProperty('--pp7x',x+'px');r.style.setProperty('--pp7y',y+'px');r.style.setProperty('--pp7rx',px.toFixed(2)+'deg');r.style.setProperty('--pp7ry',py.toFixed(2)+'deg');requestAnimationFrame(loop)}loop();
 })();
 </script>
+
+<!-- PP-PRO-STUDIO-V8 -->
+<style id="pp-pro-studio-v8">
+:root{--pro-mx:50vw;--pro-my:30vh;--pro-dx:0deg;--pro-dy:0deg}
+.pp-pro-light{position:fixed;inset:0;pointer-events:none;z-index:9986;background:
+radial-gradient(520px circle at var(--pro-mx) var(--pro-my),rgba(255,255,255,.28),transparent 70%);
+mix-blend-mode:soft-light;opacity:.55}
+.nav{backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%);box-shadow:0 1px 0 rgba(36,33,29,.06),0 8px 30px rgba(36,33,29,.05)}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info,.hero-photo,form{box-shadow:0 1px 1px rgba(36,33,29,.05),0 14px 38px rgba(36,33,29,.08);transition:transform .45s cubic-bezier(.16,.8,.18,1),box-shadow .45s ease,filter .45s ease!important}
+.dish:hover,.order-item:hover,.hours-card:hover,.aboutgrid .box:hover,.order-box:hover,.hero-info:hover,form:hover{filter:saturate(1.03) contrast(1.01);box-shadow:0 2px 2px rgba(36,33,29,.06),0 28px 70px rgba(36,33,29,.14)}
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn:before{content:"";position:absolute;inset:-100% -30%;background:linear-gradient(110deg,transparent 43%,rgba(255,255,255,.5) 50%,transparent 57%);transform:translateX(-55%) rotate(8deg);transition:transform .7s ease;z-index:-1}
+.btn:hover:before{transform:translateX(55%) rotate(8deg)}
+.hero-photo{transform:perspective(1600px) rotateX(var(--pro-dy)) rotateY(var(--pro-dx));}
+.hero-photo img{transform:scale(1.015);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter 1.2s ease;filter:saturate(1.02) contrast(1.02)}
+.hero-photo:hover img{transform:scale(1.045)}
+section{scroll-margin-top:90px}
+@media(max-width:800px){.pp-pro-light{opacity:.2}.hero-photo{transform:none}}
+@media(prefers-reduced-motion:reduce){.pp-pro-light{display:none}.hero-photo,.hero-photo img{transform:none!important}}
+</style>
+<script id="pp-pro-studio-v8-js">
+(()=>{if(window.__PPV8)return;window.__PPV8=1;
+const r=document.documentElement,l=document.createElement('div');l.className='pp-pro-light';document.body.appendChild(l);
+let tx=innerWidth/2,ty=innerHeight*.3,x=tx,y=ty;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+function raf(){x+=(tx-x)*.06;y+=(ty-y)*.06;r.style.setProperty('--pro-mx',x+'px');r.style.setProperty('--pro-my',y+'px');
+r.style.setProperty('--pro-dx',(((x/innerWidth)-.5)*3.2).toFixed(2)+'deg');r.style.setProperty('--pro-dy',(((y/innerHeight)-.5)*-2.4).toFixed(2)+'deg');requestAnimationFrame(raf)}raf();
+const els=[...document.querySelectorAll('.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info,form')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.animate([{opacity:.35,transform:'translateY(22px) scale(.985)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:700,easing:'cubic-bezier(.16,.8,.18,1)',fill:'both'})}}),{threshold:.1});
+els.forEach(e=>{e.style.opacity='.35';io.observe(e)});
+})();
+</script>
 </body></html>
