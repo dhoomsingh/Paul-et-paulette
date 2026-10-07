@@ -818,4 +818,37 @@ targets.forEach(el=>el.addEventListener('pointermove',e=>{const q=el.getBounding
 targets.forEach(el=>el.addEventListener('pointerleave',()=>{el.style.transform=''}));
 })();
 </script>
+
+<!-- PP-PRO-MASTER-V10 -->
+<style id="pp-pro-master-v10">
+:root{--v10x:50vw;--v10y:35vh;--v10sx:0px;--v10sy:0px}
+.pp-v10-cinema{position:fixed;inset:0;pointer-events:none;z-index:9984;opacity:.38;background:radial-gradient(600px circle at var(--v10x) var(--v10y),rgba(255,255,255,.24),transparent 68%),linear-gradient(180deg,rgba(255,255,255,.08),transparent 25%,rgba(36,33,29,.025));mix-blend-mode:soft-light}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info,.hero-photo,form{transform-style:preserve-3d;backface-visibility:hidden}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info{will-change:transform}
+.hero-photo{will-change:transform}
+@media(pointer:fine) and (prefers-reduced-motion:no-preference){
+.dish:hover,.order-item:hover,.hours-card:hover,.aboutgrid .box:hover,.order-box:hover,.hero-info:hover{z-index:4}
+}
+@media(max-width:800px){.pp-v10-cinema{opacity:.15}}
+@media(prefers-reduced-motion:reduce){.pp-v10-cinema{display:none}}
+</style>
+<script id="pp-pro-master-v10-js">
+(()=>{if(window.__PPV10)return;window.__PPV10=1;
+const r=document.documentElement,fx=document.createElement('div');fx.className='pp-v10-cinema';document.body.appendChild(fx);
+let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my,sy=scrollY,tsy=sy;
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY},{passive:true});
+addEventListener('scroll',()=>tsy=scrollY,{passive:true});
+const cards=[...document.querySelectorAll('.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info')];
+function tick(){
+cx+=(mx-cx)*.065;cy+=(my-cy)*.065;sy+=(tsy-sy)*.075;
+r.style.setProperty('--v10x',cx+'px');r.style.setProperty('--v10y',cy+'px');
+const hero=document.querySelector('.hero-photo');
+if(hero){const q=hero.getBoundingClientRect(),vx=(cx-(q.left+q.width/2))/q.width,vy=(cy-(q.top+q.height/2))/q.height;hero.style.transform='perspective(1500px) rotateX('+(-vy*2.2).toFixed(2)+'deg) rotateY('+(vx*2.8).toFixed(2)+'deg) translate3d('+(vx*-4).toFixed(1)+'px,'+(vy*-4).toFixed(1)+'px,0)'}
+requestAnimationFrame(tick)}tick();
+cards.forEach(el=>{
+el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.clientX-q.left)/q.width-.5,py=(e.clientY-q.top)/q.height-.5;el.style.setProperty('--v10rx',(-py*2.2).toFixed(2)+'deg');el.style.setProperty('--v10ry',(px*2.8).toFixed(2)+'deg');el.style.transform='perspective(1000px) rotateX(var(--v10rx)) rotateY(var(--v10ry)) translateZ(9px) translateY(-3px)'},{passive:true});
+el.addEventListener('pointerleave',()=>{el.style.transform='';});
+});
+})();
+</script>
 </body></html>
