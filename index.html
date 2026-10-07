@@ -873,4 +873,38 @@ function frame(){x+=(tx-x)*.07;y+=(ty-y)*.07;r.style.setProperty('--v11x',x+'px'
 cards.forEach(el=>{el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.clientX-q.left)/q.width-.5,py=(e.clientY-q.top)/q.height-.5;el.style.setProperty('--rx',(-py*1.7).toFixed(2)+'deg');el.style.setProperty('--ry',(px*2.1).toFixed(2)+'deg');el.style.transform='perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(6px) translateY(-2px)'},{passive:true});el.addEventListener('pointerleave',()=>el.style.transform='')});
 })();
 </script>
+
+<!-- PP-PRO-V15 -->
+<style id="pp-pro-v15">
+:root{--v15x:50vw;--v15y:35vh;--v15rx:0deg;--v15ry:0deg}
+.pp-v15-ambient{position:fixed;inset:0;pointer-events:none;z-index:9980;opacity:.28;background:radial-gradient(520px circle at var(--v15x) var(--v15y),rgba(255,255,255,.34),transparent 68%);mix-blend-mode:soft-light}
+.hero-photo,.hero-info,.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,form{transform-style:preserve-3d;backface-visibility:hidden}
+.hero-photo img{transition:transform 1s cubic-bezier(.2,.75,.2,1),filter .7s ease;will-change:transform}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info{transition:transform .35s cubic-bezier(.16,.8,.18,1),box-shadow .35s ease,filter .35s ease!important}
+.dish:hover,.order-item:hover,.hours-card:hover,.aboutgrid .box:hover,.order-box:hover,.hero-info:hover{filter:saturate(1.04);box-shadow:0 26px 65px rgba(36,33,29,.15),0 1px 0 rgba(255,255,255,.65) inset!important}
+.btn{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease!important}
+@media(max-width:800px){.pp-v15-ambient{opacity:.12}}
+@media(prefers-reduced-motion:reduce){.pp-v15-ambient{display:none}.hero-photo img{transform:none!important}}
+</style>
+<script id="pp-pro-v15-js">
+(()=>{if(window.__PPV15)return;window.__PPV15=1;
+const r=document.documentElement,a=document.createElement('div');a.className='pp-v15-ambient';document.body.appendChild(a);
+let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty,gyroX=0,gyroY=0;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+addEventListener('deviceorientation',e=>{if(e.gamma==null)return;gyroX=Math.max(-1,Math.min(1,e.gamma/30));gyroY=Math.max(-1,Math.min(1,(e.beta-45)/30))},{passive:true});
+const cards=[...document.querySelectorAll('.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info')];
+function loop(){x+=(tx-x)*.065;y+=(ty-y)*.065;r.style.setProperty('--v15x',x+'px');r.style.setProperty('--v15y',y+'px');requestAnimationFrame(loop)}loop();
+cards.forEach(el=>{el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.clientX-q.left)/q.width-.5,py=(e.clientY-q.top)/q.height-.5;el.style.transform='perspective(1050px) rotateX('+(-py*2.0).toFixed(2)+'deg) rotateY('+(px*2.5).toFixed(2)+'deg) translateZ(8px) translateY(-3px)'},{passive:true});el.addEventListener('pointerleave',()=>el.style.transform='')});
+const hero=document.querySelector('.hero-photo');
+if(hero){function heroLoop(){const rx=(gyroX*2.2),ry=(gyroY*1.8);hero.style.transform='perspective(1500px) rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)';requestAnimationFrame(heroLoop)}heroLoop()}
+const reveal=[...document.querySelectorAll('section,.head,.grid,.order-box,.bookinggrid,.aboutgrid')];
+if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('pp-v15-in')}}),{threshold:.08});reveal.forEach(e=>io.observe(e))}
+})();
+</script>
+<style id="pp-pro-v15-reveal">
+@media(prefers-reduced-motion:no-preference){
+.pp-v15-in .dish,.pp-v15-in .order-item,.pp-v15-in .box,.pp-v15-in .order-box{animation:ppV15In .7s cubic-bezier(.16,.8,.18,1) both}
+@keyframes ppV15In{from{opacity:.25;transform:translateY(24px) scale(.985)}to{opacity:1;transform:none}}
+}
+</style>
 </body></html>
