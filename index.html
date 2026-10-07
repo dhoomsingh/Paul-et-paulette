@@ -688,4 +688,46 @@ if(e.isIntersecting)e.target.style.setProperty('--ultra-visible','1');
 sections.forEach(s=>{s.style.setProperty('--ultra-visible','0');io.observe(s)});
 })();
 </script>
+
+<!-- PP-CINEMATIC-REALISM-V6 -->
+<style id="pp-cinematic-v6">
+:root{--pp6x:50%;--pp6y:35%;--pp6rx:0deg;--pp6ry:0deg;--pp6scroll:0}
+.pp6-ambient{position:fixed;inset:0;pointer-events:none;z-index:9988;opacity:.42;background:
+radial-gradient(360px circle at var(--pp6x) var(--pp6y),rgba(255,255,255,.5),transparent 68%),
+radial-gradient(700px circle at calc(100% - var(--pp6x)) calc(100% - var(--pp6y)),rgba(169,81,56,.08),transparent 72%);
+mix-blend-mode:soft-light}
+.hero-photo{transform:perspective(1300px) rotateX(var(--pp6ry)) rotateY(var(--pp6rx)) translateZ(0);transition:transform .18s ease-out;will-change:transform}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info{position:relative;overflow:hidden;transform-style:preserve-3d}
+.dish:after,.order-item:after,.hours-card:after,.aboutgrid .box:after,.order-box:after,.hero-info:after{content:"";position:absolute;inset:-45%;pointer-events:none;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.32) 49%,transparent 60%);transform:translateX(-65%) rotate(8deg);transition:transform .8s cubic-bezier(.2,.7,.2,1);opacity:0}
+.dish:hover:after,.order-item:hover:after,.hours-card:hover:after,.aboutgrid .box:hover:after,.order-box:hover:after,.hero-info:hover:after{transform:translateX(65%) rotate(8deg);opacity:1}
+.btn{transform:translateZ(0);transition:transform .22s cubic-bezier(.2,.9,.2,1),box-shadow .22s ease}
+.btn:hover{transform:translateY(-4px) scale(1.025);box-shadow:0 12px 28px rgba(35,24,15,.16)}
+.btn:active{transform:translateY(1px) scale(.98)}
+@media (prefers-reduced-motion:no-preference){
+section{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+}
+@media(max-width:800px){.pp6-ambient{opacity:.22}.hero-photo{transform:none}}
+@media(prefers-reduced-motion:reduce){.pp6-ambient{display:none}.hero-photo{transform:none}}
+</style>
+<script id="pp-cinematic-v6-js">
+(()=>{if(window.__PP6)return;window.__PP6=1;
+const root=document.documentElement,ambient=document.createElement('div');ambient.className='pp6-ambient';document.body.appendChild(ambient);
+let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty,scroll=0,targetScroll=0;
+const set=(k,v)=>root.style.setProperty(k,v);
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+addEventListener('scroll',()=>targetScroll=scrollY,{passive:true});
+function frame(){
+ x+=(tx-x)*.08;y+=(ty-y)*.08;scroll+=(targetScroll-scroll)*.08;
+ set('--pp6x',x+'px');set('--pp6y',y+'px');set('--pp6scroll',scroll);
+ const rx=((x/innerWidth)-.5)*5,ry=((y/innerHeight)-.5)*-4;
+ set('--pp6rx',rx.toFixed(2)+'deg');set('--pp6ry',ry.toFixed(2)+'deg');
+ requestAnimationFrame(frame)
+}frame();
+const items=[...document.querySelectorAll('.dish,.order-item,.hours-card,.aboutgrid .box,.order-box')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.animate(
+ [{opacity:.82,transform:'translateY(18px) scale(.985)'},{opacity:1,transform:'translateY(0) scale(1)'}],
+ {duration:650,easing:'cubic-bezier(.2,.75,.2,1)',fill:'both'})}}),{threshold:.08});
+items.forEach(i=>io.observe(i));
+})();
+</script>
 </body></html>
