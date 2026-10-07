@@ -907,4 +907,48 @@ if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.for
 @keyframes ppV15In{from{opacity:.25;transform:translateY(24px) scale(.985)}to{opacity:1;transform:none}}
 }
 </style>
+
+<!-- PP-PRO-V30 -->
+<style id="pp-pro-v30">
+:root{--v30x:50vw;--v30y:35vh;--v30sx:0;--v30sy:0;--v30scroll:0}
+.pp-v30-light{position:fixed;inset:0;pointer-events:none;z-index:9979;opacity:.34;background:radial-gradient(480px circle at var(--v30x) var(--v30y),rgba(255,255,255,.34),transparent 68%);mix-blend-mode:soft-light}
+.pp-v30-vignette{position:fixed;inset:0;pointer-events:none;z-index:9978;background:radial-gradient(ellipse at center,transparent 55%,rgba(36,33,29,.045) 100%);opacity:.7}
+.hero-photo,.hero-info,.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,form{transform-style:preserve-3d;backface-visibility:hidden}
+.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info,form{transition:transform .38s cubic-bezier(.16,.8,.18,1),box-shadow .38s ease,filter .38s ease!important;will-change:transform}
+.dish:hover,.order-item:hover,.hours-card:hover,.aboutgrid .box:hover,.order-box:hover,.hero-info:hover,form:hover{box-shadow:0 28px 70px rgba(36,33,29,.15),0 1px 0 rgba(255,255,255,.72) inset!important;filter:saturate(1.035)}
+.hero-photo{will-change:transform}
+.hero-photo img{will-change:transform;transition:transform 1.2s cubic-bezier(.2,.75,.2,1),filter .8s ease}
+.nav{backdrop-filter:blur(18px) saturate(120%);-webkit-backdrop-filter:blur(18px) saturate(120%);box-shadow:0 1px 0 rgba(36,33,29,.07),0 10px 35px rgba(36,33,29,.055)}
+.btn{box-shadow:0 7px 18px rgba(36,33,29,.11),inset 0 1px 0 rgba(255,255,255,.4)!important}
+@media(max-width:800px){.pp-v30-light{opacity:.12}.pp-v30-vignette{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.pp-v30-light,.pp-v30-vignette{display:none}.hero-photo,.hero-photo img{transform:none!important}}
+</style>
+<script id="pp-pro-v30-js">
+(()=>{if(window.__PPV30)return;window.__PPV30=1;
+const r=document.documentElement,light=document.createElement('div'),vig=document.createElement('div');light.className='pp-v30-light';vig.className='pp-v30-vignette';document.body.append(light,vig);
+let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty,sy=scrollY,tsy=sy,gx=0,gy=0;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+addEventListener('scroll',()=>tsy=scrollY,{passive:true});
+addEventListener('deviceorientation',e=>{if(e.gamma==null)return;gx=Math.max(-1,Math.min(1,e.gamma/35));gy=Math.max(-1,Math.min(1,(e.beta-45)/35))},{passive:true});
+const cards=[...document.querySelectorAll('.dish,.order-item,.hours-card,.aboutgrid .box,.order-box,.hero-info,form')];
+function frame(){
+x+=(tx-x)*.065;y+=(ty-y)*.065;sy+=(tsy-sy)*.07;
+r.style.setProperty('--v30x',x+'px');r.style.setProperty('--v30y',y+'px');r.style.setProperty('--v30scroll',sy);
+const hero=document.querySelector('.hero-photo');
+if(hero){const q=hero.getBoundingClientRect(),px=(x-(q.left+q.width/2))/q.width,py=(y-(q.top+q.height/2))/q.height;
+hero.style.transform='perspective(1600px) rotateX('+(-py*1.7+gy*1.7).toFixed(2)+'deg) rotateY('+(px*2.2+gx*2.2).toFixed(2)+'deg) translate3d('+(px*-5).toFixed(1)+'px,'+(py*-4).toFixed(1)+'px,0)';
+const img=hero.querySelector('img');if(img)img.style.transform='scale(1.025) translate3d('+(px*-7).toFixed(1)+'px,'+(py*-5).toFixed(1)+'px,0)'}
+requestAnimationFrame(frame)}frame();
+cards.forEach(el=>{
+el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.clientX-q.left)/q.width-.5,py=(e.clientY-q.top)/q.height-.5;el.style.transform='perspective(1100px) rotateX('+(-py*2.1).toFixed(2)+'deg) rotateY('+(px*2.7).toFixed(2)+'deg) translateZ(9px) translateY(-3px)'},{passive:true});
+el.addEventListener('pointerleave',()=>el.style.transform='')});
+if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('pp-v30-visible')}),{threshold:.06,rootMargin:'0px 0px -5% 0px'});document.querySelectorAll('section').forEach(s=>io.observe(s))}
+})();
+</script>
+<style id="pp-pro-v30-reveal">
+@media(prefers-reduced-motion:no-preference){
+section.pp-v30-visible .head,section.pp-v30-visible .dish,section.pp-v30-visible .order-box,section.pp-v30-visible .order-item,section.pp-v30-visible .hours-card,section.pp-v30-visible .box,section.pp-v30-visible form{animation:ppV30Reveal .72s cubic-bezier(.16,.8,.18,1) both}
+@keyframes ppV30Reveal{from{opacity:.15;transform:translateY(28px) scale(.985)}to{opacity:1;transform:none}}
+}
+</style>
 </body></html>
