@@ -1048,3 +1048,28 @@ interactive.forEach(el=>{
 </script>
 
 </body></html>
+<!-- PP-REALISM-V50 -->
+<style>
+#pp-realism-layer{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden}
+#pp-realism-layer .orb{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 68%);filter:blur(8px);transform:translate3d(-50%,-50%,0);opacity:.55;transition:opacity .35s ease}
+.pp-depth{transform-style:preserve-3d;will-change:transform;transition:transform .45s cubic-bezier(.2,.75,.25,1),box-shadow .45s ease}
+.pp-depth:hover{box-shadow:0 22px 55px rgba(0,0,0,.13)}
+.pp-depth:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.18),transparent 35%,transparent 65%,rgba(255,255,255,.10));opacity:0;transition:opacity .4s ease}
+.pp-depth:hover:after{opacity:1}
+@media (max-width:700px){#pp-realism-layer .orb{width:230px;height:230px;opacity:.38}.pp-depth:hover{box-shadow:0 12px 28px rgba(0,0,0,.10)}}
+@media (prefers-reduced-motion:reduce){.pp-depth{transition:none!important}#pp-realism-layer{display:none}}
+</style>
+<div id="pp-realism-layer"><div class="orb"></div></div>
+<script>
+(()=>{const layer=document.getElementById('pp-realism-layer'),orb=layer&&layer.querySelector('.orb');if(!layer)return;
+const targets=[...document.querySelectorAll('section,article,.card,.menu-card,.dish,.product,.order-item,.reservation,.hours,.hero,form,button')].filter((e,i,a)=>e&&!a.slice(0,i).includes(e));
+targets.forEach(e=>e.classList.add('pp-depth'));
+let tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,raf=0;
+function move(){x+=(tx-x)*.075;y+=(ty-y)*.075;if(orb)orb.style.transform='translate3d('+(x-170)+'px,'+(y-170)+'px,0)';raf=requestAnimationFrame(move)}
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});move();
+const motion=matchMedia('(prefers-reduced-motion: reduce)');
+if(!motion.matches){targets.forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;el.style.transform='perspective(900px) rotateX('+(-py*5)+'deg) rotateY('+(px*6)+'deg) translateZ(5px)'},{passive:true});el.addEventListener('pointerleave',()=>el.style.transform='')});
+addEventListener('deviceorientation',e=>{if(innerWidth>700)return;const gx=Math.max(-1,Math.min(1,(e.gamma||0)/25)),gy=Math.max(-1,Math.min(1,(e.beta||0)-45)/25);layer.style.transform='translate3d('+(gx*10)+'px,'+(gy*7)+'px,0)'},{passive:true});}
+})();
+</script>
+<!-- /PP-REALISM-V50 -->
