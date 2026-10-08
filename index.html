@@ -1007,4 +1007,44 @@ cards.forEach(el=>{
 })();
 </script>
 
+
+<!-- PP-REALISM-V40: premium micro-interactions -->
+<style id="pp-realism-v40">
+:root{--r40x:50vw;--r40y:35vh;--r40a:0deg;--r40b:0deg}
+.pp-r40-light{position:fixed;inset:0;pointer-events:none;z-index:9968;background:radial-gradient(360px circle at var(--r40x) var(--r40y),rgba(255,255,255,.22),transparent 72%);mix-blend-mode:soft-light}
+.pp-r40-sheen{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.22) 49%,transparent 63%);transform:translateX(-120%);transition:transform .8s cubic-bezier(.2,.8,.2,1);z-index:5}
+.dish,.order-item,.hero-info,.hours-card,.order-box,.aboutgrid .box,form,.hero-photo{overflow:hidden}
+.dish:hover .pp-r40-sheen,.order-item:hover .pp-r40-sheen,.hero-info:hover .pp-r40-sheen,.hours-card:hover .pp-r40-sheen,.order-box:hover .pp-r40-sheen,.aboutgrid .box:hover .pp-r40-sheen,.hero-photo:hover .pp-r40-sheen{transform:translateX(120%)}
+.dish,.order-item,.hero-info,.hours-card,.order-box,.aboutgrid .box,form{isolation:isolate}
+.price{font-variant-numeric:tabular-nums}
+@media(max-width:800px){
+ .pp-r40-light{opacity:.7}
+ .hero-photo{transform:perspective(1200px) rotateX(var(--r40b)) rotateY(var(--r40a))!important}
+}
+@media(prefers-reduced-motion:reduce){.pp-r40-light{display:none}.pp-r40-sheen{display:none}}
+</style>
+<script id="pp-realism-v40-js">
+(()=>{if(window.__PPR40)return;window.__PPR40=1;
+const r=document.documentElement,light=document.createElement('div');light.className='pp-r40-light';document.body.appendChild(light);
+const interactive=[...document.querySelectorAll('.dish,.order-item,.hero-info,.hours-card,.order-box,.aboutgrid .box,.hero-photo')];
+interactive.forEach(el=>{const s=document.createElement('span');s.className='pp-r40-sheen';el.appendChild(s)});
+let tx=innerWidth/2,ty=innerHeight*.35,x=tx,y=ty,gx=0,gy=0;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+addEventListener('deviceorientation',e=>{if(e.gamma==null)return;gx=Math.max(-1,Math.min(1,e.gamma/28));gy=Math.max(-1,Math.min(1,(e.beta-45)/28))},{passive:true});
+function loop(){
+ x+=(tx-x)*.06;y+=(ty-y)*.06;r.style.setProperty('--r40x',x+'px');r.style.setProperty('--r40y',y+'px');
+ if(innerWidth<=800){r.style.setProperty('--r40a',(gx*2.4).toFixed(2)+'deg');r.style.setProperty('--r40b',(-gy*2).toFixed(2)+'deg')}
+ requestAnimationFrame(loop)
+}loop();
+interactive.forEach(el=>{
+ el.addEventListener('pointermove',e=>{
+  if(!matchMedia('(pointer:fine)').matches)return;
+  const q=el.getBoundingClientRect(),dx=(e.clientX-q.left)/q.width-.5,dy=(e.clientY-q.top)/q.height-.5;
+  el.style.transform='perspective(1150px) rotateX('+(-dy*1.8).toFixed(2)+'deg) rotateY('+(dx*2.4).toFixed(2)+'deg) translate3d('+(dx*2).toFixed(1)+'px,'+(dy*2).toFixed(1)+'px,10px)';
+ },{passive:true});
+ el.addEventListener('pointerleave',()=>{el.style.transform=''});
+});
+})();
+</script>
+
 </body></html>
