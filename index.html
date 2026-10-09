@@ -1047,7 +1047,64 @@ interactive.forEach(el=>{
 })();
 </script>
 
-</body></html>
+
+<!-- Assistant d'accessibilité Paul & Paulette -->
+<style id="pp-access-assistant-style">
+#pp-access-assistant{position:fixed;right:18px;bottom:18px;z-index:10001;font-family:Arial,sans-serif;color:#24211d}
+#pp-assist-toggle{border:3px solid #fff;background:#244f3c;color:#fff;border-radius:999px;padding:15px 19px;min-height:58px;font-size:17px;font-weight:800;box-shadow:0 5px 22px #0003;cursor:pointer}
+#pp-assist-panel{display:none;width:min(370px,calc(100vw - 28px));max-height:75vh;overflow:auto;background:#fffdf9;border:3px solid #244f3c;border-radius:18px;padding:18px;box-shadow:0 12px 45px #0004;margin-bottom:10px}
+#pp-assist-panel.open{display:block}
+#pp-assist-panel h2{font-size:24px;margin:0 0 8px}
+#pp-assist-panel p{font-size:16px;line-height:1.5}
+#pp-assist-panel button,#pp-assist-panel input{font:inherit}
+#pp-assist-panel button{cursor:pointer;border:2px solid #244f3c;border-radius:9px;padding:10px;margin:4px 3px;background:#fff;color:#173c2b;font-weight:700}
+#pp-assist-panel input{width:100%;padding:12px;border:2px solid #555;border-radius:8px;margin:8px 0}
+#pp-assist-answer{background:#f1eadf;border-radius:10px;padding:12px;min-height:44px}
+#pp-assist-panel .pp-assist-main{background:#244f3c;color:white}
+.pp-assist-large{font-size:125%!important}
+@media(prefers-reduced-motion:reduce){#pp-assist-panel *{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<div id="pp-access-assistant">
+ <section id="pp-assist-panel" role="region" aria-label="Assistant vocal et aide simplifiée" aria-live="polite">
+  <h2>Bonjour ! Je peux vous aider.</h2>
+  <p>Pour les personnes aveugles, malvoyantes ou qui préfèrent des explications simples.</p>
+  <button class="pp-assist-main" id="pp-assist-read">🔊 Lire la page à voix haute</button>
+  <button id="pp-assist-stop">⏹ Arrêter la lecture</button>
+  <button id="pp-assist-big">Agrandir le texte</button>
+  <button id="pp-assist-contrast">Contraste renforcé</button>
+  <p><strong>Posez une question sur le site :</strong></p>
+  <form id="pp-assist-form"><label for="pp-assist-question">Votre question</label><input id="pp-assist-question" autocomplete="off" placeholder="Ex. Quels sont les horaires ?"><button class="pp-assist-main" type="submit">Expliquer simplement</button></form>
+  <button id="pp-assist-listen">🎙️ Dicter ma question</button>
+  <p id="pp-assist-answer" tabindex="0">Essayez : horaires, menu, prix, réservation ou commande à emporter.</p>
+  <p style="font-size:12px">L’aide vocale dépend des fonctions disponibles dans votre navigateur. Cet assistant donne des réponses guidées sur le site, pas des réponses médicales ou d’urgence.</p>
+  <button id="pp-assist-close">Fermer l’assistant</button>
+ </section>
+ <button id="pp-assist-toggle" aria-expanded="false" aria-controls="pp-assist-panel" aria-label="Ouvrir l’assistant vocal et l’aide simplifiée">♿ Aide & voix</button>
+</div>
+<script id="pp-access-assistant-js">
+(()=>{const panel=document.getElementById('pp-assist-panel'),toggle=document.getElementById('pp-assist-toggle'),answer=document.getElementById('pp-assist-answer');if(!panel||!toggle)return;
+const say=t=>{answer.textContent=t;answer.focus();if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';speechSynthesis.speak(u)}};
+const open=()=>{panel.classList.add('open');toggle.setAttribute('aria-expanded','true');document.getElementById('pp-assist-question').focus()};
+const close=()=>{panel.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.focus()};
+toggle.addEventListener('click',()=>panel.classList.contains('open')?close():open());
+document.getElementById('pp-assist-close').addEventListener('click',close);
+document.getElementById('pp-assist-stop').addEventListener('click',()=>{if('speechSynthesis'in window)speechSynthesis.cancel();});
+document.getElementById('pp-assist-read').addEventListener('click',()=>{const main=[...document.querySelectorAll('main,section')].filter(s=>!s.closest('#pp-access-assistant'));const txt=(document.querySelector('h1')?.innerText||'Paul et Paulette')+'. '+main.map(s=>s.innerText).join('. ').replace(/\s+/g,' ').slice(0,9000);say(txt)});
+let large=false;document.getElementById('pp-assist-big').addEventListener('click',()=>{large=!large;document.body.classList.toggle('pp-assist-large',large);say(large?'Le texte est agrandi.':'La taille du texte est revenue à la normale.')});
+let contrast=false;document.getElementById('pp-assist-contrast').addEventListener('click',()=>{contrast=!contrast;document.documentElement.style.filter=contrast?'contrast(1.45)':'none';say(contrast?'Le contraste est renforcé.':'Le contraste normal est rétabli.')});
+document.getElementById('pp-assist-form').addEventListener('submit',e=>{e.preventDefault();const q=document.getElementById('pp-assist-question').value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');let a;
+if(/horaire|ouvert|ferme|heure/.test(q)){const s=document.querySelector('.hours,.hours-card');a=s?'Voici les horaires indiqués sur le site : '+s.innerText.replace(/\s+/g,' ').slice(0,700):'Pour les horaires, ouvrez la rubrique Horaires sur le site.'}
+else if(/menu|plat|manger|veget|vegan|gluten|gateau|boisson/.test(q)){const s=document.querySelector('#menu');a=s?'Voici le menu expliqué simplement : '+s.innerText.replace(/\s+/g,' ').slice(0,1000):'Ouvrez la rubrique Menu pour voir les plats et leurs prix.'}
+else if(/prix|combien|euro|cout|coût/.test(q)){a='Les prix sont affichés à côté de chaque plat dans la rubrique Menu. Pour une commande, le total est affiché dans la rubrique Commande à emporter.'}
+else if(/reservation|reserver|table|place/.test(q)){const s=document.querySelector('.booking');a=s?'Pour demander une table, remplissez le formulaire de réservation dans la rubrique Réservation. '+s.innerText.replace(/\s+/g,' ').slice(0,450):'Cherchez la rubrique Réservation et remplissez les champs du formulaire.'}
+else if(/commande|emporter|recuperer|retrait/.test(q)){const s=document.querySelector('.order-section');a=s?'Pour commander à emporter, choisissez les produits et quantités dans cette rubrique. Vérifiez le total et les informations de retrait avant d’envoyer. '+s.innerText.replace(/\s+/g,' ').slice(0,500):'Ouvrez la rubrique Commande à emporter, choisissez vos produits et vérifiez le total.'}
+else if(/aveugle|voix|lire|parler|dicter/.test(q)){a='Utilisez le bouton Lire la page à voix haute. Vous pouvez aussi dicter une question avec le bouton micro si votre navigateur prend en charge la reconnaissance vocale.'}
+else{a='Je peux aider avec les horaires, le menu, les prix, les réservations et les commandes à emporter. Reformulez votre question avec un de ces mots.'}
+say(a)});
+document.getElementById('pp-assist-listen').addEventListener('click',()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){say('La dictée vocale n’est pas disponible dans ce navigateur. Vous pouvez écrire votre question.');return}const rec=new SR();rec.lang='fr-FR';rec.onresult=e=>{document.getElementById('pp-assist-question').value=e.results[0][0].transcript;document.getElementById('pp-assist-form').requestSubmit()};rec.onerror=()=>say('Je n’ai pas compris. Essayez encore ou écrivez votre question.');rec.start();say('Je vous écoute. Parlez maintenant.')});
+})();
+</script>
+\n</body></html>
 <!-- PP-REALISM-V50 -->
 <style>
 #pp-realism-layer{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden}
