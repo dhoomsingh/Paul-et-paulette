@@ -1104,7 +1104,14 @@ say(a)});
 document.getElementById('pp-assist-listen').addEventListener('click',()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){say('La dictée vocale n’est pas disponible dans ce navigateur. Vous pouvez écrire votre question.');return}const rec=new SR();rec.lang='fr-FR';rec.onresult=e=>{document.getElementById('pp-assist-question').value=e.results[0][0].transcript;document.getElementById('pp-assist-form').requestSubmit()};rec.onerror=()=>say('Je n’ai pas compris. Essayez encore ou écrivez votre question.');rec.start();say('Je vous écoute. Parlez maintenant.')});
 })();
 </script>
-\n</body></html>
+\n<!-- PP assistant side-follow position -->
+<style id="pp-assistant-side-follow">
+#pp-access-assistant{position:fixed!important;right:12px!important;top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;z-index:10001!important;display:flex!important;flex-direction:column!important;align-items:flex-end!important;max-height:90vh!important}
+#pp-assist-panel{max-height:65vh!important;overflow-y:auto!important;margin-bottom:10px!important;overscroll-behavior:contain}
+#pp-assist-toggle{max-width:min(230px,calc(100vw - 24px));box-shadow:0 5px 22px rgba(0,0,0,.24)!important}
+@media(max-width:600px){#pp-access-assistant{right:7px!important}#pp-assist-toggle{padding:12px 14px!important;font-size:15px!important}#pp-assist-panel{width:min(340px,calc(100vw - 20px))!important;max-height:62vh!important}}
+</style>
+</body></html>
 <!-- PP-REALISM-V50 -->
 <style>
 #pp-realism-layer{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden}
