@@ -1119,18 +1119,39 @@ document.getElementById('pp-assist-listen').addEventListener('click',()=>{const 
 .pp-depth:hover:after{opacity:1}
 @media (max-width:700px){#pp-realism-layer .orb{width:230px;height:230px;opacity:.38}.pp-depth:hover{box-shadow:0 12px 28px rgba(0,0,0,.10)}}
 @media (prefers-reduced-motion:reduce){.pp-depth{transition:none!important}#pp-realism-layer{display:none}}
+/* V10 MOBILE PERFORMANCE MODE: preserve the design, reduce expensive effects */
+@media(max-width:800px){
+  *,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important;transform-style:flat!important;will-change:auto!important}
+  body{perspective:none!important;background-image:none!important}
+  body:before,body:after{display:none!important}
+  nav{backdrop-filter:none!important;box-shadow:0 2px 8px rgba(0,0,0,.06)!important;transform:none!important}
+  .hero,.hero-in,.hero-in>*,section,.wrap,.head,.hero-photo,.hero-info,.dish,.order-box,.order-item,.hours-card,.aboutgrid,.aboutgrid>*,.bookinggrid,.bookinggrid>*,form,.box,footer,.btn{
+    transform:none!important;filter:none!important;box-shadow:0 3px 10px rgba(36,33,29,.06)!important
+  }
+  .hero:before,.hero:after,.hours:after,#menu:after,.order-section:after,.about:after,.booking:after,
+  .hero-photo:after,.hero-photo:before,.hero-info:before,.dish:before,.order-box:before,.order-item:before,
+  .hours-card:before,.aboutgrid .box:before,form:before{display:none!important}
+  .hero-photo img,.dish img{transform:none!important;filter:none!important}
+  #pp-realism-layer{display:none!important}
+}
+@media(min-width:801px){
+  .pp-depth{transition:transform .22s ease,box-shadow .22s ease}
+}
 </style>
-<div id="pp-realism-layer"><div class="orb"></div></div>
+<div id="pp-realism-layer" aria-hidden="true"><div class="orb"></div></div>
 <script>
 (()=>{const layer=document.getElementById('pp-realism-layer'),orb=layer&&layer.querySelector('.orb');if(!layer)return;
-const targets=[...document.querySelectorAll('section,article,.card,.menu-card,.dish,.product,.order-item,.reservation,.hours,.hero,form,button')].filter((e,i,a)=>e&&!a.slice(0,i).includes(e));
-targets.forEach(e=>e.classList.add('pp-depth'));
-let tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,raf=0;
-function move(){x+=(tx-x)*.075;y+=(ty-y)*.075;if(orb)orb.style.transform='translate3d('+(x-170)+'px,'+(y-170)+'px,0)';raf=requestAnimationFrame(move)}
-addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});move();
-const motion=matchMedia('(prefers-reduced-motion: reduce)');
-if(!motion.matches){targets.forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;el.style.transform='perspective(900px) rotateX('+(-py*5)+'deg) rotateY('+(px*6)+'deg) translateZ(5px)'},{passive:true});el.addEventListener('pointerleave',()=>el.style.transform='')});
-addEventListener('deviceorientation',e=>{if(innerWidth>700)return;const gx=Math.max(-1,Math.min(1,(e.gamma||0)/25)),gy=Math.max(-1,Math.min(1,(e.beta||0)-45)/25);layer.style.transform='translate3d('+(gx*10)+'px,'+(gy*7)+'px,0)'},{passive:true});}
+const mobile=matchMedia('(max-width:800px)').matches;
+if(mobile){layer.remove();return;}
+const targets=[...document.querySelectorAll('.hero-photo,.hero-info,.dish,.order-item,.hours-card,.aboutgrid .box,form')];
+let last=0;
+addEventListener('pointermove',e=>{
+ const now=performance.now();if(now-last<40)return;last=now;
+ const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
+ document.documentElement.style.setProperty('--glow-x',Math.round(e.clientX)+'px');
+ document.documentElement.style.setProperty('--glow-y',Math.round(e.clientY)+'px');
+ targets.forEach(el=>{const r=el.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){el.style.transform='perspective(1000px) rotateX('+(-y*1.5)+'deg) rotateY('+(x*2)+'deg)';}else{el.style.transform='';}});
+},{passive:true});
 })();
 </script>
-<!-- /PP-REALISM-V50 -->
+<!-- /PP-REALISM-V10 -->
