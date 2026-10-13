@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7d3029"><meta name="description" content="L’application Paul & Paulette : menu, commandes à emporter et réservations à Fontainebleau.">
+<link rel="manifest" href="./manifest.json">
+<title>Paul & Paulette — Application</title>
+<style>
+:root{--red:#7d3029;--red2:#a64d3b;--cream:#f7f0e5;--ink:#29231e;--green:#e5eddf;--line:#e8daca}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Arial,sans-serif;padding-bottom:35px}
+header{background:linear-gradient(135deg,#68251f,var(--red2));color:#fff;padding:28px 20px 24px;border-radius:0 0 26px 26px;box-shadow:0 10px 30px #4d211c26}
+header .brand{font:700 30px Georgia,serif;letter-spacing:-.6px}header p{margin:6px 0 0;color:#f6e8df}
+nav{display:flex;gap:8px;overflow:auto;padding:14px 14px 6px;position:sticky;top:0;background:var(--cream);z-index:3}
+nav button{white-space:nowrap;border:1px solid var(--line);background:#fffaf3;border-radius:999px;padding:10px 14px;font-weight:700;color:var(--ink)}nav button.active{background:var(--red);color:white;border-color:var(--red)}
+main{max-width:850px;margin:auto;padding:12px 14px}.panel{display:none}.panel.active{display:block}
+h1,h2,h3{font-family:Georgia,serif}h1{font-size:30px;margin:8px 0}h2{font-size:25px;margin:10px 0}p.muted{color:#71685e}
+.card{background:#fffdf8;border:1px solid var(--line);border-radius:18px;padding:17px;margin:12px 0;box-shadow:0 8px 25px #4b2e160b}
+.menu-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.menu-item:last-child{border:0}.menu-item strong{display:block}.desc{font-size:13px;color:#71685e}.price{font-weight:800;color:var(--red);white-space:nowrap}
+.quantity{display:flex;align-items:center;gap:9px}.quantity button{width:34px;height:34px;border:0;border-radius:50%;background:#f0e3d5;font-size:20px;font-weight:bold}.quantity span{min-width:15px;text-align:center;font-weight:700}
+.btn{display:block;width:100%;border:0;border-radius:12px;background:var(--red);color:white;padding:14px 16px;font-size:16px;font-weight:800;margin-top:14px}.btn.secondary{background:#e9dfd2;color:var(--ink)}label{display:block;font-size:13px;font-weight:750;margin:12px 0 5px}input,select,textarea{width:100%;padding:12px;border:1px solid #ddcdbc;border-radius:10px;background:#fffdf9;font:inherit;color:var(--ink)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:800;border-top:1px solid var(--line);padding-top:15px;margin-top:12px}.notice{background:var(--green);color:#3c5735;padding:12px;border-radius:12px;font-size:14px}.hidden{display:none!important}footer{text-align:center;color:#786e62;font-size:12px;padding:22px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.menu-item{gap:8px}.card{padding:14px}}
+</style>
+</head>
+<body>
+<header><div class="brand">Paul & Paulette</div><p>Café-restaurant · Fontainebleau</p><p style="font-size:13px">Une cuisine généreuse, fraîche et inspirée du monde entier.</p></header>
+<nav aria-label="Navigation principale">
+<button class="active" data-tab="menu">🍽️ Menu</button><button data-tab="order">🥡 À emporter <span id="cart-badge"></span></button><button data-tab="booking">📅 Réservation</button><button data-tab="info">ℹ️ Infos</button>
+</nav>
+<main>
+<section id="menu" class="panel active"><h1>La carte</h1><p class="muted">Les plats de la semaine. Les options vegan, végétariennes et sans gluten sont indiquées lorsqu’elles s’appliquent.</p><div class="notice">🌱 Une option vegan · 🥬 Végétarien · 🌾 Sans gluten selon le plat</div><div id="menu-list" class="card"></div><button class="btn" onclick="switchTab('order')">Préparer une commande à emporter</button></section>
+<section id="order" class="panel"><h1>Commande à emporter</h1><div class="notice">🥡 Retrait au restaurant uniquement · Pas de livraison · Paiement au retrait, pas de paiement en ligne.</div><div class="card"><h2>Choisissez vos produits</h2><div id="order-list"></div><div class="total"><span>Total</span><span id="total">0,00 €</span></div></div>
+<form id="order-form" class="card"><h2>Vos informations</h2><div class="grid"><div><label for="oname">Nom</label><input id="oname" name="Nom" autocomplete="name" required></div><div><label for="ophone">Téléphone</label><input id="ophone" name="Téléphone" type="tel" autocomplete="tel" required></div></div><div class="grid"><div><label for="odate">Date de retrait</label><input id="odate" name="Date de retrait" type="date" required></div><div><label for="otime">Heure de retrait (9h–17h59)</label><input id="otime" name="Heure de retrait" type="time" min="09:00" max="17:59" required></div></div><label for="onote">Message (facultatif)</label><textarea id="onote" name="Message" rows="2"></textarea><input type="hidden" name="_subject" value="Commande à emporter — Application Paul & Paulette"><input type="hidden" name="_template" value="table"><div id="order-status" role="status" class="muted"></div><button class="btn" type="submit">Envoyer la commande</button><p class="muted" style="font-size:12px">Aucun paiement en ligne. Attendez une confirmation du restaurant avant de vous déplacer.</p></form></section>
+<section id="booking" class="panel"><h1>Réserver une table</h1><p class="muted">Envoyez une demande de réservation. Elle doit être confirmée par le restaurant.</p><form id="booking-form" class="card"><div class="grid"><div><label for="bname">Nom</label><input id="bname" name="Nom" autocomplete="name" required></div><div><label for="bphone">Téléphone</label><input id="bphone" name="Téléphone" type="tel" autocomplete="tel" required></div></div><div class="grid"><div><label for="bdate">Date</label><input id="bdate" name="Date" type="date" required></div><div><label for="btime">Heure (10h–17h59)</label><input id="btime" name="Heure" type="time" min="10:00" max="17:59" required></div></div><label for="bpeople">Nombre de personnes</label><select id="bpeople" name="Nombre de personnes"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><label for="bnote">Message (facultatif)</label><textarea id="bnote" name="Message" rows="3"></textarea><input type="hidden" name="_subject" value="Réservation — Application Paul & Paulette"><input type="hidden" name="_template" value="table"><div id="booking-status" role="status" class="muted"></div><button class="btn" type="submit">Envoyer la demande</button></form></section>
+<section id="info" class="panel"><h1>Paul & Paulette</h1><div class="card"><h2>À savoir</h2><p>📍 Fontainebleau, France</p><p>🥡 Commandes à emporter : retrait sur place uniquement.</p><p>💳 Paiement de la commande au restaurant lors du retrait.</p><p>📅 Une réservation n’est définitive qu’après confirmation du restaurant.</p><a class="btn secondary" href="https://dhoomsingh.github.io/Paul-et-paulette/">Ouvrir le site internet</a></div><div class="card"><h2>Installer l’application gratuitement</h2><p><b>iPhone :</b> ouvrez cette page dans Safari, touchez Partager, puis « Sur l’écran d’accueil ».</p><p><b>Android :</b> ouvrez cette page dans Chrome, puis le menu ⋮ et « Installer l’application » ou « Ajouter à l’écran d’accueil ».</p></div></section>
+</main><footer>Paul & Paulette · Application web gratuite</footer>
+<script>
+const PRODUCTS=[
+{name:"Tofu au curry de champignons",desc:"Avec riz basmati · vegan",price:14,cat:"Plats"},
+{name:"Spaghetti sautés aux crevettes et légumes",desc:"Sauce teriyaki-lime",price:15,cat:"Plats"},
+{name:"Poulet Tikka Massala",desc:"Avec riz basmati",price:17,cat:"Plats"},
+{name:"Poulet shawarma",desc:"Boulgour, salade et yaourt grec",price:17,cat:"Plats"},
+{name:"Limonade maison",price:3.9,cat:"Boissons"},
+{name:"Red Fizz",price:4.5,cat:"Boissons"},
+{name:"Jus du jour",price:4,cat:"Boissons"},
+{name:"Jus de pomme / orange",price:3.9,cat:"Boissons"},
+{name:"Bière Pachamama blonde / ambrée",price:4.9,cat:"Boissons"},
+{name:"Thé glacé hibiscus / fleur de sureau",price:3.9,cat:"Boissons"},
+{name:"Cheesecake myrtilles / fraise",price:5.5,cat:"Gâteaux"},
+{name:"Carrot cake aux noix de pécan",price:5,cat:"Gâteaux"},
+{name:"Tarte vegan rose citron vert",price:6,cat:"Gâteaux"},
+{name:"Tarte vegan chocolat noir",price:6,cat:"Gâteaux"},
+{name:"Vegan banana bread aux myrtilles",price:4.5,cat:"Gâteaux"}
+];
+const cart={};const euro=n=>n.toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
+function renderMenu(){document.getElementById('menu-list').innerHTML=['Plats','Boissons','Gâteaux'].map(cat=>'<h2>'+cat+'</h2>'+PRODUCTS.filter(p=>p.cat===cat).map(p=>'<div class="menu-item"><div><strong>'+p.name+'</strong>'+(p.desc?'<div class="desc">'+p.desc+'</div>':'')+'</div><span class="price">'+euro(p.price)+'</span></div>').join('')).join('')}
+function renderOrder(){document.getElementById('order-list').innerHTML=PRODUCTS.map((p,i)=>'<div class="menu-item"><div><strong>'+p.name+'</strong><span class="price">'+euro(p.price)+'</span></div><div class="quantity"><button type="button" aria-label="Retirer '+p.name+'" onclick="changeQty('+i+',-1)">−</button><span>'+ (cart[i]||0) +'</span><button type="button" aria-label="Ajouter '+p.name+'" onclick="changeQty('+i+',1)">+</button></div></div>').join('');let count=Object.values(cart).reduce((a,b)=>a+b,0),sum=PRODUCTS.reduce((s,p,i)=>s+p.price*(cart[i]||0),0);document.getElementById('total').textContent=euro(sum);document.getElementById('cart-badge').textContent=count?'('+count+')':''}
+function changeQty(i,d){cart[i]=Math.max(0,(cart[i]||0)+d);renderOrder()}
+function switchTab(id){document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+function addOrderDetails(form){let lines=PRODUCTS.map((p,i)=>cart[i]?p.name+' x '+cart[i]+' = '+euro(p.price*cart[i]):'').filter(Boolean);if(!lines.length)throw Error('Choisissez au moins un produit.');let total=PRODUCTS.reduce((s,p,i)=>s+p.price*(cart[i]||0),0);let hidden=document.createElement('input');hidden.type='hidden';hidden.name='Détail de la commande';hidden.value=lines.join('\n')+'\nTOTAL : '+euro(total);form.appendChild(hidden)}
+async function submitForm(form,statusId,kind){const status=document.getElementById(statusId),btn=form.querySelector('button[type=submit');btn.disabled=true;status.textContent='Envoi en cours…';try{if(kind==='order')addOrderDetails(form);const response=await fetch('https://formsubmit.co/ajax/Pauletpaulettedhoom@gmail.com',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});const data=await response.json();if(!response.ok||data.success===false)throw Error('send');status.textContent='Demande envoyée. Attendez la confirmation du restaurant.';if(kind==='order'){Object.keys(cart).forEach(k=>delete cart[k]);renderOrder()}form.reset()}catch(e){status.textContent= e.message==='Choisissez au moins un produit.'?e.message:'Envoi non confirmé. Vérifiez votre connexion et réessayez, ou contactez le restaurant depuis son site.'}finally{const h=form.querySelector('input[name="Détail de la commande"]');if(h)h.remove();btn.disabled=false}}
+document.getElementById('order-form').addEventListener('submit',e=>{e.preventDefault();const t=document.getElementById('otime');if(t.value<'09:00'||t.value>'17:59'){document.getElementById('order-status').textContent='Choisissez une heure entre 9h00 et 17h59.';return}submitForm(e.currentTarget,'order-status','order')});
+document.getElementById('booking-form').addEventListener('submit',e=>{e.preventDefault();const t=document.getElementById('btime');if(t.value<'10:00'||t.value>'17:59'){document.getElementById('booking-status').textContent='Choisissez une heure entre 10h00 et 17h59.';return}submitForm(e.currentTarget,'booking-status','booking')});
+renderMenu();renderOrder();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script></body></html>
