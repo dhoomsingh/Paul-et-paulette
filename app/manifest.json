@@ -1,0 +1,11 @@
+{
+  "name": "Paul & Paulette",
+  "short_name": "Paul & Paulette",
+  "description": "Menu, commandes à emporter et réservations",
+  "lang": "fr-FR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f0e5",
+  "theme_color": "#7d3029"
+}
