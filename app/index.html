@@ -24,8 +24,8 @@ h1,h2,h3{font-family:Georgia,serif}h1{font-size:30px;margin:8px 0}h2{font-size:2
 <body>
 <header><div class="brand">Paul & Paulette</div><p>Café-restaurant · Fontainebleau</p><p style="font-size:13px">Une cuisine généreuse, fraîche et inspirée du monde entier.</p></header>
 <section class="install-banner" id="install-banner">
-<div><strong>📲 Emportez Paul &amp; Paulette avec vous</strong><p>Ajoutez l’application à l’écran d’accueil de votre téléphone — gratuitement.</p></div>
-<button type="button" id="install-app" class="install-btn">Installer</button>
+<div><strong>📲 Installez Paul &amp; Paulette</strong><p>Un seul appui pour ouvrir l’installation quand votre téléphone le permet — gratuitement.</p></div>
+<button type="button" id="install-app" class="install-btn">Installer maintenant</button>
 <p id="install-help" class="install-help hidden" role="status"></p>
 </section>
 <nav aria-label="Navigation principale">
@@ -76,7 +76,7 @@ const isIos=/iphone|ipad|ipod/i.test(navigator.userAgent);
 const isStandalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 function showInstallHelp(message){installHelp.textContent=message;installHelp.classList.remove('hidden')}
 if(isStandalone){installButton.textContent='Application installée';installButton.disabled=true;installButton.style.opacity='.65'}
-window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;installButton.textContent='Installer gratuitement'});
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;installButton.textContent='Installer maintenant'});
 window.addEventListener('appinstalled',()=>{installButton.textContent='Application installée';installButton.disabled=true;showInstallHelp('Paul & Paulette a été ajouté à votre écran d’accueil.')});
 installButton.addEventListener('click',async()=>{
  if(isStandalone){showInstallHelp('L’application est déjà installée sur cet appareil.');return}
@@ -89,9 +89,9 @@ installButton.addEventListener('click',async()=>{
   return;
  }
  if(isIos){
-  showInstallHelp('Sur iPhone : ouvrez cette page dans Safari, touchez Partager (le carré avec la flèche vers le haut), puis « Sur l’écran d’accueil » et « Ajouter ».');
+  showInstallHelp('Sur iPhone, Apple impose encore 2 gestes : touchez Partager dans Safari, puis « Sur l’écran d’accueil » et « Ajouter ».');
  }else{
-  showInstallHelp('Dans Chrome : ouvrez le menu ⋮ puis choisissez « Installer l’application » ou « Ajouter à l’écran d’accueil ». Si l’option n’apparaît pas, vérifiez que la page est bien ouverte en HTTPS et réessayez plus tard.');
+  showInstallHelp('Pour installer en un appui, ouvrez cette page dans Chrome ou un navigateur compatible. Si la fenêtre ne s’ouvre pas, votre navigateur ne propose pas encore l’installation automatique pour cette page.');
  }
 });
 
