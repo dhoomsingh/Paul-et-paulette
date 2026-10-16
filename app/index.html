@@ -68,36 +68,38 @@ async function submitForm(form,statusId,kind){const status=document.getElementBy
 document.getElementById('order-form').addEventListener('submit',e=>{e.preventDefault();const t=document.getElementById('otime');if(t.value<'09:00'||t.value>'17:59'){document.getElementById('order-status').textContent='Choisissez une heure entre 9h00 et 17h59.';return}submitForm(e.currentTarget,'order-status','order')});
 document.getElementById('booking-form').addEventListener('submit',e=>{e.preventDefault();const t=document.getElementById('btime');if(t.value<'10:00'||t.value>'17:59'){document.getElementById('booking-status').textContent='Choisissez une heure entre 10h00 et 17h59.';return}submitForm(e.currentTarget,'booking-status','booking')});
 
-// Installation gratuite (PWA). Android/Chromium peut afficher l'invite native; sur iPhone, Safari demande l'ajout manuel.
+// Installation PWA : le navigateur garde toujours le contrôle final.
 let deferredInstallPrompt=null;
 const installButton=document.getElementById('install-app');
 const installHelp=document.getElementById('install-help');
-const isIos=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const ua=navigator.userAgent;
+const isIos=/iphone|ipad|ipod/i.test(ua);
+const isMac=/macintosh|mac os x/i.test(ua);
+const isSafari=/safari/i.test(ua)&&!/chrome|chromium|crios|edg|opr|firefox/i.test(ua);
 const isStandalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 function showInstallHelp(message){installHelp.textContent=message;installHelp.classList.remove('hidden')}
+if(isMac&&isSafari&&!isStandalone)installButton.textContent='Installer sur mon Mac';
 if(isStandalone){installButton.textContent='Application installée';installButton.disabled=true;installButton.style.opacity='.65'}
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;installButton.textContent='Installer maintenant'});
-window.addEventListener('appinstalled',()=>{installButton.textContent='Application installée';installButton.disabled=true;showInstallHelp('Paul & Paulette a été ajouté à votre écran d’accueil.')});
+window.addEventListener('appinstalled',()=>{installButton.textContent='Application installée';installButton.disabled=true;showInstallHelp('Paul & Paulette a été ajouté à votre Mac.')});
 installButton.addEventListener('click',async()=>{
- if(isStandalone){showInstallHelp('L’application est déjà installée sur cet appareil.');return}
+ if(isStandalone){showInstallHelp('Paul & Paulette est déjà installé sur cet appareil.');return}
  if(deferredInstallPrompt){
   deferredInstallPrompt.prompt();
   const result=await deferredInstallPrompt.userChoice;
   deferredInstallPrompt=null;
-  if(result.outcome==='accepted')showInstallHelp('Installation acceptée. Retrouvez Paul & Paulette sur votre écran d’accueil.');
-  else showInstallHelp('Pas de souci : vous pourrez l’installer plus tard depuis le menu du navigateur.');
+  if(result.outcome==='accepted')showInstallHelp('Installation acceptée. Retrouvez Paul & Paulette dans vos applications.');
+  else showInstallHelp('Installation annulée. Vous pourrez réessayer plus tard.');
+  return;
+ }
+ if(isMac&&isSafari){
+  showInstallHelp('Dans Safari sur Mac, l’installation automatique par un bouton est bloquée par Apple. Dans la barre de menus du Mac, cliquez sur Fichier, puis « Ajouter au Dock… ». Confirmez : Paul & Paulette sera ensuite disponible comme une application. Si cette option manque, mettez macOS/Safari à jour ou utilisez un navigateur compatible.');
   return;
  }
  if(isIos){
-  // Ouvre directement la feuille de partage iOS : l’utilisateur peut y choisir « Sur l’écran d’accueil ».
-  if(navigator.share){
-   try{await navigator.share({title:'Paul & Paulette',text:'Application Paul & Paulette',url:location.href});}
-   catch(e){if(e.name!=='AbortError')showInstallHelp('Safari ne permet pas de forcer l’installation depuis un bouton. Utilisez le menu de partage de Safari pour ajouter l’application à l’écran d’accueil.');}
-  }else{
-   showInstallHelp('L’installation directe n’est pas disponible dans ce navigateur. Ouvrez le site dans Safari pour l’ajouter à l’écran d’accueil.');
-  }
+  showInstallHelp('Sur iPhone/iPad, Safari impose une confirmation manuelle : touchez Partager, puis « Sur l’écran d’accueil ». Un site web ne peut pas déclencher cette installation tout seul.');
  }else{
-  showInstallHelp('Installation directe non disponible ici. Ouvrez cette page dans Chrome ou un navigateur compatible avec les applications web installables.');
+  showInstallHelp('Ce navigateur ne propose pas l’installation directe pour le moment. Essayez d’ouvrir cette page dans un navigateur compatible avec les applications web installables.');
  }
 });
 
