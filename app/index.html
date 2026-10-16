@@ -37,7 +37,7 @@ h1,h2,h3{font-family:Georgia,serif}h1{font-size:30px;margin:8px 0}h2{font-size:2
 <form id="order-form" class="card"><h2>Vos informations</h2><div class="grid"><div><label for="oname">Nom</label><input id="oname" name="Nom" autocomplete="name" required></div><div><label for="ophone">Téléphone</label><input id="ophone" name="Téléphone" type="tel" autocomplete="tel" required></div></div><div class="grid"><div><label for="odate">Date de retrait</label><input id="odate" name="Date de retrait" type="date" required></div><div><label for="otime">Heure de retrait (9h–17h59)</label><input id="otime" name="Heure de retrait" type="time" min="09:00" max="17:59" required></div></div><label for="onote">Message (facultatif)</label><textarea id="onote" name="Message" rows="2"></textarea><input type="hidden" name="_subject" value="Commande à emporter — Application Paul & Paulette"><input type="hidden" name="_template" value="table"><div id="order-status" role="status" class="muted"></div><button class="btn" type="submit">Envoyer la commande</button><p class="muted" style="font-size:12px">Aucun paiement en ligne. Attendez une confirmation du restaurant avant de vous déplacer.</p></form></section>
 <section id="booking" class="panel"><h1>Réserver une table</h1><p class="muted">Envoyez une demande de réservation. Elle doit être confirmée par le restaurant.</p><form id="booking-form" class="card"><div class="grid"><div><label for="bname">Nom</label><input id="bname" name="Nom" autocomplete="name" required></div><div><label for="bphone">Téléphone</label><input id="bphone" name="Téléphone" type="tel" autocomplete="tel" required></div></div><div class="grid"><div><label for="bdate">Date</label><input id="bdate" name="Date" type="date" required></div><div><label for="btime">Heure (10h–17h59)</label><input id="btime" name="Heure" type="time" min="10:00" max="17:59" required></div></div><label for="bpeople">Nombre de personnes</label><select id="bpeople" name="Nombre de personnes"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><label for="bnote">Message (facultatif)</label><textarea id="bnote" name="Message" rows="3"></textarea><input type="hidden" name="_subject" value="Réservation — Application Paul & Paulette"><input type="hidden" name="_template" value="table"><div id="booking-status" role="status" class="muted"></div><button class="btn" type="submit">Envoyer la demande</button></form></section>
 
-<section id="info" class="panel"><h1>Paul & Paulette</h1><div class="card"><h2>À savoir</h2><p>📍 Fontainebleau, France</p><p>🥡 Commandes à emporter : retrait sur place uniquement.</p><p>💳 Paiement de la commande au restaurant lors du retrait.</p><p>📅 Une réservation n’est définitive qu’après confirmation du restaurant.</p><a class="btn secondary" href="https://dhoomsingh.github.io/Paul-et-paulette/">Ouvrir le site internet</a></div><div class="card"><h2>Installer l’application gratuitement</h2><p><b>iPhone :</b> ouvrez cette page dans Safari, touchez Partager, puis « Sur l’écran d’accueil ».</p><p><b>Android :</b> ouvrez cette page dans Chrome, puis le menu ⋮ et « Installer l’application » ou « Ajouter à l’écran d’accueil ».</p></div></section>
+<section id="info" class="panel"><h1>Paul & Paulette</h1><div class="card"><h2>À savoir</h2><p>📍 Fontainebleau, France</p><p>🥡 Commandes à emporter : retrait sur place uniquement.</p><p>💳 Paiement de la commande au restaurant lors du retrait.</p><p>📅 Une réservation n’est définitive qu’après confirmation du restaurant.</p><a class="btn secondary" href="https://dhoomsingh.github.io/Paul-et-paulette/">Ouvrir le site internet</a></div></section>
 </main><footer>Paul & Paulette · Application web gratuite</footer>
 <script>
 const PRODUCTS=[
@@ -89,9 +89,15 @@ installButton.addEventListener('click',async()=>{
   return;
  }
  if(isIos){
-  showInstallHelp('Sur iPhone, Apple impose encore 2 gestes : touchez Partager dans Safari, puis « Sur l’écran d’accueil » et « Ajouter ».');
+  // Ouvre directement la feuille de partage iOS : l’utilisateur peut y choisir « Sur l’écran d’accueil ».
+  if(navigator.share){
+   try{await navigator.share({title:'Paul & Paulette',text:'Application Paul & Paulette',url:location.href});}
+   catch(e){if(e.name!=='AbortError')showInstallHelp('Safari ne permet pas de forcer l’installation depuis un bouton. Utilisez le menu de partage de Safari pour ajouter l’application à l’écran d’accueil.');}
+  }else{
+   showInstallHelp('L’installation directe n’est pas disponible dans ce navigateur. Ouvrez le site dans Safari pour l’ajouter à l’écran d’accueil.');
+  }
  }else{
-  showInstallHelp('Pour installer en un appui, ouvrez cette page dans Chrome ou un navigateur compatible. Si la fenêtre ne s’ouvre pas, votre navigateur ne propose pas encore l’installation automatique pour cette page.');
+  showInstallHelp('Installation directe non disponible ici. Ouvrez cette page dans Chrome ou un navigateur compatible avec les applications web installables.');
  }
 });
 
