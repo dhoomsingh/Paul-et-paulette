@@ -20,7 +20,36 @@ h1,h2,h3{font-family:Georgia,serif}h1{font-size:30px;margin:8px 0}h2{font-size:2
 .quantity{display:flex;align-items:center;gap:9px}.quantity button{width:34px;height:34px;border:0;border-radius:50%;background:#f0e3d5;font-size:20px;font-weight:bold}.quantity span{min-width:15px;text-align:center;font-weight:700}
 .btn{display:block;width:100%;border:0;border-radius:12px;background:var(--red);color:white;padding:14px 16px;font-size:16px;font-weight:800;margin-top:14px}.btn.secondary{background:#e9dfd2;color:var(--ink)}label{display:block;font-size:13px;font-weight:750;margin:12px 0 5px}input,select,textarea{width:100%;padding:12px;border:1px solid #ddcdbc;border-radius:10px;background:#fffdf9;font:inherit;color:var(--ink)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:800;border-top:1px solid var(--line);padding-top:15px;margin-top:12px}.notice{background:var(--green);color:#3c5735;padding:12px;border-radius:12px;font-size:14px}.hidden{display:none!important}footer{text-align:center;color:#786e62;font-size:12px;padding:22px}
 @media(max-width:520px){.grid{grid-template-columns:1fr}.menu-item{gap:8px}.card{padding:14px}}
-.install-banner{max-width:850px;margin:14px auto 0;padding:15px 16px;background:#fffdf8;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 25px #4b2e160b;display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 14px}.install-banner strong{font-size:16px}.install-banner p{margin:3px 0 0;color:#71685e;font-size:13px}.install-btn{border:0;border-radius:10px;background:var(--red);color:white;padding:12px 16px;font:700 14px system-ui;cursor:pointer}.install-help{grid-column:1/-1;background:var(--green);padding:10px 12px;border-radius:10px;color:#3c5735!important}.install-banner .hidden{display:none!important}@media(max-width:520px){.install-banner{margin:12px 12px 0}.install-btn{padding:11px 12px}}</style>
+.install-banner{max-width:850px;margin:14px auto 0;padding:15px 16px;background:#fffdf8;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 25px #4b2e160b;display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 14px}.install-banner strong{font-size:16px}.install-banner p{margin:3px 0 0;color:#71685e;font-size:13px}.install-btn{border:0;border-radius:10px;background:var(--red);color:white;padding:12px 16px;font:700 14px system-ui;cursor:pointer}.install-help{grid-column:1/-1;background:var(--green);padding:10px 12px;border-radius:10px;color:#3c5735!important}.install-banner .hidden{display:none!important}@media(max-width:520px){.install-banner{margin:12px 12px 0}.install-btn{padding:11px 12px}}
+/* PP-PRO-APP-V11: finition professionnelle et cache rafraîchi */
+:root{--red:#7d3029;--red2:#a64d3b;--cream:#f7f0e5;--ink:#29231e;--green:#e5eddf;--line:#e8daca;--paper:#fffdf8}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:radial-gradient(ellipse at 10% 0%,#fffaf2 0,transparent 42%),var(--cream);letter-spacing:.01em}
+header{position:relative;isolation:isolate;background:linear-gradient(135deg,#55201c 0%,#7d3029 52%,#ad5a43 100%);box-shadow:0 14px 35px rgba(77,33,28,.2);padding:30px 20px 26px}
+header:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.13),transparent 38%,rgba(0,0,0,.08))}
+header .brand{text-shadow:0 2px 12px rgba(0,0,0,.16);letter-spacing:-.8px}
+nav{background:rgba(247,240,229,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,218,202,.75);padding-top:12px;padding-bottom:10px}
+nav button{box-shadow:0 3px 10px rgba(41,35,30,.04);transition:transform .18s ease,box-shadow .18s ease}
+nav button:active,.btn:active{transform:scale(.98)}
+nav button.active{box-shadow:0 5px 14px rgba(125,48,41,.2)}
+main{padding-top:16px}
+.panel.active{animation:ppFadeIn .24s ease both}
+.card{border-color:rgba(232,218,202,.95);box-shadow:0 10px 26px rgba(75,46,22,.055),0 1px 0 rgba(255,255,255,.9) inset;transition:transform .2s ease,box-shadow .2s ease}
+.menu-item{gap:16px}
+.menu-item strong{font-size:16px;line-height:1.35}
+.desc{line-height:1.5}
+.price{font-variant-numeric:tabular-nums}
+.btn{border-radius:12px;background:linear-gradient(135deg,var(--red),var(--red2));box-shadow:0 7px 18px rgba(125,48,41,.2);font-weight:800;letter-spacing:.01em;transition:filter .2s ease,transform .2s ease}
+input,select,textarea{border-radius:11px;border:1px solid #dfd0bf;background:#fffefa;box-shadow:0 1px 2px rgba(41,35,30,.025);transition:border-color .18s ease,box-shadow .18s ease}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid rgba(166,77,59,.24);outline-offset:2px}
+.quantity button{box-shadow:0 2px 7px rgba(41,35,30,.08);transition:transform .15s ease,background .15s ease}
+.quantity button:active{transform:scale(.94)}
+.hidden{display:none!important}
+@keyframes ppFadeIn{from{opacity:.7;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:700px){header{padding:38px 28px 32px}header .brand{font-size:35px}main{padding-top:20px}.card{padding:21px}.card:hover{box-shadow:0 14px 32px rgba(75,46,22,.09),0 1px 0 rgba(255,255,255,.9) inset}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+</style>
 </head>
 <body>
 <header><div class="brand">Paul & Paulette</div><p>Café-restaurant · Fontainebleau</p><p style="font-size:13px">Une cuisine généreuse, fraîche et inspirée du monde entier.</p></header>
