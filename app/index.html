@@ -19,10 +19,15 @@ h1,h2,h3{font-family:Georgia,serif}h1{font-size:30px;margin:8px 0}h2{font-size:2
 .quantity{display:flex;align-items:center;gap:9px}.quantity button{width:34px;height:34px;border:0;border-radius:50%;background:#f0e3d5;font-size:20px;font-weight:bold}.quantity span{min-width:15px;text-align:center;font-weight:700}
 .btn{display:block;width:100%;border:0;border-radius:12px;background:var(--red);color:white;padding:14px 16px;font-size:16px;font-weight:800;margin-top:14px}.btn.secondary{background:#e9dfd2;color:var(--ink)}label{display:block;font-size:13px;font-weight:750;margin:12px 0 5px}input,select,textarea{width:100%;padding:12px;border:1px solid #ddcdbc;border-radius:10px;background:#fffdf9;font:inherit;color:var(--ink)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:800;border-top:1px solid var(--line);padding-top:15px;margin-top:12px}.notice{background:var(--green);color:#3c5735;padding:12px;border-radius:12px;font-size:14px}.hidden{display:none!important}.loyalty-card{background:linear-gradient(135deg,#244638,#42684e);color:#fff;border-radius:20px;padding:21px;box-shadow:0 12px 26px #24463822;margin:14px 0}.loyalty-card .eyebrow{font-size:11px;letter-spacing:2px;color:#f1dba9;font-weight:800}.loyalty-card .big{font:700 43px/1.15 Georgia,serif;color:#f1dba9;margin:9px 0}.loyalty-card p{color:#f4f0e7;margin:5px 0}.loyalty-progress{height:9px;border-radius:20px;background:#ffffff38;overflow:hidden;margin:12px 0}.loyalty-progress span{display:block;height:100%;width:0;background:#e8c87f;transition:width .2s}.stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:15px 0}.stamp{border:1px solid var(--line);border-radius:10px;padding:9px 0;text-align:center;background:#fffaf3;color:#6c655a;font-weight:700}.stamp.used{background:#e5eddf;color:#244638;border-color:#b7cbb9}.fineprint{font-size:12px;color:#71685e;line-height:1.5}.loyalty-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.loyalty-actions .btn{margin-top:10px}footer{text-align:center;color:#786e62;font-size:12px;padding:22px}
 @media(max-width:520px){.grid{grid-template-columns:1fr}.menu-item{gap:8px}.card{padding:14px}}
-</style>
+.install-banner{max-width:850px;margin:14px auto 0;padding:15px 16px;background:#fffdf8;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 25px #4b2e160b;display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 14px}.install-banner strong{font-size:16px}.install-banner p{margin:3px 0 0;color:#71685e;font-size:13px}.install-btn{border:0;border-radius:10px;background:var(--red);color:white;padding:12px 16px;font:700 14px system-ui;cursor:pointer}.install-help{grid-column:1/-1;background:var(--green);padding:10px 12px;border-radius:10px;color:#3c5735!important}.install-banner .hidden{display:none!important}@media(max-width:520px){.install-banner{margin:12px 12px 0}.install-btn{padding:11px 12px}}</style>
 </head>
 <body>
 <header><div class="brand">Paul & Paulette</div><p>Café-restaurant · Fontainebleau</p><p style="font-size:13px">Une cuisine généreuse, fraîche et inspirée du monde entier.</p></header>
+<section class="install-banner" id="install-banner">
+<div><strong>📲 Emportez Paul &amp; Paulette avec vous</strong><p>Ajoutez l’application à l’écran d’accueil de votre téléphone — gratuitement.</p></div>
+<button type="button" id="install-app" class="install-btn">Installer</button>
+<p id="install-help" class="install-help hidden" role="status"></p>
+</section>
 <nav aria-label="Navigation principale">
 <button class="active" data-tab="menu">🍽️ Menu</button><button data-tab="order">🥡 À emporter <span id="cart-badge"></span></button><button data-tab="booking">📅 Réservation</button><button data-tab="loyalty">⭐ Fidélité</button><button data-tab="info">ℹ️ Infos</button>
 </nav>
@@ -72,5 +77,33 @@ function renderLoyalty(){document.getElementById('loyalty-number').value=loyalty
 document.getElementById('loyalty-save').addEventListener('click',()=>{const n=document.getElementById('loyalty-number').value.trim();if(!n){showLoyaltyStatus('Saisissez le numéro de carte fourni par le restaurant.');return}loyalty.number=n;saveLoyalty();renderLoyalty();showLoyaltyStatus('Numéro enregistré sur cet appareil.')});
 document.getElementById('loyalty-use').addEventListener('click',()=>{if(!loyalty.number){showLoyaltyStatus('Enregistrez d’abord le numéro de votre carte.');return}if(loyalty.used>=15){showLoyaltyStatus('Les 15 utilisations de cette carte de démonstration sont terminées.');return}loyalty.used++;saveLoyalty();renderLoyalty();showLoyaltyStatus('Démo : utilisation '+loyalty.used+' sur 15 enregistrée sur cet appareil.')});
 document.getElementById('loyalty-reset').addEventListener('click',()=>{if(confirm('Réinitialiser le suivi de démonstration sur cet appareil ?')){loyalty={number:'',used:0};saveLoyalty();renderLoyalty();showLoyaltyStatus('Suivi de démonstration réinitialisé.')}});
+
+// Installation gratuite (PWA). Android/Chromium peut afficher l'invite native; sur iPhone, Safari demande l'ajout manuel.
+let deferredInstallPrompt=null;
+const installButton=document.getElementById('install-app');
+const installHelp=document.getElementById('install-help');
+const isIos=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const isStandalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+function showInstallHelp(message){installHelp.textContent=message;installHelp.classList.remove('hidden')}
+if(isStandalone){installButton.textContent='Application installée';installButton.disabled=true;installButton.style.opacity='.65'}
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;installButton.textContent='Installer gratuitement'});
+window.addEventListener('appinstalled',()=>{installButton.textContent='Application installée';installButton.disabled=true;showInstallHelp('Paul & Paulette a été ajouté à votre écran d’accueil.')});
+installButton.addEventListener('click',async()=>{
+ if(isStandalone){showInstallHelp('L’application est déjà installée sur cet appareil.');return}
+ if(deferredInstallPrompt){
+  deferredInstallPrompt.prompt();
+  const result=await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt=null;
+  if(result.outcome==='accepted')showInstallHelp('Installation acceptée. Retrouvez Paul & Paulette sur votre écran d’accueil.');
+  else showInstallHelp('Pas de souci : vous pourrez l’installer plus tard depuis le menu du navigateur.');
+  return;
+ }
+ if(isIos){
+  showInstallHelp('Sur iPhone : ouvrez cette page dans Safari, touchez Partager (le carré avec la flèche vers le haut), puis « Sur l’écran d’accueil » et « Ajouter ».');
+ }else{
+  showInstallHelp('Dans Chrome : ouvrez le menu ⋮ puis choisissez « Installer l’application » ou « Ajouter à l’écran d’accueil ». Si l’option n’apparaît pas, vérifiez que la page est bien ouverte en HTTPS et réessayez plus tard.');
+ }
+});
+
 renderMenu();renderOrder();renderLoyalty();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script></body></html>
