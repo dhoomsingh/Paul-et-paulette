@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#7d3029"><meta name="description" content="L’application Paul & Paulette : menu, commandes à emporter et réservations à Fontainebleau.">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Paul & Paulette"><meta name="mobile-web-app-capable" content="yes"><link rel="apple-touch-icon" href="./icon.svg">
 <link rel="manifest" href="./manifest.json">
 <title>Paul & Paulette — Application</title>
 <style>
@@ -97,7 +98,7 @@ installButton.addEventListener('click',async()=>{
   return;
  }
  if(isIos){
-  showInstallHelp('Sur iPhone/iPad, Safari impose une confirmation manuelle : touchez Partager, puis « Sur l’écran d’accueil ». Un site web ne peut pas déclencher cette installation tout seul.');
+  showInstallHelp('Pour installer Paul & Paulette sur iPhone : touchez Partager (carré avec flèche vers le haut), faites défiler tout en bas puis « Modifier les actions » si nécessaire, activez « Sur l’écran d’accueil », puis choisissez cette option et touchez « Ajouter ». Si l’option est présente, activez « Ouvrir comme app » avant d’ajouter. Apple exige cette confirmation manuelle : aucun bouton de site ne peut la remplacer.');
  }else{
   showInstallHelp('Ce navigateur ne propose pas l’installation directe pour le moment. Essayez d’ouvrir cette page dans un navigateur compatible avec les applications web installables.');
  }
