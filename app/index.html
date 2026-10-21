@@ -256,6 +256,51 @@ footer{letter-spacing:.3px}
 }
 @media(prefers-reduced-motion:reduce){.install-btn,.btn{transition:none}}
 
+
+
+/* V16 — profondeur naturelle, interactions fines et finition tactile */
+:root{--copper:#c17b58;--soft-shadow:0 16px 36px rgba(73,45,27,.075)}
+body{background:radial-gradient(ellipse at 85% 22%,rgba(224,190,153,.17),transparent 34%),linear-gradient(180deg,#fcf9f3 0%,#f5ede1 52%,#f8f2e8 100%)}
+header{box-shadow:0 20px 46px rgba(74,32,27,.22),inset 0 1px 0 rgba(255,255,255,.12)}
+header:after{background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 34%,rgba(31,13,11,.08) 78%,rgba(255,255,255,.035))}
+.brand-mark{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+.brand-mark:after{content:"";position:absolute;inset:-50% -80%;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.16) 49%,transparent 56%);transform:translateX(-35%);animation:ppSheen 8s ease-in-out infinite}
+.install-banner{box-shadow:0 14px 32px rgba(71,45,26,.075),inset 0 1px 0 #fff}
+nav{box-shadow:0 8px 22px rgba(60,42,27,.045)}
+nav button{transition:transform .2s ease,background .2s ease,box-shadow .2s ease,border-color .2s ease}
+nav button:hover{transform:translateY(-1px);box-shadow:0 5px 13px rgba(60,42,27,.075)}
+nav button.active{box-shadow:0 6px 15px rgba(118,46,40,.2),inset 0 1px 0 rgba(255,255,255,.12)}
+.card{position:relative;isolation:isolate;overflow:hidden;box-shadow:var(--soft-shadow),inset 0 1px 0 rgba(255,255,255,.95);transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease}
+.card:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:linear-gradient(125deg,rgba(255,255,255,.5),transparent 32%,rgba(225,193,159,.08) 100%);opacity:.75}
+.menu-item{transition:background .18s ease,padding .18s ease,border-color .18s ease}
+.menu-item .price{transition:background .18s ease,transform .18s ease}
+.filter-chip{box-shadow:0 2px 5px rgba(59,39,22,.025);transition:transform .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease}
+.filter-chip.active{box-shadow:0 5px 12px rgba(118,46,40,.18),inset 0 1px 0 rgba(255,255,255,.12)}
+.quantity{box-shadow:inset 0 1px 2px rgba(58,39,23,.035)}
+.quantity button{transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.quantity button:hover{background:#f7e9dc;box-shadow:0 4px 9px rgba(55,38,23,.1)}
+.btn,.install-btn{position:relative;overflow:hidden}
+.btn:before,.install-btn:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.13) 48%,transparent 72%);transform:translateX(-110%);transition:transform .55s ease}
+.btn:hover:before,.install-btn:hover:before{transform:translateX(110%)}
+input,select,textarea{transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+input:focus,select:focus,textarea:focus{background:#fff}
+#order-status:not(:empty),#booking-status:not(:empty){box-shadow:inset 3px 0 0 #b66d4c}
+@keyframes ppSheen{0%,65%,100%{transform:translateX(-35%)}80%{transform:translateX(35%)}}
+@media(hover:hover) and (pointer:fine){
+ .card:hover{transform:translateY(-2px);box-shadow:0 20px 42px rgba(67,44,24,.085),inset 0 1px 0 #fff;border-color:#dfcbb5}
+ .menu-item:hover{background:linear-gradient(90deg,rgba(247,234,218,.36),transparent);padding-left:7px;padding-right:7px}
+ .menu-item:hover .price{background:#efddcc;transform:translateY(-1px)}
+}
+@media(max-width:520px){
+ .card{box-shadow:0 9px 24px rgba(67,44,24,.055),inset 0 1px 0 rgba(255,255,255,.95)}
+ .menu-item:hover{padding-left:0;padding-right:0}
+ .brand-mark:after{animation:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .brand-mark:after{animation:none}
+ .card,.menu-item,.filter-chip,.quantity button,.btn:before,.install-btn:before{transition:none!important}
+}
+
 </style>
 </head>
 <body>
