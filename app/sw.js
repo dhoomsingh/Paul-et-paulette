@@ -1,1 +1,21 @@
-const CACHE='paul-paulette-app-v16';const FILES=['./','./index.html','./manifest.json','./icon.svg'];self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES))));self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));self.addEventListener('fetch',e=>{if(e.request.method!=='GET'||new URL(e.request.url).origin!==location.origin)return;e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(e.request,copy))}return res}).catch(()=>caches.match('./index.html'))))});
+const CACHE='paul-paulette-app-v17';
+const FILES=['./','./index.html','./manifest.json','./icon.svg'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{
+ const request=event.request;
+ if(request.method!=='GET'||new URL(request.url).origin!==location.origin)return;
+ const url=new URL(request.url);
+ const isPage=request.mode==='navigate'||url.pathname.endsWith('/index.html')||url.pathname.endsWith('/');
+ if(isPage){
+  event.respondWith(fetch(request).then(response=>{
+   if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(request,copy));}
+   return response;
+  }).catch(()=>caches.match(request).then(cached=>cached||caches.match('./index.html'))));
+  return;
+ }
+ event.respondWith(caches.match(request).then(cached=>cached||fetch(request).then(response=>{
+  if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(request,copy));}
+  return response;
+ })));
+});
