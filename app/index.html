@@ -132,6 +132,53 @@ input[type=search]{margin:0;background:#fffefa}
 .quantity button:disabled{opacity:.4}
 @media(max-width:520px){.filter-chip{padding:9px 12px}.cart-actions{align-items:flex-start;flex-direction:column;gap:3px}.order-category .menu-item{align-items:center}}
 
+
+/* V14 — finition plus nette, navigation et retours d’action */
+:root{--focus:rgba(169,85,61,.22)}
+::selection{background:#e8c9b4;color:#39251f}
+nav{top:0;padding-top:max(12px,env(safe-area-inset-top));}
+nav button{flex-shrink:0;min-height:44px}
+#cart-badge{display:inline-block;font-size:11px;line-height:1.4;margin-left:3px;padding:1px 5px;border-radius:999px;background:#f1d9c9;color:#6f3028}
+nav button.active #cart-badge{background:#fff;color:#762e28}
+.menu-tools{position:relative}
+input[type=search]{min-height:48px;padding-left:15px;border-radius:14px}
+.filter-chip{min-height:38px;transition:background .18s ease,color .18s ease,transform .18s ease}
+.filter-chip:active{transform:scale(.97)}
+.menu-category h2{display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid #eee4d8}
+.menu-category h2:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,#e7dacb,transparent)}
+.menu-item{min-width:0}
+.menu-item>div:first-child{min-width:0;flex:1}
+.menu-item strong{overflow-wrap:anywhere}
+.quantity{flex-shrink:0}
+.quantity button{min-width:38px;min-height:38px;cursor:pointer}
+.btn,.install-btn,.text-button{cursor:pointer}
+.btn:disabled,.install-btn:disabled{opacity:.55;cursor:wait;box-shadow:none}
+#order-status,#booking-status{margin-top:12px;font-size:14px;line-height:1.5}
+#order-status:not(:empty),#booking-status:not(:empty){padding:10px 12px;border-radius:10px;background:#f3eadf}
+#order-status[role=status],#booking-status[role=status]{overflow-wrap:anywhere}
+form .grid>div{min-width:0}
+input[type=date],input[type=time]{min-width:0}
+.empty-state{border:1px dashed #dfd0bf;border-radius:12px;background:#fffaf3}
+footer{padding-bottom:calc(25px + env(safe-area-inset-bottom))}
+@media(min-width:900px){
+ main{max-width:920px}
+ .panel>h1{margin-top:13px}
+ .panel>.card{padding:25px}
+ .menu-item{padding:17px 2px}
+ .menu-item strong{font-size:16px}
+}
+@media(max-width:520px){
+ header{padding-top:24px}
+ .brand-promise{max-width:34em;line-height:1.55}
+ .header-pills span{font-size:10px}
+ .install-banner{border-radius:15px}
+ .menu-item strong{font-size:14px}
+ .price{font-size:14px}
+ .quantity{gap:7px}
+ .quantity button{width:36px;height:36px;min-width:36px;min-height:36px}
+}
+@media(prefers-reduced-motion:reduce){.filter-chip{transition:none}}
+
 </style>
 </head>
 <body>
