@@ -179,6 +179,83 @@ footer{padding-bottom:calc(25px + env(safe-area-inset-bottom))}
 }
 @media(prefers-reduced-motion:reduce){.filter-chip{transition:none}}
 
+
+/* V15 — identité visuelle premium et hiérarchie renforcée */
+:root{--red:#713029;--red2:#a34f3c;--cream:#f7f1e7;--ink:#2d2520;--green:#e8efe2;--line:#e7d9c9;--paper:#fffdf8;--muted:#776c61}
+body{background:linear-gradient(180deg,#fbf8f2 0,#f5ede1 48%,#f7f1e7 100%);color:var(--ink)}
+header{overflow:hidden;border-radius:0 0 32px 32px;padding-bottom:30px;background:radial-gradient(ellipse at 100% 0%,rgba(232,180,135,.24),transparent 43%),linear-gradient(135deg,#49201d 0%,#762e28 55%,#a9553d 100%);box-shadow:0 18px 42px rgba(74,32,27,.2)}
+header:before{content:"";position:absolute;pointer-events:none;width:230px;height:230px;right:-85px;bottom:-130px;border:1px solid rgba(255,255,255,.14);border-radius:50%;box-shadow:0 0 0 22px rgba(255,255,255,.025),0 0 0 46px rgba(255,255,255,.02)}
+.brandline{position:relative;z-index:1}
+.brand-mark{border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.06));box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 8px 18px rgba(0,0,0,.08)}
+.brand-sub{letter-spacing:2px!important}
+.brand-promise{max-width:550px;font-size:15px!important;line-height:1.6}
+.header-pills span{backdrop-filter:blur(8px);border-color:rgba(255,255,255,.22);padding:7px 11px}
+.install-banner{position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(120deg,#fffdf8,#f8eee2);border-color:#e8d8c6;box-shadow:0 12px 28px rgba(71,45,26,.065)}
+.install-banner:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#b86648,#762e28)}
+.install-banner>div{padding-left:5px}
+.install-banner strong{font-family:Georgia,serif;font-size:17px}
+.install-banner p{line-height:1.5}
+.install-btn{background:linear-gradient(135deg,#762e28,#a9553d);box-shadow:0 6px 15px rgba(118,46,40,.2);transition:transform .18s ease,box-shadow .18s ease}
+.install-btn:hover,.btn:hover{box-shadow:0 9px 20px rgba(118,46,40,.25);filter:brightness(1.035)}
+nav{box-shadow:0 5px 18px rgba(60,42,27,.035)}
+nav button{font-size:13px;letter-spacing:.05px}
+main{max-width:900px}
+.panel>h1{position:relative;margin:12px 0 8px;padding-bottom:11px;font-size:clamp(31px,5vw,39px);letter-spacing:-1px}
+.panel>h1:after{content:"";position:absolute;bottom:0;left:0;width:48px;height:3px;border-radius:9px;background:linear-gradient(90deg,#762e28,#c17b58)}
+.panel>p.muted{max-width:700px}
+.notice{border-radius:13px;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.card{border-radius:21px;background:linear-gradient(145deg,#fffefa,#fffaf3);box-shadow:0 12px 30px rgba(67,44,24,.055),0 1px 0 rgba(255,255,255,.95) inset}
+.menu-tools{padding:13px;background:rgba(255,253,248,.65);border:1px solid rgba(231,217,201,.85);border-radius:17px}
+.category-filters{padding-bottom:2px}
+.filter-chip{border-radius:12px}
+.menu-category h2{font-size:21px;letter-spacing:-.3px;margin-top:4px}
+.menu-item{padding:17px 2px;gap:16px}
+.menu-item strong{font-size:15px;letter-spacing:-.1px}
+.menu-item .desc{max-width:54ch}
+.menu-item .price{display:inline-block;margin-top:5px;padding:3px 8px;border-radius:8px;background:#f5e8dc;color:#78352c;font-size:13px}
+.order-category .menu-item .price{background:transparent;padding:0}
+.quantity{padding:4px;border:1px solid #eadccd;background:#fbf5ed;border-radius:999px;gap:6px}
+.quantity button{border:0;background:#fffdf8;box-shadow:0 2px 5px rgba(55,38,23,.07)}
+.quantity span{min-width:20px}
+.btn{min-height:51px;border-radius:14px;background:linear-gradient(125deg,#713029,#a34f3c);box-shadow:0 7px 17px rgba(113,48,41,.19);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn.secondary{background:#f0e5d8;border-color:#e5d5c2;color:#49372d}
+.total{padding:16px 0 2px;border-top:1px solid #e9ddcf;font-size:21px}
+.total span:last-child{color:#78352c}
+form.card h2,.card>h2{font-size:25px;letter-spacing:-.5px;margin-bottom:14px}
+label{font-size:12px;text-transform:none}
+input,select,textarea{box-shadow:0 2px 4px rgba(53,39,25,.025)}
+input::placeholder,textarea::placeholder{color:#a3988b}
+#order-status:not(:empty),#booking-status:not(:empty){border:1px solid #e6d7c5;background:#f8f0e5}
+#order-status:has(+.btn),#booking-status:has(+.btn){line-height:1.55}
+.empty-state{margin:0;padding:26px 14px}
+footer{letter-spacing:.3px}
+@media(min-width:760px){
+ body{padding-bottom:40px}
+ header{padding-top:40px;padding-bottom:34px}
+ .install-banner{max-width:872px;margin-top:18px;padding:19px 23px}
+ nav{padding-top:15px;padding-bottom:13px}
+ main{padding:25px 22px 30px}
+ .panel>h1{margin-top:16px}
+ .menu-tools{padding:16px}
+ .menu-item{padding:19px 5px}
+ .menu-item strong{font-size:16px}
+ .order-category+.order-category{margin-top:21px;padding-top:18px}
+}
+@media(max-width:520px){
+ header{border-radius:0 0 25px 25px;padding-bottom:24px}
+ .brand-promise{font-size:13px!important}
+ .header-pills{gap:6px}
+ .header-pills span{padding:6px 9px}
+ .install-banner{grid-template-columns:minmax(0,1fr) auto}
+ .install-btn{max-width:135px;white-space:normal;line-height:1.25}
+ .panel>h1{font-size:31px}
+ .menu-tools{padding:10px}
+ .card{border-radius:17px}
+ .menu-item{padding:15px 0}
+}
+@media(prefers-reduced-motion:reduce){.install-btn,.btn{transition:none}}
+
 </style>
 </head>
 <body>
