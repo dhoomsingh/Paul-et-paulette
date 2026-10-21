@@ -401,3 +401,25 @@ document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-controls
 renderMenu();renderOrder();
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script></body></html>
+
+/* V17 — luxe moderne, accessibilité et confort d’utilisation */
+:root{--red:#692923;--red2:#a35a42;--copper:#c38a63;--cream:#f7f2e9;--paper:#fffdf8;--ink:#2c241f;--line:#e8dccd}
+html{scroll-padding-top:78px}
+body{font-synthesis:none;-webkit-tap-highlight-color:transparent}
+header{background:radial-gradient(ellipse at 88% 10%,rgba(220,174,126,.22),transparent 36%),linear-gradient(132deg,#3f1b19 0%,#692923 52%,#9c503b 100%)}
+.brand-mark{border-color:rgba(230,195,158,.58);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 8px 22px rgba(0,0,0,.13)}
+.brand-mark:after{animation-duration:12s}
+@keyframes ppSheen{0%,65%{transform:translateX(-55%)}85%,100%{transform:translateX(55%)}}
+.card{border-color:#e8d9c7;box-shadow:0 9px 24px rgba(55,35,22,.045),0 1px 0 rgba(255,255,255,.95) inset}
+.menu-tools{background:rgba(255,253,248,.86);box-shadow:0 5px 18px rgba(55,35,22,.025)}
+.filter-chip{border-color:#e1d1bf;background:#fffdf8;color:#513b30}
+.filter-chip.active{background:linear-gradient(135deg,#692923,#9b4b38);border-color:#692923}
+.btn,.install-btn{background:linear-gradient(125deg,#692923,#9b4b38);box-shadow:0 6px 16px rgba(105,41,35,.16)}
+.btn:focus-visible,.install-btn:focus-visible,.filter-chip:focus-visible,nav button:focus-visible,.quantity button:focus-visible{outline:3px solid rgba(195,138,99,.6);outline-offset:3px}
+input,select,textarea{color:#2c241f}
+input:focus-visible,select:focus-visible,textarea:focus-visible{border-color:#9b4b38;outline:3px solid rgba(195,138,99,.22);outline-offset:1px}
+button{touch-action:manipulation}
+#order-status,#booking-status{overflow-wrap:anywhere}
+@media(hover:hover) and (pointer:fine){.card:hover{transform:translateY(-2px)}.quantity button:hover{background:#f1e1d1}.filter-chip:hover{border-color:#c38a63}}
+@media(max-width:520px){nav{margin-bottom:2px}.install-banner{gap:10px}.menu-item{align-items:center}.menu-item>div:first-child{padding-right:2px}.quantity button{min-width:40px;min-height:40px;width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce){.brand-mark:after{animation:none!important}.card,.btn,.install-btn,.filter-chip,nav button{transition:none!important}.card:hover{transform:none}}
