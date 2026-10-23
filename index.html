@@ -1244,3 +1244,66 @@ footer{background:#14241d!important;color:#d5d1c7!important;border-top:1px solid
 <script id="pp-netlify-form-feedback">
 (()=>{const p=new URLSearchParams(location.search);let message='';if(p.get('reservation')==='envoyee')message='Merci : votre demande a été transmise. Le restaurant doit confirmer votre réservation.';if(p.get('commande')==='envoyee')message='Merci : votre commande a été transmise au restaurant. Attendez sa confirmation avant de vous déplacer.';if(!message)return;document.addEventListener('DOMContentLoaded',()=>{const n=document.createElement('div');n.setAttribute('role','status');n.style='position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:10020;max-width:calc(100vw - 28px);padding:16px 22px;background:#172a22;color:#fffdf8;border:1px solid #b89a62;box-shadow:0 12px 35px #0003;font:600 14px/1.5 Arial,sans-serif;text-align:center';n.textContent=message;document.body.appendChild(n);setTimeout(()=>n.remove(),9000);history.replaceState({},'',location.pathname+location.hash)});})();
 </script>
+
+
+/* PRESTIGE OR ROYAL V2 — lightweight premium refresh */
+:root{
+ --cream:#f7f2e8;--ink:#211b12;--red:#b58a36;--sage:#24382d;
+ --white:#fffdf8;--line:#d8c49a;--gold:#c7a04b;--gold-light:#f4df9a;
+}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}
+nav{background:rgba(24,22,17,.96);border-bottom:1px solid rgba(199,160,75,.55);color:#fff8e7}
+.logo{color:var(--gold-light);letter-spacing:.5px}
+.links a{color:#fff8e7;transition:color .2s}
+.links a:hover{color:var(--gold-light)}
+.btn{background:linear-gradient(135deg,#f5df9d 0%,#c49a3d 48%,#a97b25 100%);color:#20180b;border:1px solid #f7e5ad;border-radius:999px;box-shadow:0 8px 24px rgba(137,96,25,.2)}
+.btn:hover{background:linear-gradient(135deg,#fff0b9,#d0a447);color:#20180b}
+.hero{background:radial-gradient(ellipse at 85% 25%,#e9d6a9 0%,transparent 38%),linear-gradient(135deg,#211b12,#3b2b16 58%,#f1e5cb);color:#fff9eb}
+.hero p{color:#eee1c8}
+.eyebrow{color:#d9b65f}
+.hero h1{color:#f3d98c;text-shadow:0 5px 22px rgba(0,0,0,.25);letter-spacing:-1.5px}
+.hero-photo{border:1px solid #c7a04b;box-shadow:0 24px 60px rgba(0,0,0,.28)}
+.photo-caption{border-color:#d8c49a;color:#2a2113}
+.hero-info{background:#fffaf0;border-color:#c7a04b;color:#211b12}
+.info-line strong,.price{color:#a8791f}
+section{background-color:var(--cream)}
+.head h2{color:#292216}
+.head .eyebrow{color:#a8791f}
+.dish{background:linear-gradient(145deg,#fffdf8,#f4ead7);border-color:#dfcda8;border-radius:16px}
+.dish h3{color:#2a2113}
+.tag{background:#f4e5b9;color:#674815}
+.vegan-banner{background:#edf0e4;border-color:#d0d6b9}
+.vegan-banner .title{color:#3e5233}
+.hours{background:#fffaf0}
+.hours-card{background:#f7f0e2;border-color:#d8c49a}
+.hours-card span{color:#a8791f}
+.order-section{background:linear-gradient(180deg,#eee3cd,#f9f4ea)}
+.order-box,form{border:1px solid #d8c49a;background:#fffdf8}
+.order-note{background:#edf0e4;border-color:#d0d6b9;color:#3e5233}
+.order-item{border-color:#e1d1af;background:#fffdf8}
+input,select,textarea{border-color:#d7c49a;background:#fffefa}
+input:focus,select:focus,textarea:focus{outline:2px solid #c7a04b;outline-offset:1px}
+.about{background:linear-gradient(135deg,#e7dcc7,#f5ecd9)}
+.about p{color:#5e5140}
+.aboutgrid .box{background:linear-gradient(145deg,#2a3c2f,#101b14);border:1px solid #c7a04b;color:#f3d98c}
+.booking{background:radial-gradient(ellipse at 0% 0%,#344435,#171a13 70%);border-top:1px solid #c7a04b}
+.booking h2{color:#f3d98c}
+.booking p{color:#e0d5bf}
+form{color:#211b12}
+footer{background:#14140f;color:#d0c4a8;border-top:1px solid #b58a36}
+footer strong{color:#f3d98c}
+.facade-photo{border-color:#c7a04b}
+::selection{background:#c7a04b;color:#211b12}
+@media(max-width:800px){
+ nav .nav{padding:12px 16px}.hero{padding-left:18px;padding-right:18px}
+ .hero h1{font-size:clamp(42px,11vw,58px)}
+ .hero-photo img{height:360px}
+ section{padding:70px 18px}
+ .hero-info{padding:24px}
+ .dish{padding:22px}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
