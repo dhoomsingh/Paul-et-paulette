@@ -590,6 +590,7 @@ footer{box-shadow:0 -25px 60px rgba(0,0,0,.16)!important}
 }
 </style>
 <script id="pp-realism-v3-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (function(){
   if(window.__PP_REALISM_V3__) return;
   window.__PP_REALISM_V3__=true;
@@ -624,8 +625,11 @@ footer{box-shadow:0 -25px 60px rgba(0,0,0,.16)!important}
     input.addEventListener('blur',()=>input.closest('.order-item')?.classList.remove('pp-active'));
   });
 })();
+
+}
 </script>
 <script id="pp-gyro-v1">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (function(){
  if(window.__PP_GYRO_V1__)return;window.__PP_GYRO_V1__=true;
  const root=document.documentElement;
@@ -657,6 +661,8 @@ footer{box-shadow:0 -25px 60px rgba(0,0,0,.16)!important}
  window.addEventListener('click',request,{once:true,passive:true});
  if(typeof DeviceOrientationEvent==='undefined')return;
 })();
+
+}
 </script>
 <style id="pp-gyro-style">
 @media (max-width:800px){
@@ -687,6 +693,7 @@ footer{box-shadow:0 -25px 60px rgba(0,0,0,.16)!important}
 @media(max-width:800px){.hero:after,.hours:after,#menu:after,.order-section:after,.about:after,.booking:after{display:none}}
 </style>
 <script id="pp-realism-v4-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (function(){
 if(window.__PP_REALISM_V4__)return;window.__PP_REALISM_V4__=true;
 const root=document.documentElement,fine=matchMedia('(pointer:fine)').matches,reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -696,6 +703,8 @@ let px=innerWidth*.5,py=innerHeight*.3,tx=px,ty=py;
 addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;root.style.setProperty('--pp-light-x',e.clientX+'px');root.style.setProperty('--pp-light-y',e.clientY+'px')},{passive:true});
 const tick=()=>{px+=(tx-px)*.09;py+=(ty-py)*.09;cards.forEach(el=>{const r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;el.style.setProperty('--shine-x',Math.max(0,Math.min(100,((px-r.left)/r.width)*100)).toFixed(1)+'%');el.style.setProperty('--shine-y',Math.max(0,Math.min(100,((py-r.top)/r.height)*100)).toFixed(1)+'%')});requestAnimationFrame(tick)};tick();
 })();
+
+}
 </script>
 
 <!-- PP-ULTRA-REALISM-V5 -->
@@ -718,6 +727,7 @@ body{--ultraGlow:rgba(255,255,255,.32)}
 @media(prefers-reduced-motion:reduce){.pp-ultra-layer{display:none}}
 </style>
 <script id="pp-ultra-v5-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (function(){
 if(window.__PP_ULTRA_V5__)return;window.__PP_ULTRA_V5__=true;
 const r=document.documentElement;
@@ -742,6 +752,8 @@ if(e.isIntersecting)e.target.style.setProperty('--ultra-visible','1');
 }),{threshold:.08});
 sections.forEach(s=>{s.style.setProperty('--ultra-visible','0');io.observe(s)});
 })();
+
+}
 </script>
 
 <!-- PP-CINEMATIC-REALISM-V6 -->
@@ -765,6 +777,7 @@ section{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 @media(prefers-reduced-motion:reduce){.pp6-ambient{display:none}.hero-photo{transform:none}}
 </style>
 <script id="pp-cinematic-v6-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PP6)return;window.__PP6=1;
 const root=document.documentElement,ambient=document.createElement('div');ambient.className='pp6-ambient';document.body.appendChild(ambient);
 let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty,scroll=0,targetScroll=0;
@@ -784,6 +797,8 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
  {duration:650,easing:'cubic-bezier(.2,.75,.2,1)',fill:'both'})}}),{threshold:.08});
 items.forEach(i=>io.observe(i));
 })();
+
+}
 </script>
 
 <!-- PP-IMMERSIVE-V7 -->
@@ -798,6 +813,7 @@ items.forEach(i=>io.observe(i));
 @media(prefers-reduced-motion:reduce){.pp7-light{display:none}.hero-photo{transform:none}}
 </style>
 <script id="pp-immersive-v7-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PP7)return;window.__PP7=1;
 const r=document.documentElement,l=document.createElement('div');l.className='pp7-light';document.body.appendChild(l);
 let tx=innerWidth/2,ty=innerHeight*.35,x=tx,y=ty,ox=0,oy=0;
@@ -806,6 +822,8 @@ addEventListener('deviceorientation',e=>{if(e.gamma==null)return;ox=Math.max(-1,
 function loop(){x+=(tx-x)*.09;y+=(ty-y)*.09;const px=(x/innerWidth-.5)*6+ox*4,py=(y/innerHeight-.5)*-6+oy*4;
 r.style.setProperty('--pp7x',x+'px');r.style.setProperty('--pp7y',y+'px');r.style.setProperty('--pp7rx',px.toFixed(2)+'deg');r.style.setProperty('--pp7ry',py.toFixed(2)+'deg');requestAnimationFrame(loop)}loop();
 })();
+
+}
 </script>
 
 <!-- PP-PRO-STUDIO-V8 -->
@@ -828,6 +846,7 @@ section{scroll-margin-top:90px}
 @media(prefers-reduced-motion:reduce){.pp-pro-light{display:none}.hero-photo,.hero-photo img{transform:none!important}}
 </style>
 <script id="pp-pro-studio-v8-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PPV8)return;window.__PPV8=1;
 const r=document.documentElement,l=document.createElement('div');l.className='pp-pro-light';document.body.appendChild(l);
 let tx=innerWidth/2,ty=innerHeight*.3,x=tx,y=ty;
@@ -838,6 +857,8 @@ const els=[...document.querySelectorAll('.dish,.order-item,.hours-card,.aboutgri
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.animate([{opacity:.35,transform:'translateY(22px) scale(.985)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:700,easing:'cubic-bezier(.16,.8,.18,1)',fill:'both'})}}),{threshold:.1});
 els.forEach(e=>{e.style.opacity='.35';io.observe(e)});
 })();
+
+}
 </script>
 
 <!-- PP-PRO-MASTER-V9 -->
@@ -863,6 +884,7 @@ body{overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){.pp-v9-light{display:none}}
 </style>
 <script id="pp-pro-master-v9-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PPV9)return;window.__PPV9=1;
 const r=document.documentElement,l=document.createElement('div');l.className='pp-v9-light';document.body.appendChild(l);
 let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty;
@@ -872,6 +894,8 @@ const targets=[...document.querySelectorAll('.dish,.order-item,.hours-card,.abou
 targets.forEach(el=>el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.clientX-q.left)/q.width-.5,py=(e.clientY-q.top)/q.height-.5;el.style.transform='perspective(900px) rotateX('+(-py*2.4).toFixed(2)+'deg) rotateY('+(px*3.2).toFixed(2)+'deg) translateZ(7px)'}));
 targets.forEach(el=>el.addEventListener('pointerleave',()=>{el.style.transform=''}));
 })();
+
+}
 </script>
 
 <!-- PP-PRO-MASTER-V10 -->
@@ -888,6 +912,7 @@ targets.forEach(el=>el.addEventListener('pointerleave',()=>{el.style.transform='
 @media(prefers-reduced-motion:reduce){.pp-v10-cinema{display:none}}
 </style>
 <script id="pp-pro-master-v10-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PPV10)return;window.__PPV10=1;
 const r=document.documentElement,fx=document.createElement('div');fx.className='pp-v10-cinema';document.body.appendChild(fx);
 let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my,sy=scrollY,tsy=sy;
@@ -905,6 +930,8 @@ el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.c
 el.addEventListener('pointerleave',()=>{el.style.transform='';});
 });
 })();
+
+}
 </script>
 
 <!-- PP-PRO-ULTIMATE-V11 -->
@@ -919,6 +946,7 @@ el.addEventListener('pointerleave',()=>{el.style.transform='';});
 @media(prefers-reduced-motion:reduce){.pp-v11-light,.pp-v11-grain{display:none}}
 </style>
 <script id="pp-pro-ultimate-v11-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PPV11)return;window.__PPV11=1;
 const r=document.documentElement,a=document.createElement('div'),g=document.createElement('div');a.className='pp-v11-light';g.className='pp-v11-grain';document.body.append(a,g);
 let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty;
@@ -927,6 +955,8 @@ const cards=[...document.querySelectorAll('.dish,.order-item,.hours-card,.aboutg
 function frame(){x+=(tx-x)*.07;y+=(ty-y)*.07;r.style.setProperty('--v11x',x+'px');r.style.setProperty('--v11y',y+'px');requestAnimationFrame(frame)}frame();
 cards.forEach(el=>{el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.clientX-q.left)/q.width-.5,py=(e.clientY-q.top)/q.height-.5;el.style.setProperty('--rx',(-py*1.7).toFixed(2)+'deg');el.style.setProperty('--ry',(px*2.1).toFixed(2)+'deg');el.style.transform='perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(6px) translateY(-2px)'},{passive:true});el.addEventListener('pointerleave',()=>el.style.transform='')});
 })();
+
+}
 </script>
 
 <!-- PP-PRO-V15 -->
@@ -942,6 +972,7 @@ cards.forEach(el=>{el.addEventListener('pointermove',e=>{const q=el.getBoundingC
 @media(prefers-reduced-motion:reduce){.pp-v15-ambient{display:none}.hero-photo img{transform:none!important}}
 </style>
 <script id="pp-pro-v15-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PPV15)return;window.__PPV15=1;
 const r=document.documentElement,a=document.createElement('div');a.className='pp-v15-ambient';document.body.appendChild(a);
 let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty,gyroX=0,gyroY=0;
@@ -955,6 +986,8 @@ if(hero){function heroLoop(){const rx=(gyroX*2.2),ry=(gyroY*1.8);hero.style.tran
 const reveal=[...document.querySelectorAll('section,.head,.grid,.order-box,.bookinggrid,.aboutgrid')];
 if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('pp-v15-in')}}),{threshold:.08});reveal.forEach(e=>io.observe(e))}
 })();
+
+}
 </script>
 <style id="pp-pro-v15-reveal">
 @media(prefers-reduced-motion:no-preference){
@@ -979,6 +1012,7 @@ if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.for
 @media(prefers-reduced-motion:reduce){.pp-v30-light,.pp-v30-vignette{display:none}.hero-photo,.hero-photo img{transform:none!important}}
 </style>
 <script id="pp-pro-v30-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PPV30)return;window.__PPV30=1;
 const r=document.documentElement,light=document.createElement('div'),vig=document.createElement('div');light.className='pp-v30-light';vig.className='pp-v30-vignette';document.body.append(light,vig);
 let tx=innerWidth*.5,ty=innerHeight*.35,x=tx,y=ty,sy=scrollY,tsy=sy,gx=0,gy=0;
@@ -999,6 +1033,8 @@ el.addEventListener('pointermove',e=>{const q=el.getBoundingClientRect(),px=(e.c
 el.addEventListener('pointerleave',()=>el.style.transform='')});
 if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('pp-v30-visible')}),{threshold:.06,rootMargin:'0px 0px -5% 0px'});document.querySelectorAll('section').forEach(s=>io.observe(s))}
 })();
+
+}
 </script>
 <style id="pp-pro-v30-reveal">
 @media(prefers-reduced-motion:no-preference){
@@ -1031,6 +1067,7 @@ nav{box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 12px 34px rgba(36,33,29,.10
 @media(prefers-reduced-motion:reduce){body:after{display:none}}
 </style>
 <script id="pp-realism-v31-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PPR31)return;window.__PPR31=1;
 const r=document.documentElement;
 let px=innerWidth*.5,py=innerHeight*.35,x=px,y=py,gx=0,gy=0;
@@ -1060,6 +1097,8 @@ cards.forEach(el=>{
  el.addEventListener('pointerleave',()=>{el.style.transform=''});
 });
 })();
+
+}
 </script>
 
 
@@ -1079,6 +1118,7 @@ cards.forEach(el=>{
 @media(prefers-reduced-motion:reduce){.pp-r40-light{display:none}.pp-r40-sheen{display:none}}
 </style>
 <script id="pp-realism-v40-js">
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
 (()=>{if(window.__PPR40)return;window.__PPR40=1;
 const r=document.documentElement,light=document.createElement('div');light.className='pp-r40-light';document.body.appendChild(light);
 const interactive=[...document.querySelectorAll('.dish,.order-item,.hero-info,.hours-card,.order-box,.aboutgrid .box,.hero-photo')];
@@ -1100,6 +1140,8 @@ interactive.forEach(el=>{
  el.addEventListener('pointerleave',()=>{el.style.transform=''});
 });
 })();
+
+}
 </script>
 
 
