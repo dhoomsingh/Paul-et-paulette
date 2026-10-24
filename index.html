@@ -266,6 +266,9 @@ updateTotal();
 })();
 </script>
 <script>
+/* PP_SKIP_MOBILE_DECOR: skip costly decorative motion on phones */
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
+
 /* 4D-style living depth: cursor + device motion */
 (function(){
  const root=document.documentElement, body=document.body;
@@ -286,12 +289,22 @@ updateTotal();
  if(window.DeviceOrientationEvent){window.addEventListener('deviceorientation',e=>{if(Math.abs(e.gamma||0)+Math.abs(e.beta||0)<2)return;move(window.innerWidth/2+(e.gamma||0)*8,window.innerHeight/2+(e.beta||0)*3)},{passive:true});}
  function raf(){cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;requestAnimationFrame(raf)} raf();
 })();
+
+}
 </script>
 <script>
+/* PP_SKIP_MOBILE_DECOR: skip costly decorative motion on phones */
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
+
 /* ULTRA-SMOOTH pointer depth: only two compositor transforms */
 (()=>{const root=document.documentElement,hero=document.querySelector('.hero-in'),nav=document.querySelector('.nav');let tx=.5,ty=.5,x=.5,y=.5,raf;const tick=()=>{x+=(tx-x)*.08;y+=(ty-y)*.08;const dx=(x-.5)*4,dy=(y-.5)*3;root.style.setProperty('--glow-x',(x*100)+'vw');root.style.setProperty('--glow-y',(y*100)+'vh');if(hero)hero.style.transform=`translate3d(${dx}px,${dy}px,0)`;if(nav)nav.style.transform=`translate3d(${-dx*.7}px,${-dy*.5}px,0)`;raf=requestAnimationFrame(tick)};addEventListener('pointermove',e=>{tx=e.clientX/innerWidth;ty=e.clientY/innerHeight},{passive:true});addEventListener('pointerleave',()=>{tx=.5;ty=.5},{passive:true});tick()})();
+
+}
 </script>
 <script>
+/* PP_SKIP_MOBILE_DECOR: skip costly decorative motion on phones */
+if (!(window.matchMedia && window.matchMedia('(max-width: 800px)').matches)) {
+
 /* MOBILE 3D/4D — gyroscope / device orientation */
 (function(){
   if(!window.DeviceOrientationEvent) return;
@@ -364,6 +377,8 @@ updateTotal();
     start();
   }
 })();
+
+}
 </script>
 
 <style id="cool-features">
