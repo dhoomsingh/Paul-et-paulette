@@ -337,7 +337,7 @@ const PRODUCTS=[
 {name:"Carrot cake aux noix de pécan",price:5,cat:"Gâteaux"},
 {name:"Tarte vegan rose citron vert",price:6,cat:"Gâteaux"},
 {name:"Tarte vegan chocolat noir",price:6,cat:"Gâteaux"},
-{name:"Vegan banana bread aux myrtilles",price:4.5,cat:"Gâteaux"}
+
 ];
 const cart={};
 try{const saved=JSON.parse(localStorage.getItem('pp-cart-v13')||'{}');Object.keys(saved).forEach(k=>{const i=Number(k),q=Number(saved[k]);if(Number.isInteger(i)&&PRODUCTS[i]&&Number.isInteger(q)&&q>0&&q<100)cart[i]=q})}catch(e){}
